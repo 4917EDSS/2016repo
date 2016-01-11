@@ -3,6 +3,12 @@
 
 #include "WPILib.h"
 
+#define TANK_DRIVE_CONTROLS 1
+#define FPS_DRIVE_CONTROLS 2
+
+#define ACCELERATION_THRESHOLD 0.1
+
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
