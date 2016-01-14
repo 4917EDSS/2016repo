@@ -28,11 +28,6 @@
 #define DControllerDriverPort 0
 
 //Axis
-#define ORightVerticalAxis 3
-#define OLeftVerticalAxis 1
-#define ORightHorizontalAxis 2
-#define OLeftHorizontalAxis 0
-
 #define DRightVerticalAxis 3
 #define DLeftVerticalAxis 1
 #define DRightHorizontalAxis 2
