@@ -14,14 +14,20 @@
 #include "Commands/AutoPosition4ShootGrp.h"
 #include "Commands/AutoPosition5ShootGrp.h"
 #include "CommandBase.h"
+#include "AHRS.h"
 
 
 class Robot: public IterativeRobot
 {
 private:
 	std::unique_ptr<Command> autonomousCommand;
+<<<<<<< HEAD
 	SendableChooser* autoDefenceOptions;
 	SendableChooser* autoLocationOptions;
+=======
+	SendableChooser *chooser;
+	AHRS *ahrs;
+>>>>>>> 35cf32fc864cb9a1312e8e7fb83500b86363fa66
 
 	void RobotInit()
 	{
@@ -46,8 +52,17 @@ private:
 
 
 		//chooser->AddObject("My Auto", new MyAutoCommand());
+<<<<<<< HEAD
 		SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
 		SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
+=======
+		SmartDashboard::PutData("Auto Modes", chooser);
+
+		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
+#if ENABLE_IMU
+		ahrs = new AHRS(SerialPort::kUSB); /* Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB */
+#endif
+>>>>>>> 35cf32fc864cb9a1312e8e7fb83500b86363fa66
 	}
 
 	/**
