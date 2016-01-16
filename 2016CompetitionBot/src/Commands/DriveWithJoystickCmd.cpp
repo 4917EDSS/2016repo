@@ -4,8 +4,6 @@
 
 DriveWithJoystickCmd::DriveWithJoystickCmd()
 {
-	previousRightSpeed = 0;
-	previousLeftSpeed = 0;
 	Requires(rDrivetrainSub.get());
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -21,67 +19,15 @@ void DriveWithJoystickCmd::Initialize()
 void DriveWithJoystickCmd::Execute()
 {
 	if(rDrivetrainSub->GetControls() == TANK_DRIVE_CONTROLS)
-		{
-			if (oi->DGetLeftVer() - previousLeftSpeed > rDrivetrainSub->GetAccelThresh())
-			{
-				previousLeftSpeed += rDrivetrainSub->GetAccelThresh();
-			}
-			else if (oi->DGetLeftVer()-previousLeftSpeed < -rDrivetrainSub->GetAccelThresh())
-			{
-				previousLeftSpeed -= rDrivetrainSub->GetAccelThresh();
-			}
-			else
-			{
-				previousLeftSpeed = oi->DGetLeftVer();
-			}
-
-			if (oi->DGetRightVer()-previousRightSpeed > rDrivetrainSub->GetAccelThresh())
-			{
-				previousRightSpeed += rDrivetrainSub->GetAccelThresh();
-			}
-			else if (oi->DGetRightVer()-previousRightSpeed < -rDrivetrainSub->GetAccelThresh())
-			{
-				previousRightSpeed -= rDrivetrainSub->GetAccelThresh();
-			}
-			else
-			{
-				previousRightSpeed = oi->DGetRightVer();
-			}
-
-
-			rDrivetrainSub->Drive(oi->DGetLeftVer(), oi->DGetRightVer());
-			SmartDashboard::PutNumber("leftStickValue", oi->DGetLeftVer());
-		}
-
-		else
-		{
-			if (oi->DGetLeftVer()-previousLeftSpeed > rDrivetrainSub->GetAccelThresh())
-			{
-				previousLeftSpeed += rDrivetrainSub->GetAccelThresh();
-			}
-			else if (oi->DGetLeftVer()-previousLeftSpeed < -rDrivetrainSub->GetAccelThresh())
-			{
-				previousLeftSpeed -= rDrivetrainSub->GetAccelThresh();
-			}
-			else
-			{
-				previousLeftSpeed = oi->DGetLeftVer();
-			}
-			if (oi->DGetRightHor()-previousRightSpeed > rDrivetrainSub->GetAccelThresh())
-			{
-				previousRightSpeed += rDrivetrainSub->GetAccelThresh();
-			}
-			else if (oi->DGetRightHor()-previousRightSpeed < -rDrivetrainSub->GetAccelThresh())
-			{
-				previousRightSpeed -= rDrivetrainSub->GetAccelThresh();
-			}
-			else
-			{
-				previousRightSpeed = oi->DGetRightHor();
-			}
-
-			SmartDashboard::PutNumber("leftStickValue", oi->DGetLeftVer());
-		}
+	{
+		rDrivetrainSub->Drive(oi->DGetLeftVer(), oi->DGetRightVer());
+		SmartDashboard::PutNumber("leftStickValue", oi->DGetLeftVer());
+	}
+	else
+	{
+		rDrivetrainSub->Drive(oi->DGetLeftVer() - oi->DGetLeftHor(), oi->DGetRightVer() + oi->DGetLeftHor());
+		SmartDashboard::PutNumber("leftStickValue", oi->DGetLeftVer());
+	}
 
 }
 

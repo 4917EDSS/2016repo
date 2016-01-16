@@ -29,8 +29,7 @@ void DrivetrainSub::Drive(float leftSpeed, float rightSpeed)
 	leftMotor1->Set(leftSpeed);
 	leftMotor2->Set(leftSpeed);
 	rightMotor1->Set(rightSpeed);
-	rightMotor2->Set(leftSpeed);
-
+	rightMotor2->Set(rightSpeed);
 }
 
 void DrivetrainSub::ToggleControls(){
