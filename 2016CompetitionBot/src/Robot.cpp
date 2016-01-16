@@ -1,21 +1,53 @@
 #include "WPILib.h"
-#include "Commands/Command.h"
-#include "Commands/ExampleCommand.h"
+#include "Commands/AutoLowBarGrp.h"
+#include "Commands/AutoPortcullisGrp.h"
+#include "Commands/AutoChevalGrp.h"
+#include "Commands/AutoRampartsGrp.h"
+#include "Commands/AutoMoatGrp.h"
+#include "Commands/AutoDrawbridgeGrp.h"
+#include "Commands/AutoSallyPortGrp.h"
+#include "Commands/AutoRockWallGrp.h"
+#include "Commands/AutoRoughTerrainGrp.h"
+#include "Commands/AutoPosition1ShootGrp.h"
+#include "Commands/AutoPosition2ShootGrp.h"
+#include "Commands/AutoPosition3ShootGrp.h"
+#include "Commands/AutoPosition4ShootGrp.h"
+#include "Commands/AutoPosition5ShootGrp.h"
 #include "CommandBase.h"
+
 
 class Robot: public IterativeRobot
 {
 private:
 	std::unique_ptr<Command> autonomousCommand;
-	SendableChooser *chooser;
+	SendableChooser* autoDefenceOptions;
+	SendableChooser* autoLocationOptions;
 
 	void RobotInit()
 	{
 		CommandBase::init();
-		chooser = new SendableChooser();
-		chooser->AddDefault("Default Auto", new ExampleCommand());
+		autoDefenceOptions = new SendableChooser();
+		autoDefenceOptions->AddDefault("Low Bar Defence", new AutoLowBarGrp());
+		autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());
+		autoDefenceOptions->AddObject("Cheval De Fris", new AutoChevalGrp());
+		autoDefenceOptions->AddObject("Ramparts Defence", new AutoRampartsGrp());
+		autoDefenceOptions->AddObject("Moat Defence", new AutoMoatGrp());
+		autoDefenceOptions->AddObject("Drawbridge Defence", new AutoDrawbridgeGrp());
+		autoDefenceOptions->AddObject("Sally Port Defence", new AutoSallyPortGrp());
+		autoDefenceOptions->AddObject("Rock Wall Defence", new AutoRockWallGrp());
+		autoDefenceOptions->AddObject("Rough Terrain Defence", new AutoRoughTerrainGrp());
+
+		autoLocationOptions = new SendableChooser();
+		autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
+		autoLocationOptions->AddObject("Position 2", new AutoPosition2ShootGrp());
+		autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
+		autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());
+		autoLocationOptions->AddObject("Position 5", new AutoPosition5ShootGrp());
+
+
 		//chooser->AddObject("My Auto", new MyAutoCommand());
-		SmartDashboard::PutData("Auto Modes", chooser);
+		SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
+		SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
 	}
 
 	/**
@@ -50,7 +82,8 @@ private:
 			autonomousCommand.reset(new ExampleCommand());
 		} */
 
-		autonomousCommand.reset((Command *)chooser->GetSelected());
+		autonomousCommand.reset((Command *)autoDefenceOptions->GetSelected());
+
 
 		if (autonomousCommand != NULL)
 			autonomousCommand->Start();

@@ -1,10 +1,15 @@
 #include "OI.h"
 #include "RobotMap.h"
-
+#include "Commands/IntakeUntilLimitHitCmd.h"
 
 OI::OI()
 {
 	dController = new Joystick(DControllerDriverPort);
+	oController = new Joystick(OControllerOperatorPort);
+
+	oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
+	oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
+
 
 	// Process operator interface input here.
 }

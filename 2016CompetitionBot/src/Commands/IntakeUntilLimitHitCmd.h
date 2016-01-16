@@ -1,13 +1,13 @@
-#ifndef EXAMPLE_COMMAND_H
-#define EXAMPLE_COMMAND_H
+#ifndef IntakeUntilLimitHitCmd_H
+#define IntakeUntilLimitHitCmd_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class ExampleCommand: public CommandBase
+class IntakeUntilLimitHitCmd: public CommandBase
 {
 public:
-	ExampleCommand();
+	IntakeUntilLimitHitCmd();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -1,10 +1,12 @@
 #include "CommandBase.h"
 #include "Subsystems/DrivetrainSub.h"
+#include "Subsystems/IntakeSub.h"
 #include "Commands/Scheduler.h"
 
 // Initialize a single static instance of all of your subsystems to NULL
-std::unique_ptr<OI> CommandBase::oi;
-std::unique_ptr<DrivetrainSub> CommandBase::rDrivetrainSub;
+OI* CommandBase::oi = NULL;
+DrivetrainSub* CommandBase::rDrivetrainSub = NULL;
+IntakeSub* CommandBase::rIntakeSub = NULL;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -21,7 +23,8 @@ void CommandBase::init()
 {
 	// Create a single static instance of all of your subsystems. The following
 	// line should be repeated for each subsystem in the project.
-	rDrivetrainSub.reset(new DrivetrainSub(LeftDrive1PWM, LeftDrive2PWM, RightDrive1PWM, RightDrive2PWM));
+	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, LeftDrive2PWM, RightDrive1PWM, RightDrive2PWM);
+	rIntakeSub = new IntakeSub(IntakePWM, IntakeLimitDIO);
 
-	oi.reset(new OI());
+	oi = new OI();
 }

@@ -1,17 +1,21 @@
-#ifndef EXAMPLE_SUBSYSTEM_H
-#define EXAMPLE_SUBSYSTEM_H
+#ifndef IntakeSub_H
+#define IntakeSub_H
 
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 
-class ExampleSubsystem: public Subsystem
+class IntakeSub: public Subsystem
 {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
+	Talon* intakeMotor;
+	DigitalInput* ballHitLimit;
 public:
-	ExampleSubsystem();
+	IntakeSub(int intakeMotorC, int ballHitLimitC);
 	void InitDefaultCommand();
+	bool IsBallLoaded();
+	void SetIntakeSpeed(float speed);
 };
 
 #endif

@@ -26,6 +26,10 @@
 
 //Controllers
 #define DControllerDriverPort 0
+#define OControllerOperatorPort 1
+
+//Buttons
+#define OIntakeBtn 1
 
 //Axis
 #define DRightVerticalAxis 3
@@ -42,6 +46,9 @@ private:
 
 
 	Joystick* dController;
+	Joystick* oController;
+	JoystickButton* oIntakeBtn;
+
 	float getStick(Joystick* stick, int axis);
 
 

@@ -4,7 +4,7 @@
 
 DriveWithJoystickCmd::DriveWithJoystickCmd()
 {
-	Requires(rDrivetrainSub.get());
+	Requires(rDrivetrainSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
