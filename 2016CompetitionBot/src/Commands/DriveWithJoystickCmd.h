@@ -6,10 +6,6 @@
 
 class DriveWithJoystickCmd: public CommandBase
 {
-private:
-	float previousRightSpeed;
-	float previousLeftSpeed;
-
 public:
 	DriveWithJoystickCmd();
 	void Initialize();

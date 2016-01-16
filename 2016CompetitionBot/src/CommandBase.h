@@ -9,10 +9,10 @@
 #include "Commands/Scheduler.h"
 
 //Talons
-#define LeftDrive1PWM 2
-#define LeftDrive2PWM 3
-#define RightDrive1PWM 6
-#define RightDrive2PWM 7
+#define LeftDrive1PWM 0
+#define LeftDrive2PWM 2
+#define RightDrive1PWM 1
+#define RightDrive2PWM 3
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
