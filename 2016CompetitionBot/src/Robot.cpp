@@ -2,12 +2,14 @@
 #include "Commands/Command.h"
 #include "Commands/ExampleCommand.h"
 #include "CommandBase.h"
+#include "AHRS.h"
 
 class Robot: public IterativeRobot
 {
 private:
 	std::unique_ptr<Command> autonomousCommand;
 	SendableChooser *chooser;
+	AHRS *ahrs;
 
 	void RobotInit()
 	{
@@ -16,6 +18,11 @@ private:
 		chooser->AddDefault("Default Auto", new ExampleCommand());
 		//chooser->AddObject("My Auto", new MyAutoCommand());
 		SmartDashboard::PutData("Auto Modes", chooser);
+
+		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
+#if ENABLE_IMU
+		ahrs = new AHRS(SerialPort::kUSB); /* Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB */
+#endif
 	}
 
 	/**
