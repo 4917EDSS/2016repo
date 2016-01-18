@@ -1,6 +1,6 @@
 #include "OI.h"
 #include "RobotMap.h"
-#include "Commands/IntakeUntilLimitHitCmd.h"
+#include "Commands/DriveStraightCmd.h"
 
 OI::OI()
 {
@@ -8,7 +8,7 @@ OI::OI()
 	oController = new Joystick(OControllerOperatorPort);
 
 	oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
-	oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
+	oIntakeBtn->WhenPressed(new DriveStraightCmd());
 
 
 	// Process operator interface input here.

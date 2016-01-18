@@ -18,6 +18,10 @@
 
 //Digital Input/Output
 #define IntakeLimitDIO 2
+#define LeftDriveEncoder1DIO 6
+#define LeftDriveEncoder2DIO 7
+#define RightDriveEncoder1DIO 4
+#define RightDriveEncoder2DIO 5
 
 
 /**

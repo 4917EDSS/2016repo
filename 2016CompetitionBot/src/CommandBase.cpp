@@ -23,7 +23,8 @@ void CommandBase::init()
 {
 	// Create a single static instance of all of your subsystems. The following
 	// line should be repeated for each subsystem in the project.
-	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, LeftDrive2PWM, RightDrive1PWM, RightDrive2PWM);
+	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, LeftDrive2PWM, RightDrive1PWM, RightDrive2PWM, LeftDriveEncoder1DIO, LeftDriveEncoder2DIO,
+			RightDriveEncoder1DIO, RightDriveEncoder2DIO);
 	rIntakeSub = new IntakeSub(IntakePWM, IntakeLimitDIO);
 
 	oi = new OI();

@@ -2,13 +2,15 @@
 #include "../RobotMap.h"
 #include "Commands/DriveWithJoystickCmd.h"
 
-DrivetrainSub::DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C) :
+DrivetrainSub::DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C, int rightEncoder1C, int rightEncoder2C) :
 		Subsystem("DrivetrainSub")
 {
-	leftMotor1.reset(new Talon(leftMotor1C));
-	leftMotor2.reset(new Talon(leftMotor2C));
-	rightMotor1.reset(new Talon(rightMotor1C));
-	rightMotor2.reset(new Talon(rightMotor2C));
+	leftMotor1 = new Talon(leftMotor1C);
+	leftMotor2 = new Talon(leftMotor2C);
+	rightMotor1 = new Talon(rightMotor1C);
+	rightMotor2 = new Talon(rightMotor2C);
+	leftDistanceEncoder = new Encoder(leftEncoder1C, leftEncoder2C);
+	rightDistanceEncoder = new Encoder(rightEncoder1C, rightEncoder2C);
 
 	controlState = TANK_DRIVE_CONTROLS;
 	accelThreshold = ACCELERATION_THRESHOLD;
@@ -55,5 +57,26 @@ void DrivetrainSub::SetAccelThresh(float accelThresh)
 	accelThreshold = accelThresh;
 }
 
+int DrivetrainSub::GetRawLeftEnc(){
+	return (int) leftDistanceEncoder->GetRaw();
+}
+
+int DrivetrainSub::GetLeftEnc(){
+	return (int) leftDistanceEncoder->GetDistance();
+}
+
+int DrivetrainSub::GetRawRightEnc(){
+	return (int) rightDistanceEncoder->GetRaw();
+}
+
+int DrivetrainSub::GetRightEnc(){
+	return (int) rightDistanceEncoder->GetDistance();
+}
+
+void DrivetrainSub::ResetDrive(){
+	// This also resets the virtual speed encoders
+	leftDistanceEncoder->Reset();
+	rightDistanceEncoder->Reset();
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

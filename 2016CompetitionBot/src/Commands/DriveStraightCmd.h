@@ -7,7 +7,6 @@
 class DriveStraightCmd: public CommandBase
 {
 private:
-	int time;
 public:
 	DriveStraightCmd();
 	void Initialize();
