@@ -8,6 +8,10 @@
 
 #define ACCELERATION_THRESHOLD 0.1
 
+//go forward this much on one side and reverse the same amount on the other for a 90 degree turn.
+//TODO: update this once the robot is finalized.
+#define DISTANCE_PER_DEGREE (745.0/90.0)
+
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
