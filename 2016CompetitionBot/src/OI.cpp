@@ -1,6 +1,6 @@
 #include "OI.h"
 #include "RobotMap.h"
-#include "Commands/DriveStraightCmd.h"
+#include "Commands/DriveTurnCmd.h"
 
 OI::OI()
 {
@@ -8,12 +8,11 @@ OI::OI()
 	oController = new Joystick(OControllerOperatorPort);
 
 	oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
-	oIntakeBtn->WhenPressed(new DriveStraightCmd());
+	oIntakeBtn->WhenPressed(new DriveTurnCmd(90, true, 1.0));
 
 
 	// Process operator interface input here.
 }
-
 float OI::getStick(Joystick* controller, int axis){
 	float rawInput = controller->GetRawAxis(axis);
 	if (axis > CONTROLLER_DEADZONE_VALUE)

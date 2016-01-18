@@ -9,7 +9,6 @@ DriveTurnCmd::DriveTurnCmd(int turnDegrees, bool isClockwiseTurnParam, float dri
 	previousLeftEncoder = 0;
 	previousRightEncoder = 0;
 	Requires(rDrivetrainSub);
-	rDrivetrainSub->ResetDrive();
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
@@ -18,15 +17,16 @@ DriveTurnCmd::DriveTurnCmd(int turnDegrees, bool isClockwiseTurnParam, float dri
 void DriveTurnCmd::Initialize()
 {
 	if (isClockwiseTurn)
-		{
-			rDrivetrainSub->Drive(driveSpeed, -driveSpeed);
+	{
+		rDrivetrainSub->Drive(driveSpeed, -driveSpeed);
 
-		}
-		else
-		{
-			rDrivetrainSub->Drive(-driveSpeed, driveSpeed);
-		}
+	}
+	else
+	{
+		rDrivetrainSub->Drive(-driveSpeed, driveSpeed);
+	}
 
+	rDrivetrainSub->ResetDrive();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -39,7 +39,7 @@ bool DriveTurnCmd::IsFinished()
 {
 
 
-	if ((rDrivetrainSub->GetLeftEnc() >= turnEncoderValues) && (rDrivetrainSub->GetRightEnc() >= turnEncoderValues)) {
+	if ((rDrivetrainSub->GetLeftEnc() <= turnEncoderValues) && (rDrivetrainSub->GetRightEnc() >= turnEncoderValues)) {
 		return true;
 	} else {
 		return false;
