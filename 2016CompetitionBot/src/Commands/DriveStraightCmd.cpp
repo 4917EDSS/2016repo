@@ -4,7 +4,8 @@ DriveStraightCmd::DriveStraightCmd()
 
 {
 	time = 100000;
-	Requires(rDrivetrainSub.get());
+#pragma message("The following line doesn't build.  Fix it and then delete this line.")
+//	Requires(rDrivetrainSub->get()); // TODO: Fix me /////////////////////////////////////////////////////////////////
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
