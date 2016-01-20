@@ -1,4 +1,5 @@
 #include "WPILib.h"
+#include "Commands/AutoGenericDuoGrp.h"
 #include "Commands/AutoLowBarGrp.h"
 #include "Commands/AutoPortcullisGrp.h"
 #include "Commands/AutoChevalGrp.h"
@@ -13,6 +14,8 @@
 #include "Commands/AutoPosition3ShootGrp.h"
 #include "Commands/AutoPosition4ShootGrp.h"
 #include "Commands/AutoPosition5ShootGrp.h"
+#include "Commands/DriveStraightCmd.h"
+#include "Commands/IntakeUntilLimitHitCmd.h"
 #include "CommandBase.h"
 #include "AHRS.h"
 
@@ -20,7 +23,9 @@
 class Robot: public IterativeRobot
 {
 private:
-	std::unique_ptr<Command> autonomousCommand;
+	Command* autonomousCommand;
+	Command* autonomousDefenceCommand;
+	Command* autonomousLocationCommand;
 	SendableChooser* autoDefenceOptions;
 	SendableChooser* autoLocationOptions;
 	AHRS *ahrs;
@@ -38,6 +43,7 @@ private:
 		autoDefenceOptions->AddObject("Sally Port Defence", new AutoSallyPortGrp());
 		autoDefenceOptions->AddObject("Rock Wall Defence", new AutoRockWallGrp());
 		autoDefenceOptions->AddObject("Rough Terrain Defence", new AutoRoughTerrainGrp());
+		autoDefenceOptions->AddObject("Test Defence", new DriveStraightCmd());
 
 		autoLocationOptions = new SendableChooser();
 		autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
@@ -45,6 +51,7 @@ private:
 		autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
 		autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());
 		autoLocationOptions->AddObject("Position 5", new AutoPosition5ShootGrp());
+		autoLocationOptions->AddObject("Test Position", new IntakeUntilLimitHitCmd());
 
 
 		//chooser->AddObject("My Auto", new MyAutoCommand());
@@ -84,16 +91,17 @@ private:
 	{
 		/* std::string autoSelected = SmartDashboard::GetString("Auto Selector", "Default");
 		if(autoSelected == "My Auto") {
-			autonomousCommand.reset(new MyAutoCommand());
+			autonomousCommand = new MyAutoCommand();
 		} else {
-			autonomousCommand.reset(new ExampleCommand());
+			autonomousCommand = new ExampleCommand();
 		} */
 
-		autonomousCommand.reset((Command *)autoDefenceOptions->GetSelected());
+		autonomousDefenceCommand = (Command *)autoDefenceOptions->GetSelected();
+		autonomousLocationCommand = (Command *)autoLocationOptions->GetSelected();
+		autonomousCommand = new AutoGenericDuoGrp(autonomousDefenceCommand, autonomousLocationCommand);
 
 
-		if (autonomousCommand != NULL)
-			autonomousCommand->Start();
+		autonomousCommand->Start();
 	}
 
 	void AutonomousPeriodic()
