@@ -31,11 +31,17 @@
 //Buttons
 #define OIntakeBtn 1
 
+
 //Axis
 #define DRightVerticalAxis 3
 #define DLeftVerticalAxis 1
 #define DRightHorizontalAxis 2
 #define DLeftHorizontalAxis 0
+
+#define ORightVerticalAxis 3
+#define OLeftVerticalAxis 1
+#define OLeftHorizontalAxis 0
+
 
 #define CONTROLLER_DEADZONE_VALUE 0.075
 

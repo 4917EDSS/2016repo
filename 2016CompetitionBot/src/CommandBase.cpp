@@ -1,12 +1,12 @@
 #include "CommandBase.h"
-#include "Subsystems/DrivetrainSub.h"
-#include "Subsystems/IntakeSub.h"
 #include "Commands/Scheduler.h"
 
 // Initialize a single static instance of all of your subsystems to NULL
 OI* CommandBase::oi = NULL;
 DrivetrainSub* CommandBase::rDrivetrainSub = NULL;
 IntakeSub* CommandBase::rIntakeSub = NULL;
+ShooterSub* CommandBase::rShooterSub = NULL;
+CameraSub* CommandBase::rCameraSub = NULL;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -26,6 +26,8 @@ void CommandBase::init()
 	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, LeftDrive2PWM, RightDrive1PWM, RightDrive2PWM, LeftDriveEncoder1DIO, LeftDriveEncoder2DIO,
 			RightDriveEncoder1DIO, RightDriveEncoder2DIO);
 	rIntakeSub = new IntakeSub(IntakePWM, IntakeLimitDIO);
+	rShooterSub = new ShooterSub(ShooterMotorPWM, ShooterEncoder1DIO, ShooterEncoder2DIO);
+	rCameraSub = new CameraSub();
 
 	oi = new OI();
 }
