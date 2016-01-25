@@ -9,6 +9,7 @@
 #include "Subsystems/IntakeSub.h"
 #include "Subsystems/ShooterSub.h"
 #include "Subsystems/CameraSub.h"
+#include "Subsystems/HopperSub.h"
 #include "Commands/Scheduler.h"
 
 //Talons
@@ -19,13 +20,13 @@
 #define IntakePWM 4       //Actually intaking or expelling boulders by rotating the intake drums.
 #define ShooterMotorPWM 5 //High speed wheels to launch the boulder.
 #define IntakeDeployPWM 6 //Moves the intake subsystem.
-#define TriggerPWM 7      //Moves boulder from hopper to SpinnerMotor.
+#define HopperPWM 7      //Moves boulder from hopper to SpinnerMotor.
 #define TurretRotate 8    //Rotates shooting turret(Yaw).
 #define TurretTilt 9      //Tilts shooting turret(Pitch).
 
 
 //Digital Input/Output
-#define IntakeLimitDIO 1
+#define HopperLimitDIO 1
 #define ShooterEncoder1DIO 8
 #define ShooterEncoder2DIO 9
 #define LeftDriveEncoder1DIO 6
@@ -50,6 +51,8 @@ public:
 	static IntakeSub* rIntakeSub;
 	static ShooterSub* rShooterSub;
 	static CameraSub* rCameraSub;
+	static HopperSub* rHopperSub;
+	// OI MUST BE AT BOTTOM
 	static OI* oi;
 };
 
