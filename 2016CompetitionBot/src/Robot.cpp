@@ -16,6 +16,8 @@
 #include "Commands/AutoPosition5ShootGrp.h"
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
+#include "Commands/BallToIntakeCmd.h"
+#include "Commands/BallToShooterCmd.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
 #include "AHRS.h"
@@ -47,7 +49,8 @@ private:
 		autoDefenceOptions->AddObject("Sally Port Defence", new AutoSallyPortGrp());
 		autoDefenceOptions->AddObject("Rock Wall Defence", new AutoRockWallGrp());
 		autoDefenceOptions->AddObject("Rough Terrain Defence", new AutoRoughTerrainGrp());
-		autoDefenceOptions->AddObject("Test Defence", new DriveStraightCmd());
+		autoDefenceOptions->AddObject("put to shooter", new BallToShooterCmd());
+		autoDefenceOptions->AddObject("expel", new BallToIntakeCmd());
 
 		autoLocationOptions = new SendableChooser();
 		autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());

@@ -3,7 +3,7 @@
 
 #include "WPILib.h"
 
-#define CAMERA_NAME "cam1"
+#define CAMERA_NAME "cam2"
 
 #define TANK_DRIVE_CONTROLS 1
 #define FPS_DRIVE_CONTROLS 2

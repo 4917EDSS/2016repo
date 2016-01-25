@@ -1,43 +1,41 @@
-#include "IntakeUntilLimitHitCmd.h"
+#include "BallToIntakeCmd.h"
 
-IntakeUntilLimitHitCmd::IntakeUntilLimitHitCmd()
+BallToIntakeCmd::BallToIntakeCmd()
 {
-	Requires(rIntakeSub);
+	timer = 0;
 	Requires(rHopperSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
 
 // Called just before this Command runs the first time
-void IntakeUntilLimitHitCmd::Initialize()
+void BallToIntakeCmd::Initialize()
 {
-	rIntakeSub->SetIntakeSpeed(1.0);
-	rHopperSub->SetHopperMotor(0.25);
+	timer = 0;
+	rHopperSub->SetHopperMotor(1);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void IntakeUntilLimitHitCmd::Execute()
+void BallToIntakeCmd::Execute()
 {
-
+	timer++;
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool IntakeUntilLimitHitCmd::IsFinished()
+bool BallToIntakeCmd::IsFinished()
 {
-	//return rIntakeSub->IsBallLoaded();
-	return rHopperSub->IsBallIn();
+	return timer>100;
 }
 
 // Called once after isFinished returns true
-void IntakeUntilLimitHitCmd::End()
+void BallToIntakeCmd::End()
 {
-	rIntakeSub->SetIntakeSpeed(0);
 	rHopperSub->SetHopperMotor(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void IntakeUntilLimitHitCmd::Interrupted()
+void BallToIntakeCmd::Interrupted()
 {
 	End();
 }
