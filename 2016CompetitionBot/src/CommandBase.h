@@ -18,14 +18,15 @@
 #define RightDrive2PWM 3
 #define IntakePWM 4       //Actually intaking or expelling boulders by rotating the intake drums.
 #define ShooterMotorPWM 5 //High speed wheels to launch the boulder.
-#define IntakeDeployPWM 6 //Moves the intake subsystem.
+#define AdjustPWM 6 //Moves the intake subsystem.
 #define TriggerPWM 7      //Moves boulder from hopper to SpinnerMotor.
-#define TurretRotate 8    //Rotates shooting turret(Yaw).
-#define TurretTilt 9      //Tilts shooting turret(Pitch).
+#define TurretRotatePWM 8    //Rotates shooting turret(Yaw).
+#define TurretTiltPWM 9      //Tilts shooting turret(Pitch).
 
 
 //Digital Input/Output
-#define IntakeLimitDIO 1
+#define HeightEncoder1DIO 1
+#define HeightEncoder2DIO 2
 #define ShooterEncoder1DIO 8
 #define ShooterEncoder2DIO 9
 #define LeftDriveEncoder1DIO 6

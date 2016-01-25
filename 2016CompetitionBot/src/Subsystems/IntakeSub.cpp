@@ -1,11 +1,12 @@
 #include "IntakeSub.h"
 #include "../RobotMap.h"
 
-IntakeSub::IntakeSub(int intakeMotorC, int ballHitLimitC) :
+IntakeSub::IntakeSub(int intakeMotorC, int adjustMotorC, int heightEncoder1C, int heightEncoder2C) :
 		Subsystem("IntakeSub")
 {
 	intakeMotor = new Talon(intakeMotorC);
-	ballHitLimit = new DigitalInput(ballHitLimitC);
+	adjustMotor = new Talon(adjustMotorC);
+	heightEncoder = new Encoder(heightEncoder1C, heightEncoder2C);
 }
 
 
@@ -17,9 +18,19 @@ void IntakeSub::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-bool IntakeSub::IsBallLoaded()
+int IntakeSub::GetHeight()
 {
-	return !ballHitLimit->Get();
+	return (int) heightEncoder->GetDistance();
+}
+
+int IntakeSub::GetRawHeight()
+{
+	return (int) heightEncoder->GetRaw();
+}
+
+void IntakeSub::SetVerticalSpeed(float speed)
+{
+	adjustMotor->Set(speed);
 }
 
 void IntakeSub::SetIntakeSpeed(float speed)

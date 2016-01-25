@@ -25,7 +25,7 @@ void CommandBase::init()
 	// line should be repeated for each subsystem in the project.
 	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, LeftDrive2PWM, RightDrive1PWM, RightDrive2PWM, LeftDriveEncoder1DIO, LeftDriveEncoder2DIO,
 			RightDriveEncoder1DIO, RightDriveEncoder2DIO);
-	rIntakeSub = new IntakeSub(IntakePWM, IntakeLimitDIO);
+	rIntakeSub = new IntakeSub(IntakePWM, AdjustPWM, HeightEncoder1DIO, HeightEncoder2DIO);
 	rShooterSub = new ShooterSub(ShooterMotorPWM, ShooterEncoder1DIO, ShooterEncoder2DIO);
 	rCameraSub = new CameraSub();
 
