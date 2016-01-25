@@ -67,5 +67,5 @@ void SetIntakeHeightCmd::End()
 // subsystems is scheduled to run
 void SetIntakeHeightCmd::Interrupted()
 {
-
+	End();
 }
