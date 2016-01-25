@@ -22,7 +22,8 @@ void IntakeUntilLimitHitCmd::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool IntakeUntilLimitHitCmd::IsFinished()
 {
-	return rIntakeSub->IsBallLoaded();
+	//return rIntakeSub->IsBallLoaded();
+	return true;
 }
 
 // Called once after isFinished returns true
