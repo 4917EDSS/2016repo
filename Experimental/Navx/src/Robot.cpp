@@ -2,9 +2,12 @@
 #include "Commands/Command.h"
 #include "Commands/ExampleCommand.h"
 #include "CommandBase.h"
+#include "AHRS.h"
 
 class Robot: public IterativeRobot
 {
+	AHRS *ahrs = NULL;
+
 private:
 	std::unique_ptr<Command> autonomousCommand;
 	SendableChooser *chooser;
@@ -16,6 +19,8 @@ private:
 		chooser->AddDefault("Default Auto", new ExampleCommand());
 		//chooser->AddObject("My Auto", new MyAutoCommand());
 		SmartDashboard::PutData("Auto Modes", chooser);
+
+		ahrs = new AHRS(SerialPort::Port::kUSB);
 	}
 
 	/**
@@ -73,6 +78,14 @@ private:
 
 	void TeleopPeriodic()
 	{
+		if( ahrs )
+		{
+			SmartDashboard::PutBoolean( "IMU_Connected", ahrs->IsConnected());
+		}
+
+
+
+
 		Scheduler::GetInstance()->Run();
 	}
 
