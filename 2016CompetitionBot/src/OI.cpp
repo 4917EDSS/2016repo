@@ -41,3 +41,18 @@ float OI::DGetRightHor(){
 	return getStick(dController, DRightHorizontalAxis);
 }
 
+float OI::OGetRightVer(){
+	return -getStick(oController, ORightVerticalAxis);
+}
+
+float OI::OGetLeftVer(){
+	return -getStick(oController, OLeftVerticalAxis);
+}
+
+float OI::OGetLeftHor(){
+	return getStick(oController, OLeftHorizontalAxis);
+}
+
+float OI::OGetRightHor(){
+	return getStick(oController, ORightHorizontalAxis);
+}

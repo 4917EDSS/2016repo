@@ -40,6 +40,7 @@
 
 #define ORightVerticalAxis 3
 #define OLeftVerticalAxis 1
+#define ORightHorizontalAxis 2
 #define OLeftHorizontalAxis 0
 
 
