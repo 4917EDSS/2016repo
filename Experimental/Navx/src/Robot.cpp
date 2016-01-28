@@ -81,6 +81,28 @@ private:
 		if( ahrs )
 		{
 			SmartDashboard::PutBoolean( "IMU_Connected", ahrs->IsConnected());
+			SmartDashboard::PutNumber(  "IMU_Yaw",              ahrs->GetYaw());
+			SmartDashboard::PutNumber(  "IMU_Pitch",            ahrs->GetPitch());
+			SmartDashboard::PutNumber(  "IMU_Roll",             ahrs->GetRoll());
+			SmartDashboard::PutNumber(  "IMU_CompassHeading",   ahrs->GetCompassHeading());
+			SmartDashboard::PutNumber(  "IMU_Update_Count",     ahrs->GetUpdateCount());
+			SmartDashboard::PutNumber(  "IMU_Byte_Count",       ahrs->GetByteCount());
+
+			/* These functions are compatible w/the WPI Gyro Class */
+			SmartDashboard::PutNumber(  "IMU_TotalYaw",         ahrs->GetAngle());
+			SmartDashboard::PutNumber(  "IMU_YawRateDPS",       ahrs->GetRate());
+
+			SmartDashboard::PutNumber(  "IMU_Accel_X",          ahrs->GetWorldLinearAccelX());
+			SmartDashboard::PutNumber(  "IMU_Accel_Y",          ahrs->GetWorldLinearAccelY());
+			SmartDashboard::PutBoolean( "IMU_IsMoving",         ahrs->IsMoving());
+			SmartDashboard::PutNumber(  "IMU_Temp_C",           ahrs->GetTempC());
+			SmartDashboard::PutBoolean( "IMU_IsCalibrating",    ahrs->IsCalibrating());
+
+			SmartDashboard::PutNumber(  "Velocity_X",           ahrs->GetVelocityX() );
+			SmartDashboard::PutNumber(  "Velocity_Y",           ahrs->GetVelocityY() );
+			SmartDashboard::PutNumber(  "Displacement_X",       ahrs->GetDisplacementX() );
+			SmartDashboard::PutNumber(  "Displacement_Y",       ahrs->GetDisplacementY() );
+
 		}
 
 
