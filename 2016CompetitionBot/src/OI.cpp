@@ -1,11 +1,23 @@
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveTurnCmd.h"
+#include "Commands/FireCmd.h"
+#include "Commands/BallToIntakeCmd.h"
+#include "Commands/BallToShooterCmd.h"
 
 OI::OI()
 {
 	dController = new Joystick(DControllerDriverPort);
 	oController = new Joystick(OControllerOperatorPort);
+
+	oFireBtn = new JoystickButton(oController, OFireBtn);
+	oFireBtn->WhileHeld(new FireCmd);
+
+	oLowGoalBtn = new JoystickButton(oController, OLowGoalBtn);
+	oLowGoalBtn->WhenPressed(new BallToIntakeCmd);
+
+	oHighGoalBtn = new JoystickButton(oController, OHighGoalBtn);
+	oHighGoalBtn->WhenPressed(new BallToShooterCmd);
 
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
@@ -15,7 +27,11 @@ OI::OI()
 }
 float OI::getStick(Joystick* controller, int axis){
 	float rawInput = controller->GetRawAxis(axis);
-	if (axis > CONTROLLER_DEADZONE_VALUE)
+	if (rawInput > CONTROLLER_DEADZONE_VALUE)
+	{
+		return (rawInput*fabs(rawInput));
+	}
+	else if(rawInput < -CONTROLLER_DEADZONE_VALUE)
 	{
 		return (rawInput*fabs(rawInput));
 	}

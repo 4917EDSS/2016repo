@@ -30,6 +30,9 @@
 
 //Buttons
 #define OIntakeBtn 1
+#define OFireBtn 5
+#define OLowGoalBtn 6
+#define OHighGoalBtn 8
 
 
 //Axis
@@ -44,7 +47,7 @@
 #define OLeftHorizontalAxis 0
 
 
-#define CONTROLLER_DEADZONE_VALUE 0.075
+#define CONTROLLER_DEADZONE_VALUE 0.001
 
 
 class OI
@@ -54,7 +57,9 @@ private:
 
 	Joystick* dController;
 	Joystick* oController;
-	JoystickButton* oIntakeBtn;
+	JoystickButton* oFireBtn;
+	JoystickButton* oLowGoalBtn;
+	JoystickButton* oHighGoalBtn;
 
 	float getStick(Joystick* stick, int axis);
 

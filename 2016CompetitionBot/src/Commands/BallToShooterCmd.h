@@ -7,6 +7,7 @@
 class BallToShooterCmd: public CommandBase
 {
 private:
+	Timer* timerOne;
 	int timer;
 public:
 	BallToShooterCmd();
