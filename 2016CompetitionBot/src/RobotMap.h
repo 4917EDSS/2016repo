@@ -15,6 +15,11 @@
 #define DISTANCE_PER_DEGREE (745.0/90.0)
 
 
+//Some bool constants used for code readability
+#define IS_DRIVE true
+#define IS_SHIFTER false
+
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking

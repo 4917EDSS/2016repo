@@ -13,6 +13,7 @@ private:
 	Talon* leftMotor2;
 	Talon* rightMotor1;
 	Talon* rightMotor2;
+	DoubleSolenoid* driveLiftShifter;
 	Encoder* leftDistanceEncoder;
 	Encoder* rightDistanceEncoder;
 
@@ -20,7 +21,8 @@ private:
 	float accelThreshold;
 
 public:
-	DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C, int rightEncoder1C, int rightEncoder2C);
+	DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C,
+			int rightEncoder1C, int rightEncoder2C, int driveLiftShift1C, int driveLiftShift2C);
 	void Drive(float leftSpeed, float rightSpeed);
 	void ToggleControls();
 	int GetControls();
@@ -30,6 +32,8 @@ public:
 	int GetLeftEnc();
 	int GetRawRightEnc();
 	int GetRightEnc();
+	void SetLiftShift(bool isDrive);
+	bool GetLiftShift();
 	void InitDefaultCommand();
 	void ResetDrive();
 

@@ -2,13 +2,15 @@
 #include "../RobotMap.h"
 #include "Commands/DriveWithJoystickCmd.h"
 
-DrivetrainSub::DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C, int rightEncoder1C, int rightEncoder2C) :
+DrivetrainSub::DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C,
+		int rightEncoder1C, int rightEncoder2C, int driveLiftShift1C, int driveLiftShift2C) :
 		Subsystem("DrivetrainSub")
 {
 	leftMotor1 = new Talon(leftMotor1C);
 	leftMotor2 = new Talon(leftMotor2C);
 	rightMotor1 = new Talon(rightMotor1C);
 	rightMotor2 = new Talon(rightMotor2C);
+	driveLiftShifter = new DoubleSolenoid(driveLiftShift1C, driveLiftShift2C);
 	leftDistanceEncoder = new Encoder(leftEncoder1C, leftEncoder2C);
 	rightDistanceEncoder = new Encoder(rightEncoder1C, rightEncoder2C);
 
@@ -71,6 +73,29 @@ int DrivetrainSub::GetRawRightEnc(){
 
 int DrivetrainSub::GetRightEnc(){
 	return (int) rightDistanceEncoder->GetDistance();
+}
+
+void DrivetrainSub::SetLiftShift(bool isDrive){
+	if (isDrive)
+	{
+		driveLiftShifter->Set(DoubleSolenoid::kForward);
+	}
+	else
+	{
+		driveLiftShifter->Set(DoubleSolenoid::kReverse);
+	}
+}
+
+bool DrivetrainSub::GetLiftShift(){
+	if (driveLiftShifter->Get() == DoubleSolenoid::kForward)
+	{
+		return IS_DRIVE;
+	}
+	else
+	{
+		return IS_SHIFTER;
+	}
+
 }
 
 void DrivetrainSub::ResetDrive(){

@@ -37,6 +37,10 @@
 #define RightDriveEncoder2DIO 5
 
 
+//Air Outputs
+#define ShifterSolenoid1PNC 0
+#define ShifterSolenoid2PNC 1
+
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a

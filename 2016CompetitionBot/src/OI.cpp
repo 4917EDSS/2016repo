@@ -4,6 +4,7 @@
 #include "Commands/FireCmd.h"
 #include "Commands/BallToIntakeCmd.h"
 #include "Commands/BallToShooterCmd.h"
+#include "Commands/ToggleDriveLiftCmd.h"
 
 OI::OI()
 {
@@ -18,6 +19,9 @@ OI::OI()
 
 	oHighGoalBtn = new JoystickButton(oController, OHighGoalBtn);
 	oHighGoalBtn->WhenPressed(new BallToShooterCmd);
+
+	dLiftShifterBtn = new JoystickButton(dController, DLiftShifterBtn);
+	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);
 
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
