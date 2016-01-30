@@ -28,7 +28,7 @@ void CommandBase::init()
 			RightDriveEncoder1DIO, RightDriveEncoder2DIO, ShifterSolenoid1PNC, ShifterSolenoid2PNC);
 	rIntakeSub = new IntakeSub(IntakePWM, AdjustPWM, HeightEncoder1DIO, HeightEncoder2DIO);
 	rShooterSub = new ShooterSub(ShooterMotorPWM, ShooterEncoder1DIO, ShooterEncoder2DIO, TurretRotatePWM, TurretTiltPWM);
-	rCameraSub = new CameraSub();
+	//rCameraSub = new CameraSub();
 	rHopperSub = new HopperSub(HopperPWM, HopperLimitDIO);
 	//OI must be at the bottom!!
 	oi = new OI();

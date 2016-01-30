@@ -1,4 +1,6 @@
 #include "WPILib.h"
+#include <unistd.h>
+#include <iostream>
 #include "Commands/AutoGenericDuoGrp.h"
 #include "Commands/AutoLowBarGrp.h"
 #include "Commands/AutoPortcullisGrp.h"
@@ -33,8 +35,24 @@ private:
 	SendableChooser* autoLocationOptions;
 	AHRS *ahrs;
 
+	// Constants to run the GRIP process
+	const char *JAVA = "/home/lvuser/frc/JRE/bin/java";
+	char *GRIP_ARGS[5] = { "java", "-jar", "/home/lvuser/grip.jar",
+				"/home/lvuser/project.grip", NULL };
+
+
 	void RobotInit()
 	{
+		// Running GRIP in a new process
+		// TODO:
+		// THIS PROGRAM HAS YET TO WORK AS IS. Commenting out the rest of this function
+		// from CommandBase::init() down to the bottom makes it work.
+		if (fork() == 0) {
+			if (execv(JAVA, GRIP_ARGS) == -1) {
+				perror("Error running GRIP");
+			}
+		}
+
 		CommandBase::init();
 		CameraServer::GetInstance()->SetQuality(50);
 		//the camera name (ex "cam0") can be found through the roborio web interface
@@ -67,8 +85,9 @@ private:
 
 		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
 #if ENABLE_IMU
-		ahrs = new AHRS(SerialPort::kUSB); /* Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB */
+		ahrs = new AHRS(SerialPort::kUSB); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
 #endif
+
 	}
 
 	/**
@@ -135,6 +154,16 @@ private:
 
 	void TestPeriodic()
 	{
+		// The following NetworkTable code does not need to live in Robot.cpp. This is just to prove it works.
+		// Network table looking up the contours report
+		std::shared_ptr<NetworkTable> gripTable = NetworkTable::GetTable("GRIP/myContoursReport");
+		std::cerr << "Getting contours area array." << std::endl;
+		std::vector<double> arr = gripTable->GetNumberArray("area", llvm::ArrayRef<double>());
+		std::cerr << "Done getting number array. Array values are as follows: " << std::endl;
+		for (unsigned int i = 0; i < arr.size(); i++) {
+			std::cout << arr[i] << std::endl;
+		}
+
 		LiveWindow::GetInstance()->Run();
 	}
 };
