@@ -114,6 +114,8 @@ private:
 	void AutonomousPeriodic()
 	{
 		Scheduler::GetInstance()->Run();
+		SmartDashboard::PutNumber("Left Wheel dis Encoder", CommandBase::rDrivetrainSub->GetLeftEnc());
+		SmartDashboard::PutNumber("Right Wheel dis Encoder", CommandBase::rDrivetrainSub->GetRightEnc());
 	}
 
 	void TeleopInit()
