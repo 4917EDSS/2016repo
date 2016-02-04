@@ -54,9 +54,9 @@ private:
 		}
 
 		CommandBase::init();
-		CameraServer::GetInstance()->SetQuality(50);
+		//CameraServer::GetInstance()->SetQuality(50);
 		//the camera name (ex "cam0") can be found through the roborio web interface
-		CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
+		//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 		autoDefenceOptions = new SendableChooser();
 		autoDefenceOptions->AddDefault("Low Bar Defence", new AutoLowBarGrp());
 		autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());

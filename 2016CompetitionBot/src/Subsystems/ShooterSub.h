@@ -19,6 +19,7 @@ public:
 	void Spin(float spinSpeed);
 	void SetTurretRotate(float speed);
 	void SetTurretTilt(float speed);
+	float GetTargetOffsetFromCenter();
 	void InitDefaultCommand();
 };
 

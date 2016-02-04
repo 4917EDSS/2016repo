@@ -15,6 +15,11 @@
 #define DISTANCE_PER_DEGREE (745.0/90.0)
 
 
+#define MIDDLE_CAMERA_X 160.0
+
+#define TARGET_RANGE 40
+
+
 //Some bool constants used for code readability
 #define IS_DRIVE true
 #define IS_SHIFTER false

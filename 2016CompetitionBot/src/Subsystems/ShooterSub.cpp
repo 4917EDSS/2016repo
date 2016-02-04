@@ -1,6 +1,7 @@
 #include "ShooterSub.h"
 #include "../Commands/SpinupCmd.h"
 #include "../Commands/ControlTurretWithJoystickCmd.h"
+#include "../Commands/AimBotCmd.h"
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
@@ -32,9 +33,40 @@ void ShooterSub::SetTurretTilt(float speed)
 	tiltTurretMotor->Set(speed);
 }
 
+float ShooterSub::GetTargetOffsetFromCenter()
+{
+	int TargetIndex = 0, temp = 0;
+	float  TargetWidth = 0;
+
+	std::shared_ptr<NetworkTable> gripTable = NetworkTable::GetTable("GRIP/myContoursReport");
+
+	std::cerr << "Getting contours width array." << std::endl;
+	std::vector<double> WidthArray = gripTable->GetNumberArray("width", llvm::ArrayRef<double>());
+	std::cerr << "Done getting number array. Array values are as follows: " << WidthArray.size() << std::endl;
+	for (unsigned int i = 0; i < WidthArray.size(); i++) {
+		if (WidthArray[i] > temp)
+		{
+			temp = i;
+		}
+		std::cout << WidthArray[i] << std::endl;
+	}
+	TargetIndex = temp;
+
+	std::cerr << "Getting contours centerX array." << std::endl;
+	std::vector<double> XArray = gripTable->GetNumberArray("centerX", llvm::ArrayRef<double>());
+	std::cerr << "Done getting number array. Array values are as follows: " << std::endl;
+	std::cout << XArray[TargetIndex] << std::endl;
+
+	TargetWidth = XArray[TargetIndex] - MIDDLE_CAMERA_X;
+	return TargetWidth;
+
+
+
+}
+
 void ShooterSub::InitDefaultCommand()
 {
-	SetDefaultCommand(new ControlTurretWithJoystickCmd());
+	SetDefaultCommand(new AimBotCmd());
 	//SetDefaultCommand(new SpinupCmd());
 
 	// Set the default command for a subsystem here.
