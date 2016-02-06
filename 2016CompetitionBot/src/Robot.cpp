@@ -16,10 +16,21 @@
 #include "Commands/AutoPosition3ShootGrp.h"
 #include "Commands/AutoPosition4ShootGrp.h"
 #include "Commands/AutoPosition5ShootGrp.h"
-#include "Commands/DriveStraightCmd.h"
+
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/BallToIntakeCmd.h"
 #include "Commands/BallToShooterCmd.h"
+#include "Commands/CameraUpdateCmd.h"
+#include "Commands/ControlIntakeWithJoystickCmd.h"
+#include "Commands/ControlTurretWithJoystickCmd.h"
+#include "Commands/DriveStraightCmd.h"
+#include "Commands/DriveTurnCmd.h"
+#include "Commands/DriveWithJoystickCmd.h"
+#include "Commands/FireCmd.h"
+#include "Commands/IntakeUntilLimitHitCmd.h"
+#include "Commands/SetIntakeHeightCmd.h"
+#include "Commands/SpinupCmd.h"
+#include "Commands/ToggleDriveLiftCmd.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
 #include "AHRS.h"
@@ -28,6 +39,9 @@
 class Robot: public IterativeRobot
 {
 private:
+	void SetSmartDashboardAutoOptions();
+	void SendCmdAndSubInfoToSmartDashboard();
+
 	Command* autonomousCommand;
 	Command* autonomousDefenceCommand;
 	Command* autonomousLocationCommand;
@@ -54,39 +68,16 @@ private:
 		}
 
 		CommandBase::init();
-		//CameraServer::GetInstance()->SetQuality(50);
+
 		//the camera name (ex "cam0") can be found through the roborio web interface
-		//CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
-		autoDefenceOptions = new SendableChooser();
-		autoDefenceOptions->AddDefault("Low Bar Defence", new AutoLowBarGrp());
-		autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());
-		autoDefenceOptions->AddObject("Cheval De Fris", new AutoChevalGrp());
-		autoDefenceOptions->AddObject("Ramparts Defence", new AutoRampartsGrp());
-		autoDefenceOptions->AddObject("Moat Defence", new AutoMoatGrp());
-		autoDefenceOptions->AddObject("Drawbridge Defence", new AutoDrawbridgeGrp());
-		autoDefenceOptions->AddObject("Sally Port Defence", new AutoSallyPortGrp());
-		autoDefenceOptions->AddObject("Rock Wall Defence", new AutoRockWallGrp());
-		autoDefenceOptions->AddObject("Rough Terrain Defence", new AutoRoughTerrainGrp());
-		autoDefenceOptions->AddObject("put to shooter", new BallToShooterCmd());
-		autoDefenceOptions->AddObject("expel", new BallToIntakeCmd());
+//		CameraServer::GetInstance()->SetQuality(50);
+//		CameraServer::GetInstance()->StartAutomaticCapture(CAMERA_NAME);
 
-		autoLocationOptions = new SendableChooser();
-		autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
-		autoLocationOptions->AddObject("Position 2", new AutoPosition2ShootGrp());
-		autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
-		autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());
-		autoLocationOptions->AddObject("Position 5", new AutoPosition5ShootGrp());
-		autoLocationOptions->AddObject("Test Position", new IntakeUntilLimitHitCmd());
-
-
-		//chooser->AddObject("My Auto", new MyAutoCommand());
-		SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
-		SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
+		// Send to the Smart Dashboard a list of auto commands to choose from
+		SetSmartDashboardAutoOptions();
 
 		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
-#if ENABLE_IMU
-		ahrs = new AHRS(SerialPort::kUSB); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
-#endif
+//		ahrs = new AHRS(SerialPort::kUSB); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
 
 	}
 
@@ -122,11 +113,11 @@ private:
 			autonomousCommand = new ExampleCommand();
 		} */
 
+//		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
+
 		autonomousDefenceCommand = (Command *)autoDefenceOptions->GetSelected();
 		autonomousLocationCommand = (Command *)autoLocationOptions->GetSelected();
 		autonomousCommand = new AutoGenericDuoGrp(autonomousDefenceCommand, autonomousLocationCommand);
-
-
 		autonomousCommand->Start();
 	}
 
@@ -145,6 +136,8 @@ private:
 		// this line or comment it out.
 		if (autonomousCommand != NULL)
 			autonomousCommand->Cancel();
+
+		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 	}
 
 	void TeleopPeriodic()
@@ -167,6 +160,67 @@ private:
 		LiveWindow::GetInstance()->Run();
 	}
 };
+
+void Robot::SendCmdAndSubInfoToSmartDashboard()
+{
+	// See what command is running
+	SmartDashboard::PutData(Scheduler::GetInstance());
+
+	// See what command requires a particular subsystem
+	if(CommandBase::rDrivetrainSub)
+			SmartDashboard::PutData(CommandBase::rDrivetrainSub);
+	if(CommandBase::rIntakeSub)
+		SmartDashboard::PutData(CommandBase::rIntakeSub);
+	if(CommandBase::rShooterSub)
+		SmartDashboard::PutData(CommandBase::rShooterSub);
+	if(CommandBase::rCameraSub)
+		SmartDashboard::PutData(CommandBase::rCameraSub);
+	if(CommandBase::rHopperSub)
+		SmartDashboard::PutData(CommandBase::rHopperSub);
+
+	// See status of each command and be able to run it manually
+	SmartDashboard::PutData("Ball To Intake", new BallToIntakeCmd());
+	SmartDashboard::PutData("Ball To Shooter", new BallToShooterCmd());
+	SmartDashboard::PutData("Camera Update", new CameraUpdateCmd());
+	SmartDashboard::PutData("Joystick Intake Ctrl", new ControlIntakeWithJoystickCmd());
+	SmartDashboard::PutData("Joystick Turret Ctrl", new ControlTurretWithJoystickCmd());
+	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd());
+//	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd());				// Needs parameters
+	SmartDashboard::PutData("Joystick Drive", new DriveWithJoystickCmd());
+	SmartDashboard::PutData("Fire", new FireCmd());
+	SmartDashboard::PutData("Intake Until Limit Hit", new IntakeUntilLimitHitCmd());
+//	SmartDashboard::PutData("Set Intake Height", new SetIntakeHeightCmd());	// Needs parameters
+	SmartDashboard::PutData("Spinup", new SpinupCmd());
+	SmartDashboard::PutData("Toggle Drive Lift", new ToggleDriveLiftCmd());
+}
+
+void Robot::SetSmartDashboardAutoOptions()
+{
+	autoDefenceOptions = new SendableChooser();
+	autoDefenceOptions->AddDefault("Low Bar Defence", new AutoLowBarGrp());
+	autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());
+	autoDefenceOptions->AddObject("Cheval De Fris", new AutoChevalGrp());
+	autoDefenceOptions->AddObject("Ramparts Defence", new AutoRampartsGrp());
+	autoDefenceOptions->AddObject("Moat Defence", new AutoMoatGrp());
+	autoDefenceOptions->AddObject("Drawbridge Defence", new AutoDrawbridgeGrp());
+	autoDefenceOptions->AddObject("Sally Port Defence", new AutoSallyPortGrp());
+	autoDefenceOptions->AddObject("Rock Wall Defence", new AutoRockWallGrp());
+	autoDefenceOptions->AddObject("Rough Terrain Defence", new AutoRoughTerrainGrp());
+	autoDefenceOptions->AddObject("put to shooter", new BallToShooterCmd());
+	autoDefenceOptions->AddObject("expel", new BallToIntakeCmd());
+
+	autoLocationOptions = new SendableChooser();
+	autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
+	autoLocationOptions->AddObject("Position 2", new AutoPosition2ShootGrp());
+	autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
+	autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());
+	autoLocationOptions->AddObject("Position 5", new AutoPosition5ShootGrp());
+	autoLocationOptions->AddObject("Test Position", new IntakeUntilLimitHitCmd());
+
+	//chooser->AddObject("My Auto", new MyAutoCommand());
+	SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
+	SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
+}
 
 START_ROBOT_CLASS(Robot)
 
