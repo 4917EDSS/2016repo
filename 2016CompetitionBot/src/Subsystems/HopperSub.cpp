@@ -18,9 +18,14 @@ bool HopperSub::IsBallIn()
 	return ballInLimit->Get();
 }
 
-void HopperSub::SetHopperMotor(float speed)
+void HopperSub::SetHopperMotorIn(float speed)
 {
 	hopperMotor->Set(speed);
+}
+
+void HopperSub::SetHopperMotorOut(float speed)
+{
+	hopperMotor->Set(-speed);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

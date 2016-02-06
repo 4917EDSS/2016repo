@@ -12,7 +12,7 @@ IntakeUntilLimitHitCmd::IntakeUntilLimitHitCmd()
 void IntakeUntilLimitHitCmd::Initialize()
 {
 	rIntakeSub->SetIntakeSpeed(1.0);
-	rHopperSub->SetHopperMotor(0.25);
+	rHopperSub->SetHopperMotorIn(0.25);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -32,7 +32,7 @@ bool IntakeUntilLimitHitCmd::IsFinished()
 void IntakeUntilLimitHitCmd::End()
 {
 	rIntakeSub->SetIntakeSpeed(0);
-	rHopperSub->SetHopperMotor(0);
+	rHopperSub->SetHopperMotorIn(0);
 }
 
 // Called when another command which requires one or more of the same

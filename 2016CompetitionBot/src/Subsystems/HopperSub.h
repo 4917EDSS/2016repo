@@ -15,7 +15,8 @@ public:
 	HopperSub(int hopperMotorC, int ballInLimitC);
 	void InitDefaultCommand();
 	bool IsBallIn();
-	void SetHopperMotor(float speed);
+	void SetHopperMotorIn(float speed);
+	void SetHopperMotorOut(float speed);
 };
 
 #endif

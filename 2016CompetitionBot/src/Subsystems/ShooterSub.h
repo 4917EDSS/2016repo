@@ -12,15 +12,17 @@ private:
 	Talon* rotateTurretMotor;
 	Talon* tiltTurretMotor;
 	Encoder4917* shooterEncoder;
+	Encoder* tiltEncoder;
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 public:
-	ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int turretRotateC, int turretTiltC);
+	ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int turretRotateC, int turretTiltC);
 	void Spin(float spinSpeed);
 	void SetTurretRotate(float speed);
 	void SetTurretTilt(float speed);
 	float GetTargetOffsetFromCenter();
 	void InitDefaultCommand();
+	float GetTiltEnc();
 };
 
 #endif
