@@ -75,7 +75,7 @@ int DrivetrainSub::GetRightEnc(){
 	return (int) rightDistanceEncoder->GetDistance();
 }
 
-void DrivetrainSub::SetLiftShift(bool isDrive){
+void DrivetrainSub::ShiftDrive(bool isDrive){
 	if (isDrive)
 	{
 		driveLiftShifter->Set(DoubleSolenoid::kForward);
@@ -86,7 +86,7 @@ void DrivetrainSub::SetLiftShift(bool isDrive){
 	}
 }
 
-bool DrivetrainSub::GetLiftShift(){
+bool DrivetrainSub::GetGear(){
 	if (driveLiftShifter->Get() == DoubleSolenoid::kForward)
 	{
 		return IS_DRIVE;
