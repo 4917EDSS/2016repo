@@ -32,8 +32,8 @@ public:
 	int GetLeftEnc();
 	int GetRawRightEnc();
 	int GetRightEnc();
-	void SetLiftShift(bool isDrive);
-	bool GetLiftShift();
+	void ShiftDrive(bool isDrive);
+	bool GetGear();
 	void InitDefaultCommand();
 	void ResetDrive();
 

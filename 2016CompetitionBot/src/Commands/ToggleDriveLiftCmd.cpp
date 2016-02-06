@@ -10,7 +10,7 @@ ToggleDriveLiftCmd::ToggleDriveLiftCmd()
 // Called just before this Command runs the first time
 void ToggleDriveLiftCmd::Initialize()
 {
-	rDrivetrainSub->SetLiftShift(!rDrivetrainSub->GetLiftShift());
+	rDrivetrainSub->ShiftDrive(!rDrivetrainSub->GetGear());
 }
 
 // Called repeatedly when this Command is scheduled to run
