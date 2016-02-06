@@ -63,12 +63,8 @@ private:
 	JoystickButton* oLowGoalBtn;
 	JoystickButton* oHighGoalBtn;
 	JoystickButton* dLiftShifterBtn;
-<<<<<<< HEAD
 	JoystickButton* oPrepareShotBtn;
-=======
 	JoystickButton* oLowBarTransformBtn;
-
->>>>>>> 414aa63ad093998b13a320adbaa1a9a7090f678a
 	float getStick(Joystick* stick, int axis);
 
 
