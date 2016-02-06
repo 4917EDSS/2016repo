@@ -5,6 +5,7 @@
 #include "Commands/BallToIntakeCmd.h"
 #include "Commands/BallToShooterCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
+#include "Commands/LowBarTransformCmd.h"
 
 OI::OI()
 {
@@ -22,6 +23,9 @@ OI::OI()
 
 	dLiftShifterBtn = new JoystickButton(dController, DLiftShifterBtn);
 	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);
+
+	oLowBarTransformBtn = new JoystickButton(oController, OLowBarTransformBtn);
+	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);
 
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
