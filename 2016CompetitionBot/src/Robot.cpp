@@ -169,7 +169,7 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 
 	// See what command requires a particular subsystem
 	if(CommandBase::rDrivetrainSub)
-			SmartDashboard::PutData(CommandBase::rDrivetrainSub);
+		SmartDashboard::PutData(CommandBase::rDrivetrainSub);
 	if(CommandBase::rIntakeSub)
 		SmartDashboard::PutData(CommandBase::rIntakeSub);
 	if(CommandBase::rShooterSub)
