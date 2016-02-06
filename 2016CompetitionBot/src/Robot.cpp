@@ -67,6 +67,14 @@ private:
 			}
 		}
 
+		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
+		ahrs = new AHRS(SPI::kMXP); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
+		if(!ahrs){
+			std::cerr << "ahrs not connecting";
+		}
+		else{
+			std::cerr << "ahrs connected";
+		}
 		CommandBase::init();
 
 		//the camera name (ex "cam0") can be found through the roborio web interface
@@ -76,8 +84,7 @@ private:
 		// Send to the Smart Dashboard a list of auto commands to choose from
 		SetSmartDashboardAutoOptions();
 
-		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
-//		ahrs = new AHRS(SerialPort::kUSB); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
+
 
 	}
 
@@ -144,19 +151,14 @@ private:
 	{
 		Scheduler::GetInstance()->Run();
 		SmartDashboard::PutNumber("Tilt encoder", CommandBase::rShooterSub->GetTiltEnc());
+		if(ahrs){
+			SmartDashboard::PutBoolean("imu connected", ahrs->IsConnected());
+			SmartDashboard::PutNumber("imu IO", ahrs->kDigitalChannels);
+		}
 	}
 
 	void TestPeriodic()
 	{
-		// The following NetworkTable code does not need to live in Robot.cpp. This is just to prove it works.
-		// Network table looking up the contours report
-		std::shared_ptr<NetworkTable> gripTable = NetworkTable::GetTable("GRIP/myContoursReport");
-		std::cerr << "Getting contours area array." << std::endl;
-		std::vector<double> arr = gripTable->GetNumberArray("area", llvm::ArrayRef<double>());
-		std::cerr << "Done getting number array. Array values are as follows: " << std::endl;
-		for (unsigned int i = 0; i < arr.size(); i++) {
-			std::cout << arr[i] << std::endl;
-		}
 
 		LiveWindow::GetInstance()->Run();
 	}

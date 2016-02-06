@@ -2,14 +2,14 @@
 #include "../RobotMap.h"
 #include "Commands/DriveWithJoystickCmd.h"
 
-DrivetrainSub::DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C,
+DrivetrainSub::DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1C, int leftEncoder2C,
 		int rightEncoder1C, int rightEncoder2C, int driveLiftShift1C, int driveLiftShift2C) :
 		Subsystem("DrivetrainSub")
 {
 	leftMotor1 = new Talon(leftMotor1C);
-	leftMotor2 = new Talon(leftMotor2C);
+	//leftMotor2 = new Talon(leftMotor2C);
 	rightMotor1 = new Talon(rightMotor1C);
-	rightMotor2 = new Talon(rightMotor2C);
+	//rightMotor2 = new Talon(rightMotor2C);
 	driveLiftShifter = new DoubleSolenoid(driveLiftShift1C, driveLiftShift2C);
 	leftDistanceEncoder = new Encoder(leftEncoder1C, leftEncoder2C);
 	rightDistanceEncoder = new Encoder(rightEncoder1C, rightEncoder2C);
@@ -31,9 +31,9 @@ void DrivetrainSub::InitDefaultCommand()
 void DrivetrainSub::Drive(float leftSpeed, float rightSpeed)
 {
 	leftMotor1->Set(leftSpeed);
-	leftMotor2->Set(leftSpeed);
+	//leftMotor2->Set(leftSpeed);
 	rightMotor1->Set(rightSpeed);
-	rightMotor2->Set(rightSpeed);
+	//rightMotor2->Set(rightSpeed);
 }
 
 void DrivetrainSub::ToggleControls(){

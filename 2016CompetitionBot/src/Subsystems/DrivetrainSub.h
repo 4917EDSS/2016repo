@@ -21,7 +21,7 @@ private:
 	float accelThreshold;
 
 public:
-	DrivetrainSub(int leftMotor1C, int leftMotor2C, int rightMotor1C, int rightMotor2C, int leftEncoder1C, int leftEncoder2C,
+	DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1C, int leftEncoder2C,
 			int rightEncoder1C, int rightEncoder2C, int driveLiftShift1C, int driveLiftShift2C);
 	void Drive(float leftSpeed, float rightSpeed);
 	void ToggleControls();
