@@ -5,6 +5,8 @@
 #include "Commands/BallToIntakeCmd.h"
 #include "Commands/BallToShooterCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
+#include "Commands/PrepareShotCmd.h"
+#include "Commands/LowBarTransformCmd.h"
 
 OI::OI()
 {
@@ -12,7 +14,7 @@ OI::OI()
 	oController = new Joystick(OControllerOperatorPort);
 
 	oFireBtn = new JoystickButton(oController, OFireBtn);
-	oFireBtn->WhileHeld(new FireCmd);
+	oFireBtn->WhenPressed(new FireCmd);
 
 	oLowGoalBtn = new JoystickButton(oController, OLowGoalBtn);
 	oLowGoalBtn->WhenPressed(new BallToIntakeCmd);
@@ -23,12 +25,19 @@ OI::OI()
 	dLiftShifterBtn = new JoystickButton(dController, DLiftShifterBtn);
 	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);
 
+	oPrepareShotBtn = new JoystickButton (oController, OPrepareShotBtn);
+	oPrepareShotBtn->WhenPressed(new PrepareShotCmd);
+
+	oLowBarTransformBtn = new JoystickButton(oController, OLowBarTransformBtn);
+	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);
+
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
 
 
 	// Process operator interface input here.
 }
+
 float OI::getStick(Joystick* controller, int axis){
 	float rawInput = controller->GetRawAxis(axis);
 	if (rawInput > CONTROLLER_DEADZONE_VALUE)

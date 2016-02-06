@@ -1,43 +1,40 @@
-#include "FireCmd.h"
+//COMMAND NOT IMPLEMENTED YET, WAITING ON DETAILS ABOUT ROBOT
+#include "LowBarTransformCmd.h"
 
-FireCmd::FireCmd()
+LowBarTransformCmd::LowBarTransformCmd()
 {
 	Requires(rShooterSub);
-	Requires(rHopperSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
 
 // Called just before this Command runs the first time
-void FireCmd::Initialize()
+void LowBarTransformCmd::Initialize()
 {
-	rHopperSub->SetHopperMotorIn(1.0);
-	rShooterSub->Spin(1.0);
+	rShooterSub->SetTurretTilt(1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void FireCmd::Execute()
+void LowBarTransformCmd::Execute()
 {
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool FireCmd::IsFinished()
+bool LowBarTransformCmd::IsFinished()
 {
-	std::cout<<"Time since init " << TimeSinceInitialized()<< std::endl;
-	return TimeSinceInitialized() >= 1.5;
+	return false;
 }
 
 // Called once after isFinished returns true
-void FireCmd::End()
+void LowBarTransformCmd::End()
 {
-	rShooterSub->Spin(0.0);
-	rHopperSub->SetHopperMotorIn(0.0);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void FireCmd::Interrupted()
+void LowBarTransformCmd::Interrupted()
 {
-	End();
+
 }

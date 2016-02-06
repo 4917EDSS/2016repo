@@ -5,14 +5,15 @@
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
-ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int turretRotateC, int turretTiltC) :
+ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int turretRotateC, int turretTiltC) :
 		Subsystem("ExampleSubsystem")
 {
 	spinnerMotor = new Talon(shooterMotorC);
 	rotateTurretMotor = new Talon(turretRotateC);
 	tiltTurretMotor = new Talon(turretTiltC);
 
-	shooterEncoder = new  Encoder4917(shooterEncoder1C, shooterEncoder2C);
+	shooterEncoder = new Encoder4917(shooterEncoder1C, shooterEncoder2C);
+	tiltEncoder = new Encoder(tiltEncoder1C, tiltEncoder2C);
 
 
 }
@@ -40,33 +41,30 @@ float ShooterSub::GetTargetOffsetFromCenter()
 
 	std::shared_ptr<NetworkTable> gripTable = NetworkTable::GetTable("GRIP/myContoursReport");
 
-	std::cerr << "Getting contours width array." << std::endl;
 	std::vector<double> WidthArray = gripTable->GetNumberArray("width", llvm::ArrayRef<double>());
-	std::cerr << "Done getting number array. Array values are as follows: " << WidthArray.size() << std::endl;
+
 	for (unsigned int i = 0; i < WidthArray.size(); i++) {
 		if (WidthArray[i] > temp)
 		{
 			temp = i;
 		}
-		std::cout << WidthArray[i] << std::endl;
 	}
+
 	TargetIndex = temp;
 
-	std::cerr << "Getting contours centerX array." << std::endl;
 	std::vector<double> XArray = gripTable->GetNumberArray("centerX", llvm::ArrayRef<double>());
-	std::cerr << "Done getting number array. Array values are as follows: " << std::endl;
-	std::cout << XArray[TargetIndex] << std::endl;
 
 	TargetWidth = XArray[TargetIndex] - MIDDLE_CAMERA_X;
 	return TargetWidth;
+}
 
-
-
+float ShooterSub::GetTiltEnc() {
+	return tiltEncoder->GetDistance();
 }
 
 void ShooterSub::InitDefaultCommand()
 {
-	SetDefaultCommand(new AimBotCmd());
+	//SetDefaultCommand(new AimBotCmd());
 	//SetDefaultCommand(new SpinupCmd());
 
 	// Set the default command for a subsystem here.

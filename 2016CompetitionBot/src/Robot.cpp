@@ -143,6 +143,7 @@ private:
 	void TeleopPeriodic()
 	{
 		Scheduler::GetInstance()->Run();
+		SmartDashboard::PutNumber("Tilt encoder", CommandBase::rShooterSub->GetTiltEnc());
 	}
 
 	void TestPeriodic()

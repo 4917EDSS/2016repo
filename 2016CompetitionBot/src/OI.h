@@ -34,7 +34,8 @@
 #define OLowGoalBtn 6
 #define OHighGoalBtn 8
 #define DLiftShifterBtn 5
-
+#define OPrepareShotBtn 2
+#define OLowBarTransformBtn 7
 
 //Axis
 #define DRightVerticalAxis 3
@@ -62,7 +63,12 @@ private:
 	JoystickButton* oLowGoalBtn;
 	JoystickButton* oHighGoalBtn;
 	JoystickButton* dLiftShifterBtn;
+<<<<<<< HEAD
+	JoystickButton* oPrepareShotBtn;
+=======
+	JoystickButton* oLowBarTransformBtn;
 
+>>>>>>> 414aa63ad093998b13a320adbaa1a9a7090f678a
 	float getStick(Joystick* stick, int axis);
 
 

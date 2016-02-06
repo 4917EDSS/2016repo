@@ -20,7 +20,7 @@ void BallToIntakeCmd::Initialize()
 	timerOne->Reset();
 	timer = 0;
 
-	rHopperSub->SetHopperMotor(1.0);
+	rHopperSub->SetHopperMotorOut(1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -39,7 +39,7 @@ bool BallToIntakeCmd::IsFinished()
 // Called once after isFinished returns true
 void BallToIntakeCmd::End()
 {
-	rHopperSub->SetHopperMotor(0.0);
+	rHopperSub->SetHopperMotorOut(0.0);
 }
 
 // Called when another command which requires one or more of the same
