@@ -1,11 +1,9 @@
 #include "ShooterSub.h"
-#include "../Commands/SpinupCmd.h"
 #include "../Commands/ControlTurretWithJoystickCmd.h"
-#include "../Commands/AimBotCmd.h"
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
-ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int turretRotateC, int turretTiltC, int turretCenteredC) :
+ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int turretCenteredC) :
 		Subsystem("ExampleSubsystem")
 {
 	spinnerMotor = new Talon(shooterMotorC);
@@ -14,9 +12,11 @@ ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncod
 
 	shooterEncoder = new Encoder4917(shooterEncoder1C, shooterEncoder2C);
 	tiltEncoder = new Encoder(tiltEncoder1C, tiltEncoder2C);
+	rotateEncoder = new Encoder(rotateEncoder1C, rotateEncoder2C);
 
 	turretCentered = new DigitalInput(turretCenteredC);
 
+	target = 0;
 
 }
 
@@ -64,8 +64,50 @@ float ShooterSub::GetTiltEnc() {
 	return tiltEncoder->GetDistance();
 }
 
+float ShooterSub::GetRotateEnc(){
+	return rotateEncoder->GetDistance();
+}
+
 bool ShooterSub::GetTurretCentered(){
 	return turretCentered->Get();
+}
+
+void ShooterSub::SetTarget(int newTarget){
+	target = newTarget;
+}
+
+void ShooterSub::Update(bool visionActive){
+	if(GetTurretCentered())
+	{
+		rotateEncoder->Reset();
+	}
+	if(visionActive)
+	{
+		if (GetTargetOffsetFromCenter() > TARGET_RANGE)
+		{
+			SetTurretRotate(1.0);
+		}
+		else if (GetTargetOffsetFromCenter() < -TARGET_RANGE)
+		{
+			SetTurretRotate(-1.0);
+		}
+		else
+		{
+			SetTurretRotate(0.0);
+		}
+	}
+	else
+	{
+		if(target > GetRotateEnc()+ROTATE_MARGIN)
+		{
+			SetTurretRotate(1.0);
+		}
+		else if(target < GetRotateEnc()-ROTATE_MARGIN)
+		{
+			SetTurretRotate(-1.0);
+		}
+	}
+
 }
 
 void ShooterSub::InitDefaultCommand()
