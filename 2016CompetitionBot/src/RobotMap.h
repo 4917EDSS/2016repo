@@ -14,6 +14,7 @@
 //TODO: update this once the robot is finalized.
 #define DISTANCE_PER_DEGREE (745.0/90.0)
 
+#define ROTATE_MARGIN 10
 
 #define MIDDLE_CAMERA_X 160.0
 

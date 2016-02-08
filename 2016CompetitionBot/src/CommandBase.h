@@ -36,9 +36,10 @@
 #define LeftDriveEncoder2DIO 7
 #define RightDriveEncoder1DIO 4
 #define RightDriveEncoder2DIO 5
+#define RotateEncoder1DIO 12
+#define RotateEncoder2DIO 13
 #define TiltEncoder1DIO 8
 #define TiltEncoder2DIO 9
-
 
 
 //Air Outputs

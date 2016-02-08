@@ -17,18 +17,7 @@ void PrepareShotCmd::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void PrepareShotCmd::Execute()
 {
-	if (rShooterSub->GetTargetOffsetFromCenter() > TARGET_RANGE)
-		{
-			rShooterSub->SetTurretRotate(1.0);
-		}
-		else if (rShooterSub->GetTargetOffsetFromCenter() < -TARGET_RANGE)
-		{
-			rShooterSub->SetTurretRotate(-1.0);
-		}
-		else
-		{
-			rShooterSub->SetTurretRotate(0.0);
-		}
+	rShooterSub->Update(true);
 }
 
 // Make this return true when this Command no longer needs to run execute()
