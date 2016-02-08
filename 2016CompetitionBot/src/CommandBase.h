@@ -26,17 +26,18 @@
 
 
 //Digital Input/Output
-#define HopperLimitDIO 10
-#define HeightEncoder1DIO 1
+#define HopperLimitDIO 0
+#define HeightEncoder1DIO 1  //These are for the height of the intake.
 #define HeightEncoder2DIO 2
-#define ShooterEncoder1DIO 8
-#define ShooterEncoder2DIO 9
+#define ShooterForwardLimitDIO 3
+#define ShooterEncoder1DIO 10
+#define ShooterEncoder2DIO 11
 #define LeftDriveEncoder1DIO 6
 #define LeftDriveEncoder2DIO 7
 #define RightDriveEncoder1DIO 4
 #define RightDriveEncoder2DIO 5
-#define TiltEncoder1DIO 12
-#define TiltEncoder2DIO 13
+#define TiltEncoder1DIO 8
+#define TiltEncoder2DIO 9
 
 
 //Air Outputs

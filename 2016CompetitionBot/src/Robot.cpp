@@ -176,15 +176,15 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 		SmartDashboard::PutData(CommandBase::rIntakeSub);
 	if(CommandBase::rShooterSub)
 		SmartDashboard::PutData(CommandBase::rShooterSub);
-	if(CommandBase::rCameraSub)
-		SmartDashboard::PutData(CommandBase::rCameraSub);
+	//if(CommandBase::rCameraSub)
+		//SmartDashboard::PutData(CommandBase::rCameraSub);
 	if(CommandBase::rHopperSub)
 		SmartDashboard::PutData(CommandBase::rHopperSub);
 
 	// See status of each command and be able to run it manually
 	SmartDashboard::PutData("Ball To Intake", new BallToIntakeCmd());
 	SmartDashboard::PutData("Ball To Shooter", new BallToShooterCmd());
-	SmartDashboard::PutData("Camera Update", new CameraUpdateCmd());
+	//SmartDashboard::PutData("Camera Update", new CameraUpdateCmd());
 	SmartDashboard::PutData("Joystick Intake Ctrl", new ControlIntakeWithJoystickCmd());
 	SmartDashboard::PutData("Joystick Turret Ctrl", new ControlTurretWithJoystickCmd());
 	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd());

@@ -13,8 +13,8 @@ OI::OI()
 	dController = new Joystick(DControllerDriverPort);
 	oController = new Joystick(OControllerOperatorPort);
 
-	oFireBtn = new JoystickButton(oController, OFireBtn);
-	oFireBtn->WhenPressed(new FireCmd);
+	oFlywheelSpinBtn = new JoystickButton(oController, OFlywheelSpinBtn);
+	oFlywheelSpinBtn->WhileHeld(new FireCmd);
 
 	oLowGoalBtn = new JoystickButton(oController, OLowGoalBtn);
 	oLowGoalBtn->WhenPressed(new BallToIntakeCmd);
@@ -26,7 +26,7 @@ OI::OI()
 	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);
 
 	oPrepareShotBtn = new JoystickButton (oController, OPrepareShotBtn);
-	oPrepareShotBtn->WhenPressed(new PrepareShotCmd);
+	oPrepareShotBtn->WhileHeld(new PrepareShotCmd);
 
 	oLowBarTransformBtn = new JoystickButton(oController, OLowBarTransformBtn);
 	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);

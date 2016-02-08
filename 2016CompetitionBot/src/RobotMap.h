@@ -19,6 +19,8 @@
 
 #define TARGET_RANGE 40
 
+#define DRIVE_SENSITIVITY 2.5      //The higher the number, the less sensitive.
+
 
 //Some bool constants used for code readability
 #define IS_DRIVE true
