@@ -45,6 +45,11 @@ float ShooterSub::GetTargetOffsetFromCenter()
 
 	std::vector<double> WidthArray = gripTable->GetNumberArray("width", llvm::ArrayRef<double>());
 
+	if (WidthArray.size() < 1)
+	{
+		return 0.0;
+	}
+
 	for (unsigned int i = 0; i < WidthArray.size(); i++) {
 		if (WidthArray[i] > temp)
 		{

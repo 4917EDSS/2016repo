@@ -30,7 +30,7 @@
 
 //Buttons
 #define OIntakeBtn 1
-#define OFireBtn 5
+#define OFlywheelSpinBtn 5
 #define OLowGoalBtn 6
 #define OHighGoalBtn 8
 #define DLiftShifterBtn 5
@@ -59,7 +59,7 @@ private:
 
 	Joystick* dController;
 	Joystick* oController;
-	JoystickButton* oFireBtn;
+	JoystickButton* oFlywheelSpinBtn;
 	JoystickButton* oLowGoalBtn;
 	JoystickButton* oHighGoalBtn;
 	JoystickButton* dLiftShifterBtn;

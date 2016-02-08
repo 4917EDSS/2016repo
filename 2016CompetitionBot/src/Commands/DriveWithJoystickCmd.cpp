@@ -1,3 +1,4 @@
+#include <cmath>
 #include "DriveWithJoystickCmd.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
@@ -18,10 +19,29 @@ void DriveWithJoystickCmd::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveWithJoystickCmd::Execute()
 {
+	int signValueLeft = 0, signValueRight = 0;
 	if(rDrivetrainSub->GetControls() == TANK_DRIVE_CONTROLS)
 	{
-		rDrivetrainSub->Drive(oi->DGetLeftVer(), oi->DGetRightVer());
-		SmartDashboard::PutNumber("leftStickValue", oi->DGetLeftVer());
+		if (oi->DGetLeftVer() > 0)
+		{
+			signValueLeft = 1;
+		}
+		else if (oi->DGetLeftVer() < 0)
+		{
+			signValueLeft = -1;
+		}
+
+		if (oi->DGetRightVer() > 0)
+		{
+		signValueRight = 1;
+		}
+		else if (oi->DGetRightVer() < 0)
+		{
+		signValueRight = -1;
+		}
+
+		rDrivetrainSub->Drive((signValueLeft * (pow(fabs(oi->DGetLeftVer()), DRIVE_SENSITIVITY))), (signValueRight * (pow(fabs(oi->DGetRightVer()), DRIVE_SENSITIVITY))));
+		SmartDashboard::PutNumber("signValueLeft", pow(fabs(oi->DGetLeftVer()), DRIVE_SENSITIVITY));
 	}
 	else
 	{
