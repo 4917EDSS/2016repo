@@ -37,6 +37,7 @@
 #define RightDriveEncoder2DIO 5
 #define TiltEncoder1DIO 12
 #define TiltEncoder2DIO 13
+#define TurretCenteredLimitDIO 18
 
 
 //Air Outputs

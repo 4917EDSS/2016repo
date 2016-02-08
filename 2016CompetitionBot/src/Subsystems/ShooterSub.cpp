@@ -5,7 +5,7 @@
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
-ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int turretRotateC, int turretTiltC) :
+ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int turretRotateC, int turretTiltC, int turretCenteredC) :
 		Subsystem("ExampleSubsystem")
 {
 	spinnerMotor = new Talon(shooterMotorC);
@@ -14,6 +14,8 @@ ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncod
 
 	shooterEncoder = new Encoder4917(shooterEncoder1C, shooterEncoder2C);
 	tiltEncoder = new Encoder(tiltEncoder1C, tiltEncoder2C);
+
+	turretCentered = new DigitalInput(turretCenteredC);
 
 
 }
@@ -60,6 +62,10 @@ float ShooterSub::GetTargetOffsetFromCenter()
 
 float ShooterSub::GetTiltEnc() {
 	return tiltEncoder->GetDistance();
+}
+
+bool ShooterSub::GetTurretCentered(){
+	return turretCentered->Get();
 }
 
 void ShooterSub::InitDefaultCommand()
