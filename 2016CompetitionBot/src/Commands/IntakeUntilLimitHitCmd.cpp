@@ -12,7 +12,7 @@ IntakeUntilLimitHitCmd::IntakeUntilLimitHitCmd()
 void IntakeUntilLimitHitCmd::Initialize()
 {
 	rIntakeSub->SetIntakeSpeed(1.0);
-	rHopperSub->SetHopperMotorIn(0.25);
+	rHopperSub->SetHopperMotorIn(1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -25,7 +25,7 @@ void IntakeUntilLimitHitCmd::Execute()
 bool IntakeUntilLimitHitCmd::IsFinished()
 {
 	//return rIntakeSub->IsBallLoaded();
-	return rHopperSub->IsBallIn();
+	return !rHopperSub->IsBallIn();
 }
 
 // Called once after isFinished returns true

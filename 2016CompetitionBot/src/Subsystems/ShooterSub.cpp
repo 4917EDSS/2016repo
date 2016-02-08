@@ -117,6 +117,7 @@ void ShooterSub::Update(bool visionActive){
 
 void ShooterSub::InitDefaultCommand()
 {
+	SetDefaultCommand(new ControlTurretWithJoystickCmd());
 	//SetDefaultCommand(new AimBotCmd());
 	//SetDefaultCommand(new SpinupCmd());
 
