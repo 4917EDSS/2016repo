@@ -36,6 +36,7 @@
 #define DLiftShifterBtn 5
 #define OPrepareShotBtn 2
 #define OLowBarTransformBtn 7
+#define OIntakeUntilLimitBtn 3
 
 //Axis
 #define DRightVerticalAxis 3
@@ -65,6 +66,7 @@ private:
 	JoystickButton* dLiftShifterBtn;
 	JoystickButton* oPrepareShotBtn;
 	JoystickButton* oLowBarTransformBtn;
+	JoystickButton* oIntakeUntilLimitBtn;
 	float getStick(Joystick* stick, int axis);
 
 

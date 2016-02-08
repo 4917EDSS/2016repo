@@ -22,12 +22,12 @@ bool HopperSub::IsBallIn()
 
 void HopperSub::SetHopperMotorIn(float speed)
 {
-	hopperMotor->Set(speed);
+	hopperMotor->Set(0.5 * speed);
 }
 
 void HopperSub::SetHopperMotorOut(float speed)
 {
-	hopperMotor->Set(-speed);
+	hopperMotor->Set(0.5 * -speed);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

@@ -7,6 +7,7 @@
 #include "Commands/ToggleDriveLiftCmd.h"
 #include "Commands/PrepareShotCmd.h"
 #include "Commands/LowBarTransformCmd.h"
+#include "Commands/IntakeUntilLimitHitCmd.h"
 
 OI::OI()
 {
@@ -30,6 +31,10 @@ OI::OI()
 
 	oLowBarTransformBtn = new JoystickButton(oController, OLowBarTransformBtn);
 	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);
+
+	oIntakeUntilLimitBtn = new JoystickButton(oController, OIntakeUntilLimitBtn);
+	oIntakeUntilLimitBtn->WhenPressed(new IntakeUntilLimitHitCmd);
+
 
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
