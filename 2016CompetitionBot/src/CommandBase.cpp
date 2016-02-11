@@ -26,8 +26,8 @@ void CommandBase::init()
 	// line should be repeated for each subsystem in the project.
 	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, RightDrive1PWM, LeftDriveEncoder1DIO, LeftDriveEncoder2DIO,
 			RightDriveEncoder1DIO, RightDriveEncoder2DIO, ShifterSolenoid1PNC, ShifterSolenoid2PNC);
-	rIntakeSub = new IntakeSub(IntakePWM, AdjustPWM, HeightEncoder1DIO, HeightEncoder2DIO);
-	rShooterSub = new ShooterSub(ShooterMotorPWM, ShooterEncoder1DIO, ShooterEncoder2DIO, TiltEncoder1DIO, TiltEncoder2DIO, RotateTurretEncoder1DIO, RotateTurretEncoder2DIO, TurretRotatePWM, TurretTiltPWM, TurretCenteredLimitDIO);
+	rIntakeSub = new IntakeSub(IntakePWM, AdjustPWM, HeightEncoder1DIO, HeightEncoder2DIO, IntakeUpLimitDIO);
+	rShooterSub = new ShooterSub(ShooterMotorPWM, ShooterEncoder1DIO, ShooterEncoder2DIO, TiltEncoder1DIO, TiltEncoder2DIO, RotateTurretEncoder1DIO, RotateTurretEncoder2DIO, TurretRotatePWM, TurretTiltPWM, TurretCenteredLimitDIO, TiltDownDIO);
 	//rCameraSub = new CameraSub(); commented out to allow for better console outputs
 	rHopperSub = new HopperSub(HopperPWM, HopperLimitDIO);
 

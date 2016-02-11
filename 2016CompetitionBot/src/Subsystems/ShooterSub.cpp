@@ -3,7 +3,7 @@
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
-ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int turretCenteredC) :
+ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int tiltDownC, int turretCenteredC) :
 		Subsystem("ExampleSubsystem")
 {
 	spinnerMotor = new Talon(shooterMotorC);
@@ -15,6 +15,7 @@ ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncod
 	rotateEncoder = new Encoder(rotateEncoder1C, rotateEncoder2C);
 
 	turretCentered = new DigitalInput(turretCenteredC);
+	tiltDown = new DigitalInput(tiltDownC);
 
 	target = 0;
 
@@ -26,13 +27,23 @@ void ShooterSub::Spin(float spinSpeed)
 	spinnerMotor->Set(spinSpeed);
 }
 
+//The reset function only works if SetTurretRotate is constantly called.
 void ShooterSub::SetTurretRotate(float speed)
 {
+	if(GetTurretCentered())
+	{
+		rotateEncoder->Reset();
+	}
 	rotateTurretMotor->Set(speed);
 }
 
+//The reset function only works if SetTurretTilt is constantly called.
 void ShooterSub::SetTurretTilt(float speed)
 {
+	if(GetTiltDown())
+	{
+		tiltEncoder->Reset();
+	}
 	tiltTurretMotor->Set(speed);
 }
 
@@ -77,15 +88,15 @@ bool ShooterSub::GetTurretCentered(){
 	return turretCentered->Get();
 }
 
+bool ShooterSub::GetTiltDown(){
+	return tiltDown->Get();
+}
+
 void ShooterSub::SetTarget(int newTarget){
 	target = newTarget;
 }
 
 void ShooterSub::Update(bool visionActive){
-	if(GetTurretCentered())
-	{
-		rotateEncoder->Reset();
-	}
 	if(visionActive)
 	{
 		if (GetTargetOffsetFromCenter() > TARGET_RANGE)

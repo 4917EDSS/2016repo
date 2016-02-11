@@ -6,8 +6,8 @@ HopperSub::HopperSub(int hopperMotorC, int ballInLimitC) :
 {
 	hopperMotor = new Talon(hopperMotorC);
 	ballInLimit = new DigitalInput(ballInLimitC);
-	LiveWindow::GetInstance()->AddActuator("Hopper", "HopperMotor", hopperMotor);
-	LiveWindow::GetInstance()->AddSensor("Hopper", "BallIntakeLimit", ballInLimit);
+	//LiveWindow::GetInstance()->AddActuator("Hopper", "HopperMotor", hopperMotor);
+	//LiveWindow::GetInstance()->AddSensor("Hopper", "BallIntakeLimit", ballInLimit);
 }
 
 void HopperSub::InitDefaultCommand()
