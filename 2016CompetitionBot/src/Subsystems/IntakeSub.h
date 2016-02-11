@@ -12,10 +12,12 @@ private:
 	Talon* intakeMotor;
 	Talon* adjustMotor;
 	Encoder* heightEncoder;
+	DigitalInput* intakeUpLimit;
 public:
-	IntakeSub(int intakeMotorC, int adjustMotorC, int heightEncoder1C, int heightEncoder2C);
+	IntakeSub(int intakeMotorC, int adjustMotorC, int heightEncoder1C, int heightEncoder2C, int intakeUpLimitC);
 	void InitDefaultCommand();
 	int GetHeight();
+	bool GetIntakeUp();
 	int GetRawHeight();
 	void SetVerticalSpeed(float speed);
 	void SetIntakeSpeed(float speed);
