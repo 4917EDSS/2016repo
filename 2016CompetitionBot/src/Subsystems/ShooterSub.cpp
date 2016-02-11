@@ -14,15 +14,19 @@ ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncod
 	tiltEncoder = new Encoder(tiltEncoder1C, tiltEncoder2C);
 	rotateEncoder = new Encoder(rotateEncoder1C, rotateEncoder2C);
 
+	turretCentered = new DigitalInput(turretCenteredC);
+	tiltDown = new DigitalInput(tiltDownC);
+
 	LiveWindow::GetInstance()->AddActuator("Shooter", "spinnerMotor", spinnerMotor);
 //	LiveWindow::GetInstance()->AddSensor("Shooter", "shooterEncoder", shooterEncoder); // TODO: Add this type of encoder
 	LiveWindow::GetInstance()->AddActuator("Shooter", "tiltMotor", tiltTurretMotor);
 	LiveWindow::GetInstance()->AddSensor("Shooter", "tiltEncoder", tiltEncoder);
 	LiveWindow::GetInstance()->AddActuator("Shooter", "rotateMotor", rotateTurretMotor);
 	LiveWindow::GetInstance()->AddSensor("Shooter", "rotateEncoder", rotateEncoder);
+	LiveWindow::GetInstance()->AddSensor("Shooter", "turretCentered", turretCentered);
+	LiveWindow::GetInstance()->AddSensor("Shooter", "tiltDown", tiltDown);
 
-	turretCentered = new DigitalInput(turretCenteredC);
-	tiltDown = new DigitalInput(tiltDownC);
+
 
 	target = 0;
 
