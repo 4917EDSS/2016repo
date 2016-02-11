@@ -8,6 +8,10 @@ IntakeSub::IntakeSub(int intakeMotorC, int adjustMotorC, int heightEncoder1C, in
 	intakeMotor = new Talon(intakeMotorC);
 	adjustMotor = new Talon(adjustMotorC);
 	heightEncoder = new Encoder(heightEncoder1C, heightEncoder2C);
+
+	LiveWindow::GetInstance()->AddActuator("Intake", "intakeMotor", intakeMotor);
+	LiveWindow::GetInstance()->AddActuator("Intake", "adjustMotor", adjustMotor);
+	LiveWindow::GetInstance()->AddSensor("Intake", "heightEncoder", heightEncoder);
 }
 
 

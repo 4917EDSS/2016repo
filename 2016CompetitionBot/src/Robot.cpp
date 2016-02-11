@@ -41,6 +41,7 @@ class Robot: public IterativeRobot
 private:
 	void SetSmartDashboardAutoOptions();
 	void SendCmdAndSubInfoToSmartDashboard();
+	void UpdateSmartDashboard();
 
 	Command* autonomousCommand;
 	Command* autonomousDefenceCommand;
@@ -67,7 +68,7 @@ private:
 			}
 		}
 
-		// Initialize the navX-mxp IMU (accelerometer, gyro, compass)
+		// Initialize the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
 		ahrs = new AHRS(SPI::kMXP); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
 		if(!ahrs){
 			std::cerr << "ahrs not connecting";
@@ -150,11 +151,7 @@ private:
 	void TeleopPeriodic()
 	{
 		Scheduler::GetInstance()->Run();
-		SmartDashboard::PutNumber("Tilt encoder", CommandBase::rShooterSub->GetTiltEnc());
-		if(ahrs){
-			SmartDashboard::PutBoolean("imu connected", ahrs->IsConnected());
-			SmartDashboard::PutNumber("imu IO", ahrs->kDigitalChannels);
-		}
+		UpdateSmartDashboard();
 	}
 
 	void TestPeriodic()
@@ -223,6 +220,25 @@ void Robot::SetSmartDashboardAutoOptions()
 	//chooser->AddObject("My Auto", new MyAutoCommand());
 	SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
 	SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
+}
+
+// This is run during Teleop periodic to update the Smart Dashboard values
+void Robot::UpdateSmartDashboard()
+{
+	SmartDashboard::PutNumber("Tilt encoder", CommandBase::rShooterSub->GetTiltEnc());
+
+	// For the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
+	if(ahrs)
+	{
+		double zeroYaw = 0.0;
+
+		SmartDashboard::PutBoolean("IMU Connected", ahrs->IsConnected());
+		SmartDashboard::PutNumber("IMU Yaw", ahrs->GetYaw());
+		SmartDashboard::PutNumber("IMU Pitch", ahrs->GetPitch());
+		SmartDashboard::PutNumber("IMU Roll", ahrs->GetRoll());
+		SmartDashboard::GetNumber("IMU Zero Yaw", zeroYaw);
+		// TODO:  Add "ahrs->ZeroYaw()" if useful
+	}
 }
 
 START_ROBOT_CLASS(Robot)

@@ -17,7 +17,11 @@ DrivetrainSub::DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1
 	controlState = TANK_DRIVE_CONTROLS;
 	accelThreshold = ACCELERATION_THRESHOLD;
 
-
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "leftMotor1", leftMotor1);
+	LiveWindow::GetInstance()->AddSensor("Drivetrain", "leftDistanceEncoder", leftDistanceEncoder);
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "rightMotor1", rightMotor1);
+	LiveWindow::GetInstance()->AddSensor("Drivetrain", "rightDistanceEncoder", rightDistanceEncoder);
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "driveLiftShifter", driveLiftShifter);
 
 }
 
