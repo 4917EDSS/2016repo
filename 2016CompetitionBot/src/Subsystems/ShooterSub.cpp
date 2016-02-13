@@ -38,19 +38,62 @@ void ShooterSub::Spin(float spinSpeed)
 	spinnerMotor->Set(spinSpeed);
 }
 
+
+
+void ShooterSub::RotateTurretClockwise(float speed) {
+	SetTurretRotate(speed);
+}
+
+void ShooterSub::RotateTurretCounterClockwise(float speed) {
+	SetTurretRotate(-speed);
+}
+
 //The reset function only works if SetTurretRotate is constantly called.
 void ShooterSub::SetTurretRotate(float speed)
 {
-	if(GetTurretCentered())
+
+	if (GetTurretCentered())
 	{
 		rotateEncoder->Reset();
 	}
-	rotateTurretMotor->Set(speed);
+
+	if (GetRotateEnc() > MAX_TURRET_ROTATE_EV && speed > 0) {
+		// Hard stop on the RIGHT
+		rotateTurretMotor->Set(0.0);
+	}
+	else if (GetRotateEnc() < -MAX_TURRET_ROTATE_EV && speed < 0) {
+		// Hard stop on the LEFT
+		rotateTurretMotor->Set(0.0);
+	}
+	else if (GetRotateEnc() > MAX_TURRET_ROTATE_INTERFERENCE_EV && speed > 0 && GetTiltEnc() <= HOOD_INTERFERENCE_EV) {
+		// Stop if the hood is down and we are going to run into the hood of our shooter on the RIGHT
+		rotateTurretMotor->Set(0.0);
+	}
+	else if (GetRotateEnc() < -MAX_TURRET_ROTATE_INTERFERENCE_EV && speed < 0 && GetTiltEnc() <= HOOD_INTERFERENCE_EV) {
+		// Stop if the hood is down and we are going to run into the hood of our shooter on the LEFT
+		rotateTurretMotor->Set(0.0);
+	}
+	else {
+		rotateTurretMotor->Set(speed);
+	}
 }
 
 //The reset function only works if SetTurretTilt is constantly called.
 void ShooterSub::SetTurretTilt(float speed)
 {
+	if (GetTiltEnc() >= MAX_HOOD_HEIGHT_EV) {
+		//Stop tilting if at max height
+		tiltTurretMotor->Set(0.0);
+	}
+	else if (GetRotateEnc() > MAX_TURRET_ROTATE_INTERFERENCE_EV) {
+		//Don't tilt down if turret if we will run into the frame on the RIGHT
+		tiltTurretMotor->Set(0.0);
+	}
+	else if (GetRotateEnc() < -MAX_TURRET_ROTATE_INTERFERENCE_EV) {
+		//Don't tilt down if turret if we will run into the frame on the LEFT
+		tiltTurretMotor->Set(0.0);
+	}
+
 	if(GetTiltDown())
 	{
 		tiltEncoder->Reset();

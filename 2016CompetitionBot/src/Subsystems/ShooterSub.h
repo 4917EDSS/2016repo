@@ -17,6 +17,7 @@ private:
 	Encoder* rotateEncoder;
 	DigitalInput* turretCentered;
 	int target;
+	void SetTurretRotate(float speed);
 
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
@@ -30,7 +31,8 @@ public:
 	float GetRotateEnc();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);
-	void SetTurretRotate(float speed);
+	void RotateTurretClockwise(float speed);
+	void RotateTurretCounterClockwise(float speed);
 	bool GetTurretCentered();
 	bool GetTiltDown();
 };
