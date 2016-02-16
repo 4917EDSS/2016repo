@@ -32,7 +32,7 @@ int IntakeSub::GetHeight()
 }
 
 bool IntakeSub::GetIntakeUp(){
-	return intakeUpLimit->Get();
+	return !intakeUpLimit->Get();
 }
 
 int IntakeSub::GetRawHeight()

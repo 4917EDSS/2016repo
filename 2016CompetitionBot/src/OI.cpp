@@ -79,6 +79,10 @@ float OI::OGetRightVer(){
 	return -getStick(oController, ORightVerticalAxis);
 }
 
+int OI::OGetPov() {
+	return oController->GetPOV();
+}
+
 float OI::OGetLeftVer(){
 	return -getStick(oController, OLeftVerticalAxis);
 }

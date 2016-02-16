@@ -18,10 +18,21 @@ void ControlIntakeWithJoystickCmd::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ControlIntakeWithJoystickCmd::Execute()
 {
+	// Dealing with height of intake
+	if (oi->OGetPov() == 0 && !rIntakeSub->GetIntakeUp()) {
+		rIntakeSub->SetVerticalSpeed(-0.25);
+	}
+	else if (oi->OGetPov() == 180) {
+		rIntakeSub->SetVerticalSpeed(0.25);
+	}
+	else {
+		rIntakeSub->SetVerticalSpeed(0.0);
+	}
+	// Dealing with intake in and out motors
 	if ((oi->OGetRightVer() != 0.0) && (rHopperSub->IsBallIn()))
-			{
-				rIntakeSub->SetIntakeSpeed(oi->OGetRightVer());
-			}
+	{
+		rIntakeSub->SetIntakeSpeed(oi->OGetRightVer());
+	}
 	else
 	{
 		rIntakeSub->SetIntakeSpeed(0.0);
@@ -38,6 +49,7 @@ bool ControlIntakeWithJoystickCmd::IsFinished()
 void ControlIntakeWithJoystickCmd::End()
 {
 	rIntakeSub->SetIntakeSpeed(0.0);
+	rIntakeSub->SetVerticalSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same

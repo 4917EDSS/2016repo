@@ -80,6 +80,7 @@ public:
 	float OGetLeftVer();
 	float OGetLeftHor();
 	float OGetRightHor();
+	int OGetPov();
 };
 
 #endif
