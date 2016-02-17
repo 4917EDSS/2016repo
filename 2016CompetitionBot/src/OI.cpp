@@ -43,15 +43,16 @@ OI::OI()
 	// Process operator interface input here.
 }
 
-float OI::getStick(Joystick* controller, int axis){
+float OI::getStick(Joystick* controller, int axis, float sensitivity){
 	float rawInput = controller->GetRawAxis(axis);
+	float adjustedInput = pow(fabs(rawInput), sensitivity);
 	if (rawInput > CONTROLLER_DEADZONE_VALUE)
 	{
-		return (rawInput*fabs(rawInput));
+		return adjustedInput;
 	}
 	else if(rawInput < -CONTROLLER_DEADZONE_VALUE)
 	{
-		return (rawInput*fabs(rawInput));
+		return -adjustedInput;
 	}
 	else
 	{
@@ -59,38 +60,38 @@ float OI::getStick(Joystick* controller, int axis){
 	}
 }
 
-float OI::DGetRightVer(){
-	return -getStick(dController, DRightVerticalAxis);
+float OI::DGetRightVer(float sensitivity){
+	return -getStick(dController, DRightVerticalAxis, sensitivity);
 }
 
-float OI::DGetLeftVer(){
-	return -getStick(dController, DLeftVerticalAxis);
+float OI::DGetLeftVer(float sensitivity){
+	return -getStick(dController, DLeftVerticalAxis, sensitivity);
 }
 
-float OI::DGetLeftHor(){
-	return getStick(dController, DLeftHorizontalAxis);
+float OI::DGetLeftHor(float sensitivity){
+	return getStick(dController, DLeftHorizontalAxis, sensitivity);
 }
 
-float OI::DGetRightHor(){
-	return getStick(dController, DRightHorizontalAxis);
+float OI::DGetRightHor(float sensitivity){
+	return getStick(dController, DRightHorizontalAxis, sensitivity);
 }
 
-float OI::OGetRightVer(){
-	return -getStick(oController, ORightVerticalAxis);
+float OI::OGetRightVer(float sensitivity){
+	return -getStick(oController, ORightVerticalAxis, sensitivity);
+}
+
+float OI::OGetLeftVer(float sensitivity){
+	return -getStick(oController, OLeftVerticalAxis, sensitivity);
+}
+
+float OI::OGetLeftHor(float sensitivity){
+	return getStick(oController, OLeftHorizontalAxis, sensitivity);
+}
+
+float OI::OGetRightHor(float sensitivity){
+	return getStick(oController, ORightHorizontalAxis, sensitivity);
 }
 
 int OI::OGetPov() {
 	return oController->GetPOV();
-}
-
-float OI::OGetLeftVer(){
-	return -getStick(oController, OLeftVerticalAxis);
-}
-
-float OI::OGetLeftHor(){
-	return getStick(oController, OLeftHorizontalAxis);
-}
-
-float OI::OGetRightHor(){
-	return getStick(oController, ORightHorizontalAxis);
 }

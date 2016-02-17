@@ -67,19 +67,19 @@ private:
 	JoystickButton* oPrepareShotBtn;
 	JoystickButton* oLowBarTransformBtn;
 	JoystickButton* oIntakeUntilLimitBtn;
-	float getStick(Joystick* stick, int axis);
+	float getStick(Joystick* stick, int axis, float sensitivity);
 
 
 public:
 	OI();
-	float DGetRightVer();
-	float DGetLeftVer();
-	float DGetLeftHor();
-	float DGetRightHor();
-	float OGetRightVer();
-	float OGetLeftVer();
-	float OGetLeftHor();
-	float OGetRightHor();
+	float DGetRightVer(float sensitivity);
+	float DGetLeftVer(float sensitivity);
+	float DGetLeftHor(float sensitivity);
+	float DGetRightHor(float sensitivity);
+	float OGetRightVer(float sensitivity);
+	float OGetLeftVer(float sensitivity);
+	float OGetLeftHor(float sensitivity);
+	float OGetRightHor(float sensitivity);
 	int OGetPov();
 };
 
