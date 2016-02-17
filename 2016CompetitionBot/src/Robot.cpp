@@ -225,7 +225,12 @@ void Robot::SetSmartDashboardAutoOptions()
 // This is run during Teleop periodic to update the Smart Dashboard values
 void Robot::UpdateSmartDashboard()
 {
-	SmartDashboard::PutNumber("Tilt encoder", CommandBase::rShooterSub->GetTiltEnc());
+	SmartDashboard::PutNumber("Tilt raw encoder", CommandBase::rShooterSub->GetRawTiltEnc());
+	SmartDashboard::PutNumber("IntakeHeight raw encoder", CommandBase::rIntakeSub->GetRawHeight());
+	SmartDashboard::PutNumber("LeftDrive raw encoder", CommandBase::rDrivetrainSub->GetRawLeftEnc());
+	SmartDashboard::PutNumber("RightDrive raw encoder", CommandBase::rDrivetrainSub->GetRawRightEnc());
+	SmartDashboard::PutNumber("Turret rotate raw encoder", CommandBase::rShooterSub->GetRawRotateEnc());
+
 
 	// For the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
 	if(ahrs)
