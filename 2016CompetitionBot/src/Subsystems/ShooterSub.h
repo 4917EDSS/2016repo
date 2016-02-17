@@ -28,7 +28,9 @@ public:
 	float GetTargetOffsetFromCenter();
 	void InitDefaultCommand();
 	float GetTiltEnc();
+	float GetRawTiltEnc();
 	float GetRotateEnc();
+	float GetRawRotateEnc();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);
 	void SetTurretRotate(float speed);

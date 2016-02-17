@@ -31,13 +31,13 @@ int IntakeSub::GetHeight()
 	return (int) heightEncoder->GetDistance();
 }
 
-bool IntakeSub::GetIntakeUp(){
-	return !intakeUpLimit->Get();
-}
-
 int IntakeSub::GetRawHeight()
 {
 	return (int) heightEncoder->GetRaw();
+}
+
+bool IntakeSub::GetIntakeUp(){
+	return !intakeUpLimit->Get();
 }
 
 void IntakeSub::SetVerticalSpeed(float speed)

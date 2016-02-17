@@ -146,6 +146,14 @@ float ShooterSub::GetRotateEnc(){
 	return rotateEncoder->GetDistance();
 }
 
+float ShooterSub::GetRawTiltEnc() {
+	return tiltEncoder->GetRaw();
+}
+
+float ShooterSub::GetRawRotateEnc(){
+	return rotateEncoder->GetRaw();
+}
+
 bool ShooterSub::GetTurretCentered(){
 	return turretCentered->Get();
 }
