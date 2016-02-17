@@ -13,8 +13,8 @@
 #include "Commands/Scheduler.h"
 
 //Talons
-#define LeftDrive1PWM 2
-#define LeftDrive2PWM 0
+#define LeftDrive1PWM 0
+#define LeftDrive2PWM 2
 #define RightDrive1PWM 1
 #define RightDrive2PWM 3
 #define IntakePWM 4       //Actually intaking or expelling boulders by rotating the intake drums.

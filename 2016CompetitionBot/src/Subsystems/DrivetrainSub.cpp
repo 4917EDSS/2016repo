@@ -34,7 +34,7 @@ void DrivetrainSub::InitDefaultCommand()
 
 void DrivetrainSub::Drive(float leftSpeed, float rightSpeed)
 {
-	leftMotor1->Set(leftSpeed);
+	leftMotor1->Set(-leftSpeed);
 	//leftMotor2->Set(leftSpeed);
 	rightMotor1->Set(rightSpeed);
 	//rightMotor2->Set(rightSpeed);
