@@ -5,7 +5,7 @@ DriveTurnCmd::DriveTurnCmd(int turnDegrees, bool isClockwiseTurnParam, float dri
 {
 	driveSpeed = fabs(driveSpeedParam);
 	isClockwiseTurn = isClockwiseTurnParam;
-	turnEncoderValues = turnDegrees * DISTANCE_PER_DEGREE;
+	turnEncoderValues = turnDegrees * DISTANCE_PER_DEGREE_EV;
 	previousLeftEncoder = 0;
 	previousRightEncoder = 0;
 	Requires(rDrivetrainSub);
