@@ -12,7 +12,7 @@
 
 #define ROTATE_MARGIN 10
 
-#define MIDDLE_CAMERA_X 160.0
+#define MIDDLE_CAMERA_X 120.0
 
 #define TARGET_RANGE 40
 
