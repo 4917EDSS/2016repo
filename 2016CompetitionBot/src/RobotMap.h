@@ -14,7 +14,7 @@
 
 #define MIDDLE_CAMERA_X 120.0
 
-#define TARGET_RANGE 40
+#define TARGET_RANGE 15
 
 #define DRIVE_SENSITIVITY 2.5      //The higher the number, the less sensitive.
 
@@ -30,9 +30,9 @@
 // TURRET ROTATE
 // TODO: get these values
 // The farthest the turret can rotate positive or negative
-#define MAX_TURRET_ROTATE_EV 400
+#define MAX_TURRET_ROTATE_EV 10000
 // The farthest the turret can rotate if the hood is down
-#define MAX_TURRET_ROTATE_INTERFERENCE_EV 200
+#define MAX_TURRET_ROTATE_INTERFERENCE_EV 10000
 
 // TURRET HOOD
 // If above this, we can freely rotate past the interference point

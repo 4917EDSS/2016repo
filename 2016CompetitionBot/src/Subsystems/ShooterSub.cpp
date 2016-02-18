@@ -52,7 +52,7 @@ void ShooterSub::RotateTurretCounterClockwise(float speed) {
 void ShooterSub::SetTurretRotate(float speed)
 {
 
-	if (GetTurretCentered())
+	if (!GetTurretCentered())
 	{
 		rotateEncoder->Reset();
 	}
@@ -171,11 +171,11 @@ void ShooterSub::Update(bool visionActive){
 	{
 		if (GetTargetOffsetFromCenter() > TARGET_RANGE)
 		{
-			SetTurretRotate(1.0);
+			SetTurretRotate(-0.25);
 		}
 		else if (GetTargetOffsetFromCenter() < -TARGET_RANGE)
 		{
-			SetTurretRotate(-1.0);
+			SetTurretRotate(0.25);
 		}
 		else
 		{
