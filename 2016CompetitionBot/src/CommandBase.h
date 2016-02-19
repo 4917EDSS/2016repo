@@ -30,8 +30,8 @@
 #define HeightEncoder1DIO 1  //These are for the height of the intake.
 #define HeightEncoder2DIO 2
 #define TurretCenteredLimitDIO 3
-#define IntakeUpLimitDIO 4
-#define TiltDownDIO 5
+#define TiltDownDIO 4
+#define IntakeUpLimitDIO 5
 #define ShooterEncoder1DIO 10
 #define ShooterEncoder2DIO 11
 #define LeftDriveEncoder1DIO 12
@@ -40,8 +40,8 @@
 #define RightDriveEncoder2DIO 19
 #define RotateTurretEncoder1DIO 6
 #define RotateTurretEncoder2DIO 7
-#define TiltEncoder1DIO 8
-#define TiltEncoder2DIO 9
+#define TiltEncoder1DIO 9
+#define TiltEncoder2DIO 8
 
 
 //Air Outputs

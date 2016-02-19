@@ -30,6 +30,7 @@ public:
 	float GetTiltEnc();
 	float GetRawTiltEnc();
 	float GetRotateEnc();
+	void ResetTiltEnc();
 	float GetRawRotateEnc();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);

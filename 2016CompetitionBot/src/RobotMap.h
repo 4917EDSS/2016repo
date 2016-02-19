@@ -30,15 +30,13 @@
 // TURRET ROTATE
 // TODO: get these values
 // The farthest the turret can rotate positive or negative
-#define MAX_TURRET_ROTATE_EV 10000
-// The farthest the turret can rotate if the hood is down
-#define MAX_TURRET_ROTATE_INTERFERENCE_EV 10000
+#define MAX_TURRET_ROTATE_EV 5850
 
 // TURRET HOOD
 // If above this, we can freely rotate past the interference point
 #define HOOD_INTERFERENCE_EV 310
 // Highest the hood can go
-#define MAX_HOOD_HEIGHT_EV 520
+#define MAX_HOOD_HEIGHT_EV 2000
 
 // DRIVETRAIN
 //go forward this much on one side and reverse the same amount on the other for a 90 degree turn.
