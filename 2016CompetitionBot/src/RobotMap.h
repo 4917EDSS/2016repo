@@ -33,8 +33,6 @@
 #define MAX_TURRET_ROTATE_EV 5850
 
 // TURRET HOOD
-// If above this, we can freely rotate past the interference point
-#define HOOD_INTERFERENCE_EV 310
 // Highest the hood can go
 #define MAX_HOOD_HEIGHT_EV 2000
 
