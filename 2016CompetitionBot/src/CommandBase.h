@@ -14,9 +14,7 @@
 
 //Talons
 #define LeftDrive1PWM 0
-#define LeftDrive2PWM 2
 #define RightDrive1PWM 1
-#define RightDrive2PWM 3
 #define IntakePWM 4       //Actually intaking or expelling boulders by rotating the intake drums.
 #define ShooterMotorPWM 5 //was 5 High speed wheels to launch the boulder.
 #define AdjustPWM 6 	  //Moves the intake subsystem.

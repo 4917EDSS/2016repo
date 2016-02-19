@@ -7,8 +7,6 @@
 class BallToIntakeCmd: public CommandBase
 {
 private:
-	Timer* timerOne;
-	int timer;
 public:
 	BallToIntakeCmd();
 	void Initialize();

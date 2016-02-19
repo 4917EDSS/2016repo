@@ -1,14 +1,13 @@
-#ifndef BallToShooterCmd_H
-#define BallToShooterCmd_H
+#ifndef ResetDrivetrainEncCmd_H
+#define ResetDrivetrainEncCmd_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class BallToShooterCmd: public CommandBase
+class ResetDrivetrainEncCmd: public CommandBase
 {
-private:
 public:
-	BallToShooterCmd();
+	ResetDrivetrainEncCmd();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

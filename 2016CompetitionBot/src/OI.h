@@ -37,6 +37,10 @@
 #define OPrepareShotBtn 2
 #define OLowBarTransformBtn 7
 #define OIntakeUntilLimitBtn 3
+#define OEmergencyStopBtn1 11
+#define DEmergencyStopBtn1 11
+#define OEmergencyStopBtn2 12
+#define DEmergencyStopBtn2 12
 
 //Axis
 #define DRightVerticalAxis 3
@@ -67,6 +71,10 @@ private:
 	JoystickButton* oPrepareShotBtn;
 	JoystickButton* oLowBarTransformBtn;
 	JoystickButton* oIntakeUntilLimitBtn;
+	JoystickButton* oEmergencyStopBtn1;
+	JoystickButton* dEmergencyStopBtn1;
+	JoystickButton* oEmergencyStopBtn2;
+	JoystickButton* dEmergencyStopBtn2;
 	float getStick(Joystick* stick, int axis, float sensitivity);
 
 

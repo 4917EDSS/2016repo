@@ -1,41 +1,39 @@
-#include "BallToIntakeCmd.h"
-#include "Timer.h"
+#include "ResetDrivetrainEncCmd.h"
 
-BallToIntakeCmd::BallToIntakeCmd()
+ResetDrivetrainEncCmd::ResetDrivetrainEncCmd()
 {
-	Requires(rHopperSub);
+	Requires(rDrivetrainSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
 
 // Called just before this Command runs the first time
-void BallToIntakeCmd::Initialize()
+void ResetDrivetrainEncCmd::Initialize()
 {
-
-	rHopperSub->SetHopperMotorOut(1.0);
+	rDrivetrainSub->ResetDrive();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void BallToIntakeCmd::Execute()
+void ResetDrivetrainEncCmd::Execute()
 {
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BallToIntakeCmd::IsFinished()
+bool ResetDrivetrainEncCmd::IsFinished()
 {
-
-	return TimeSinceInitialized() > 0.5;
+	return true;
 }
 
 // Called once after isFinished returns true
-void BallToIntakeCmd::End()
+void ResetDrivetrainEncCmd::End()
 {
-	rHopperSub->SetHopperMotorOut(0.0);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void BallToIntakeCmd::Interrupted()
+void ResetDrivetrainEncCmd::Interrupted()
 {
-	End();
+
 }

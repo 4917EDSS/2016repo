@@ -7,9 +7,7 @@ DrivetrainSub::DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1
 		Subsystem("DrivetrainSub")
 {
 	leftMotor1 = new Talon(leftMotor1C);
-	//leftMotor2 = new Talon(leftMotor2C);
 	rightMotor1 = new Talon(rightMotor1C);
-	//rightMotor2 = new Talon(rightMotor2C);
 	driveLiftShifter = new DoubleSolenoid(driveLiftShift1C, driveLiftShift2C);
 	leftDistanceEncoder = new Encoder(leftEncoder1C, leftEncoder2C);
 	rightDistanceEncoder = new Encoder(rightEncoder1C, rightEncoder2C);

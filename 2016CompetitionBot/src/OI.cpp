@@ -1,13 +1,14 @@
 #include "OI.h"
 #include "RobotMap.h"
 #include "Commands/DriveTurnCmd.h"
-#include "Commands/FireCmd.h"
+#include "Commands/SpinupCmd.h"
 #include "Commands/BallToIntakeCmd.h"
 #include "Commands/BallToShooterCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
 #include "Commands/PrepareShotCmd.h"
 #include "Commands/LowBarTransformCmd.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
+#include "Commands/EmergencyStopCmd.h"
 
 OI::OI()
 {
@@ -15,7 +16,7 @@ OI::OI()
 	oController = new Joystick(OControllerOperatorPort);
 
 	oFlywheelSpinBtn = new JoystickButton(oController, OFlywheelSpinBtn);
-	oFlywheelSpinBtn->WhileHeld(new FireCmd);
+	oFlywheelSpinBtn->WhileHeld(new SpinupCmd);
 
 	oLowGoalBtn = new JoystickButton(oController, OLowGoalBtn);
 	oLowGoalBtn->WhenPressed(new BallToIntakeCmd);
@@ -27,7 +28,7 @@ OI::OI()
 	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);
 
 	oPrepareShotBtn = new JoystickButton (oController, OPrepareShotBtn);
-	oPrepareShotBtn->WhileHeld(new PrepareShotCmd);
+	oPrepareShotBtn->WhenPressed(new PrepareShotCmd);
 
 	oLowBarTransformBtn = new JoystickButton(oController, OLowBarTransformBtn);
 	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);
@@ -35,7 +36,18 @@ OI::OI()
 	oIntakeUntilLimitBtn = new JoystickButton(oController, OIntakeUntilLimitBtn);
 	oIntakeUntilLimitBtn->WhenPressed(new IntakeUntilLimitHitCmd);
 
+	//Emergency Stop commands.
+	oEmergencyStopBtn1 = new JoystickButton(oController, OEmergencyStopBtn1);
+	oEmergencyStopBtn1->WhenPressed(new EmergencyStopCmd);
 
+	dEmergencyStopBtn1 = new JoystickButton(oController, DEmergencyStopBtn1);
+	dEmergencyStopBtn1->WhenPressed(new EmergencyStopCmd);
+
+	oEmergencyStopBtn2 = new JoystickButton(oController, OEmergencyStopBtn2);
+	oEmergencyStopBtn2->WhenPressed(new EmergencyStopCmd);
+
+	dEmergencyStopBtn2 = new JoystickButton(oController, DEmergencyStopBtn2);
+	dEmergencyStopBtn2->WhenPressed(new EmergencyStopCmd);
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());
 

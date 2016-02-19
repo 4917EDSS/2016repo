@@ -26,7 +26,7 @@
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/DriveTurnCmd.h"
 #include "Commands/DriveWithJoystickCmd.h"
-#include "Commands/FireCmd.h"
+#include "Commands/ResetDrivetrainEncCmd.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/SetIntakeHeightCmd.h"
 #include "Commands/SpinupCmd.h"
@@ -187,11 +187,11 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd());
 //	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd());				// Needs parameters
 	SmartDashboard::PutData("Joystick Drive", new DriveWithJoystickCmd());
-	SmartDashboard::PutData("Fire", new FireCmd());
 	SmartDashboard::PutData("Intake Until Limit Hit", new IntakeUntilLimitHitCmd());
 //	SmartDashboard::PutData("Set Intake Height", new SetIntakeHeightCmd());	// Needs parameters
 	SmartDashboard::PutData("Spinup", new SpinupCmd());
 	SmartDashboard::PutData("Toggle Drive Lift", new ToggleDriveLiftCmd());
+	SmartDashboard::PutData("ResetDrive Encoders", new ResetDrivetrainEncCmd());
 }
 
 void Robot::SetSmartDashboardAutoOptions()

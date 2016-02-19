@@ -1,13 +1,13 @@
-#ifndef FireCmd_H
-#define FireCmd_H
+#ifndef EmergencyStopCmd_H
+#define EmergencyStopCmd_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class FireCmd: public CommandBase
+class EmergencyStopCmd: public CommandBase
 {
 public:
-	FireCmd();
+	EmergencyStopCmd();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -10,9 +10,7 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 	Talon* leftMotor1;
-	Talon* leftMotor2;
 	Talon* rightMotor1;
-	Talon* rightMotor2;
 	DoubleSolenoid* driveLiftShifter;
 	Encoder* leftDistanceEncoder;
 	Encoder* rightDistanceEncoder;

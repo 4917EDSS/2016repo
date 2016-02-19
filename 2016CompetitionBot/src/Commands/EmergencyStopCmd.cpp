@@ -1,40 +1,42 @@
-#include "FireCmd.h"
+#include "EmergencyStopCmd.h"
 
-FireCmd::FireCmd()
+EmergencyStopCmd::EmergencyStopCmd()
 {
 	Requires(rShooterSub);
+	Requires(rIntakeSub);
+	Requires(rHopperSub);
+	Requires(rDrivetrainSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
 
 // Called just before this Command runs the first time
-void FireCmd::Initialize()
+void EmergencyStopCmd::Initialize()
 {
 
-	rShooterSub->Spin(1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void FireCmd::Execute()
+void EmergencyStopCmd::Execute()
 {
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool FireCmd::IsFinished()
+bool EmergencyStopCmd::IsFinished()
 {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
-void FireCmd::End()
+void EmergencyStopCmd::End()
 {
-	rShooterSub->Spin(0.0);
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void FireCmd::Interrupted()
+void EmergencyStopCmd::Interrupted()
 {
-	End();
+
 }

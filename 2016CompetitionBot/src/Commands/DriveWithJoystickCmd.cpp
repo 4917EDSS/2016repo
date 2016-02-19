@@ -19,7 +19,6 @@ void DriveWithJoystickCmd::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveWithJoystickCmd::Execute()
 {
-	int signValueLeft = 0, signValueRight = 0;
 	if(rDrivetrainSub->GetControls() == TANK_DRIVE_CONTROLS)
 	{
 		rDrivetrainSub->Drive(oi->DGetLeftVer(4.0), oi->DGetRightVer(4.0));
