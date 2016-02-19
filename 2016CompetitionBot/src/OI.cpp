@@ -9,6 +9,7 @@
 #include "Commands/LowBarTransformCmd.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/EmergencyStopCmd.h"
+#include "Commands/IntakeUntilLimitHitGrp.h"
 
 OI::OI()
 {
@@ -34,19 +35,20 @@ OI::OI()
 	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);
 
 	oIntakeUntilLimitBtn = new JoystickButton(oController, OIntakeUntilLimitBtn);
-	oIntakeUntilLimitBtn->WhenPressed(new IntakeUntilLimitHitCmd);
+	oIntakeUntilLimitBtn->WhenPressed(new IntakeUntilLimitHitGrp);
+
 
 	//Emergency Stop commands.
 	oEmergencyStopBtn1 = new JoystickButton(oController, OEmergencyStopBtn1);
 	oEmergencyStopBtn1->WhenPressed(new EmergencyStopCmd);
 
-	dEmergencyStopBtn1 = new JoystickButton(oController, DEmergencyStopBtn1);
+	dEmergencyStopBtn1 = new JoystickButton(dController, DEmergencyStopBtn1);
 	dEmergencyStopBtn1->WhenPressed(new EmergencyStopCmd);
 
 	oEmergencyStopBtn2 = new JoystickButton(oController, OEmergencyStopBtn2);
 	oEmergencyStopBtn2->WhenPressed(new EmergencyStopCmd);
 
-	dEmergencyStopBtn2 = new JoystickButton(oController, DEmergencyStopBtn2);
+	dEmergencyStopBtn2 = new JoystickButton(dController, DEmergencyStopBtn2);
 	dEmergencyStopBtn2->WhenPressed(new EmergencyStopCmd);
 	//oIntakeBtn = new JoystickButton(oController, OIntakeBtn);
 	//oIntakeBtn->WhenPressed(new IntakeUntilLimitHitCmd());

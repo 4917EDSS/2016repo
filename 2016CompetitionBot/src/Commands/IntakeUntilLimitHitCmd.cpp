@@ -1,9 +1,10 @@
 #include "IntakeUntilLimitHitCmd.h"
-
+//DOES NOT GUARANTEE SHOOTER FACING FOWARD
 IntakeUntilLimitHitCmd::IntakeUntilLimitHitCmd()
 {
 	Requires(rIntakeSub);
 	Requires(rHopperSub);
+	Requires(rShooterSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
@@ -13,6 +14,7 @@ void IntakeUntilLimitHitCmd::Initialize()
 {
 	rIntakeSub->SetIntakeSpeed(1.0);
 	rHopperSub->SetHopperMotorIn(1.0);
+	rShooterSub->SetTurretRotate(0.0);
 }
 
 // Called repeatedly when this Command is scheduled to run

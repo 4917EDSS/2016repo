@@ -27,6 +27,7 @@
 #include "Commands/DriveTurnCmd.h"
 #include "Commands/DriveWithJoystickCmd.h"
 #include "Commands/ResetDrivetrainEncCmd.h"
+#include "Commands/TurretRotateZeroEncCmd.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/SetIntakeHeightCmd.h"
 #include "Commands/SpinupCmd.h"
@@ -192,6 +193,7 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Spinup", new SpinupCmd());
 	SmartDashboard::PutData("Toggle Drive Lift", new ToggleDriveLiftCmd());
 	SmartDashboard::PutData("ResetDrive Encoders", new ResetDrivetrainEncCmd());
+	SmartDashboard::PutData("Zero Turret encoder", new TurretRotateZeroEncCmd());
 }
 
 void Robot::SetSmartDashboardAutoOptions()

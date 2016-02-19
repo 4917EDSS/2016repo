@@ -51,9 +51,10 @@ void ShooterSub::RotateTurretCounterClockwise(float speed) {
 //The reset function only works if SetTurretRotate is constantly called.
 void ShooterSub::SetTurretRotate(float speed)
 {
-
+	speed *= ROTATE_SLOW;
 	if (!GetTurretCentered())
 	{
+		std::cout << "CENTERED" << std::endl;
 		rotateEncoder->Reset();
 	}
 
@@ -82,7 +83,7 @@ void ShooterSub::SetTurretTilt(float speed)
 			return;
 		}
 	}
-	if (GetTiltEnc() >= MAX_HOOD_HEIGHT_EV && speed > 0) {
+	if (GetRawTiltEnc() >= MAX_HOOD_HEIGHT_EV && speed > 0) {
 		//Stop tilting if at max height
 		tiltTurretMotor->Set(0.0);
 	}
@@ -177,6 +178,9 @@ void ShooterSub::Update(bool visionActive){
 		else if(target < GetRotateEnc()-ROTATE_MARGIN)
 		{
 			SetTurretRotate(-1.0);
+		}
+		else {
+			SetTurretRotate(0.0);
 		}
 	}
 

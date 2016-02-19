@@ -25,7 +25,7 @@ void DriveWithJoystickCmd::Execute()
 	}
 	else
 	{
-		rDrivetrainSub->Drive(oi->DGetLeftVer(4.0) - oi->DGetLeftHor(4.0), oi->DGetRightVer(4.0) + oi->DGetLeftHor(4.0));
+		rDrivetrainSub->Drive(oi->DGetLeftVer(4.0) - oi->DGetRightHor(4.0), oi->DGetLeftVer(4.0) + oi->DGetRightHor(4.0));
 	}
 
 }

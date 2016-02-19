@@ -36,8 +36,8 @@
 #define LeftDriveEncoder2DIO 13
 #define RightDriveEncoder1DIO 18
 #define RightDriveEncoder2DIO 19
-#define RotateTurretEncoder1DIO 6
-#define RotateTurretEncoder2DIO 7
+#define RotateTurretEncoder1DIO 7
+#define RotateTurretEncoder2DIO 6
 #define TiltEncoder1DIO 9
 #define TiltEncoder2DIO 8
 
