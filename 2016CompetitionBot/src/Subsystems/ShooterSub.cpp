@@ -3,10 +3,13 @@
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
-ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int tiltDownC, int turretCenteredC) :
+ShooterSub::ShooterSub(int shooterMotorCanC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int tiltDownC, int turretCenteredC) :
 		Subsystem("ExampleSubsystem")
 {
-	spinnerMotor = new Talon(shooterMotorC);
+	spinnerMotor = new CANTalon(shooterMotorCanC);
+	spinnerMotor->SetControlMode(CANSpeedController::ControlMode::kVoltage);
+	spinnerMotor->SetPID(FLYWHEEL_P, FLYWHEEL_I, FLYWHEEL_D);
+	spinnerMotor->EnableControl();
 	rotateTurretMotor = new Talon(turretRotateC);
 	tiltTurretMotor = new Talon(turretTiltC);
 
@@ -35,9 +38,8 @@ ShooterSub::ShooterSub(int shooterMotorC, int shooterEncoder1C, int shooterEncod
 
 void ShooterSub::Spin(float spinSpeed)
 {
-	spinnerMotor->Set(spinSpeed);
+	spinnerMotor->Set(spinSpeed*FLYWHEEL_VOLTAGE);
 }
-
 
 
 void ShooterSub::RotateTurretClockwise(float speed) {

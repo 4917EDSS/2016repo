@@ -1,4 +1,5 @@
 #include "SpinupCmd.h"
+#include <iostream>
 
 SpinupCmd::SpinupCmd()
 {
@@ -17,8 +18,6 @@ void SpinupCmd::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void SpinupCmd::Execute()
 {
-
-
 	//The plan is to have a sensor in the hopper for when a ball is there. Only run the ShooterMotor when there is a ball there.
 }
 

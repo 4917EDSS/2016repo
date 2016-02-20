@@ -20,6 +20,11 @@
 
 #define ROTATE_SLOW 0.25
 
+#define FLYWHEEL_P 1
+#define FLYWHEEL_I 0
+#define FLYWHEEL_D 0
+#define FLYWHEEL_VOLTAGE 11.2
+
 //Some bool constants used for code readability
 #define IS_DRIVE true
 #define IS_SHIFTER false
