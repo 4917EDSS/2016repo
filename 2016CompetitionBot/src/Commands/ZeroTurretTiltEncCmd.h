@@ -1,13 +1,13 @@
-#ifndef LowBarTransformCmd_H
-#define LowBarTransformCmd_H
+#ifndef ZeroTurretTiltEncCmd_H
+#define ZeroTurretTiltEncCmd_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class LowBarTransformCmd: public CommandBase
+class ZeroTurretTiltEncCmd: public CommandBase
 {
 public:
-	LowBarTransformCmd();
+	ZeroTurretTiltEncCmd();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

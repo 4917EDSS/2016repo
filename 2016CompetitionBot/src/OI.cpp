@@ -6,7 +6,7 @@
 #include "Commands/BallToShooterCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
 #include "Commands/PrepareShotCmd.h"
-#include "Commands/LowBarTransformCmd.h"
+#include "Commands/LowBarTransformGrp.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/EmergencyStopCmd.h"
 #include "Commands/IntakeUntilLimitHitGrp.h"
@@ -32,7 +32,7 @@ OI::OI()
 	oPrepareShotBtn->WhenPressed(new PrepareShotCmd);
 
 	oLowBarTransformBtn = new JoystickButton(oController, OLowBarTransformBtn);
-	oLowBarTransformBtn->WhenPressed(new LowBarTransformCmd);
+	oLowBarTransformBtn->WhenPressed(new LowBarTransformGrp);
 
 	oIntakeUntilLimitBtn = new JoystickButton(oController, OIntakeUntilLimitBtn);
 	oIntakeUntilLimitBtn->WhenPressed(new IntakeUntilLimitHitGrp);

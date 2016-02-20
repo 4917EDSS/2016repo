@@ -1,7 +1,6 @@
-//COMMAND NOT IMPLEMENTED YET, WAITING ON DETAILS ABOUT ROBOT
-#include "LowBarTransformCmd.h"
+#include "ZeroTurretTiltEncCmd.h"
 
-LowBarTransformCmd::LowBarTransformCmd()
+ZeroTurretTiltEncCmd::ZeroTurretTiltEncCmd()
 {
 	Requires(rShooterSub);
 	// Use Requires() here to declare subsystem dependencies
@@ -9,32 +8,32 @@ LowBarTransformCmd::LowBarTransformCmd()
 }
 
 // Called just before this Command runs the first time
-void LowBarTransformCmd::Initialize()
+void ZeroTurretTiltEncCmd::Initialize()
 {
-	rShooterSub->SetTurretTilt(1.0);
+	rShooterSub->SetTurretTilt(-1.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void LowBarTransformCmd::Execute()
+void ZeroTurretTiltEncCmd::Execute()
 {
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool LowBarTransformCmd::IsFinished()
+bool ZeroTurretTiltEncCmd::IsFinished()
 {
-	return false;
+	return rShooterSub->GetTiltDown();
 }
 
 // Called once after isFinished returns true
-void LowBarTransformCmd::End()
+void ZeroTurretTiltEncCmd::End()
 {
-
+	rShooterSub->SetTurretTilt(0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void LowBarTransformCmd::Interrupted()
+void ZeroTurretTiltEncCmd::Interrupted()
 {
-
+	End();
 }
