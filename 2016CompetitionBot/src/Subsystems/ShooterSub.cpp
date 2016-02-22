@@ -12,6 +12,7 @@ ShooterSub::ShooterSub(int shooterMotorCanC, int shooterEncoder1C, int shooterEn
 	spinnerMotor->EnableControl();
 	rotateTurretMotor = new Talon(turretRotateC);
 	tiltTurretMotor = new Talon(turretTiltC);
+	tiltTurretMotor->SetInverted(true); // tilt motor up = positive speed, wiring doesn't match this
 
 	shooterEncoder = new Encoder4917(shooterEncoder1C, shooterEncoder2C);
 	tiltEncoder = new Encoder(tiltEncoder1C, tiltEncoder2C);
@@ -43,11 +44,11 @@ void ShooterSub::Spin(float spinSpeed)
 
 
 void ShooterSub::RotateTurretClockwise(float speed) {
-	SetTurretRotate(speed);
+	SetTurretRotate(-speed);
 }
 
 void ShooterSub::RotateTurretCounterClockwise(float speed) {
-	SetTurretRotate(-speed);
+	SetTurretRotate(speed);
 }
 
 //The reset function only works if SetTurretRotate is constantly called.

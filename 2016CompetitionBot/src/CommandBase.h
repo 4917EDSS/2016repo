@@ -33,8 +33,8 @@
 #define IntakeUpLimitDIO 5
 #define ShooterEncoder1DIO 10
 #define ShooterEncoder2DIO 11
-#define LeftDriveEncoder1DIO 12
-#define LeftDriveEncoder2DIO 13
+#define LeftDriveEncoder1DIO 13
+#define LeftDriveEncoder2DIO 12
 #define RightDriveEncoder1DIO 18
 #define RightDriveEncoder2DIO 19
 #define RotateTurretEncoder1DIO 7

@@ -12,7 +12,7 @@ DrivetrainSub::DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1
 	leftDistanceEncoder = new Encoder(leftEncoder1C, leftEncoder2C);
 	rightDistanceEncoder = new Encoder(rightEncoder1C, rightEncoder2C);
 
-	controlState = FPS_DRIVE_CONTROLS;
+	controlState = TANK_DRIVE_CONTROLS;
 	accelThreshold = ACCELERATION_THRESHOLD;
 
 	LiveWindow::GetInstance()->AddActuator("Drivetrain", "leftMotor1", leftMotor1);

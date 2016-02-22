@@ -29,14 +29,7 @@ void ControlIntakeWithJoystickCmd::Execute()
 		rIntakeSub->SetVerticalSpeed(0.0);
 	}
 	// Dealing with intake in and out motors
-	if ((oi->OGetRightVer(2.0) != 0.0) && (rHopperSub->IsBallIn()))
-	{
-		rIntakeSub->SetIntakeSpeed(oi->OGetRightVer(2.0));
-	}
-	else
-	{
-		rIntakeSub->SetIntakeSpeed(0.0);
-	}
+	rIntakeSub->SetIntakeSpeed(oi->OGetRightVer(2.0));
 }
 
 // Make this return true when this Command no longer needs to run execute()
