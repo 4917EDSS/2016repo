@@ -57,7 +57,6 @@ void ShooterSub::SetTurretRotate(float speed)
 	speed *= ROTATE_SLOW;
 	if (!GetTurretCentered())
 	{
-		std::cout << "CENTERED" << std::endl;
 		rotateEncoder->Reset();
 	}
 
