@@ -20,16 +20,16 @@ void ControlIntakeWithJoystickCmd::Execute()
 {
 	// Dealing with height of intake
 	if (oi->OGetPov() == 0 && !rIntakeSub->GetIntakeUp()) {
-		rIntakeSub->SetVerticalSpeed(-0.5);
+		rIntakeSub->SetVerticalSpeed(-0.7);
 	}
 	else if (oi->OGetPov() == 180) {
-		rIntakeSub->SetVerticalSpeed(0.5);
+		rIntakeSub->SetVerticalSpeed(0.7);
 	}
 	else {
 		rIntakeSub->SetVerticalSpeed(0.0);
 	}
 	// Dealing with intake in and out motors
-	rIntakeSub->SetIntakeSpeed(oi->OGetRightVer(2.0));
+	rIntakeSub->SetIntakeSpeed(-oi->OGetRightVer(2.0));
 }
 
 // Make this return true when this Command no longer needs to run execute()

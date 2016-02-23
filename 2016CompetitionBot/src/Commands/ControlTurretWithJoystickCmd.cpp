@@ -22,12 +22,7 @@ void ControlTurretWithJoystickCmd::Execute()
 	rShooterSub->SetTurretTilt(oi->OGetLeftVer(2.0));
 
 	//Turning the turret with the left operator joystick horizontal axis
-	if (oi->OGetLeftHor(2.0) != 0.0)
-	{
-		rShooterSub->SetTurretRotate(-oi->OGetLeftHor(2.0));
-	}
-
-
+	rShooterSub->RotateTurretClockwise(oi->OGetLeftHor(2.0));
 }
 
 // Make this return true when this Command no longer needs to run execute()
