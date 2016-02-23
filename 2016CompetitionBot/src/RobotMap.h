@@ -16,7 +16,7 @@
 
 #define TARGET_RANGE 15
 
-#define DRIVE_SENSITIVITY 2.5      //The higher the number, the less sensitive.
+#define DRIVE_SENSITIVITY 0.8      //The higher the number, the more sensitive.
 
 #define ROTATE_SLOW 0.25
 

@@ -1,5 +1,6 @@
 #include "PrepareShotCmd.h"
 #include "RobotMap.h"
+#include <iostream>
 
 PrepareShotCmd::PrepareShotCmd()
 {
@@ -18,6 +19,8 @@ void PrepareShotCmd::Initialize()
 void PrepareShotCmd::Execute()
 {
 	rShooterSub->Update(true);
+	std::cout << rShooterSub->spinnerMotor->GetOutputCurrent() << " is Current" << std::endl;
+	std::cout << rShooterSub->spinnerMotor->GetOutputVoltage() << " is Voltage" << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()

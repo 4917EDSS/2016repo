@@ -12,7 +12,7 @@ IntakeUntilLimitHitCmd::IntakeUntilLimitHitCmd()
 // Called just before this Command runs the first time
 void IntakeUntilLimitHitCmd::Initialize()
 {
-	rIntakeSub->SetIntakeSpeed(1.0);
+	rIntakeSub->SetIntakeSpeed(-1.0);
 	rHopperSub->SetHopperMotorIn(1.0);
 	rShooterSub->SetTurretRotate(0.0);
 }

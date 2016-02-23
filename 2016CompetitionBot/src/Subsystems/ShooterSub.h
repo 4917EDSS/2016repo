@@ -8,7 +8,7 @@
 class ShooterSub: public Subsystem
 {
 private:
-	CANTalon* spinnerMotor;
+
 	Talon* rotateTurretMotor;
 	Talon* tiltTurretMotor;
 	Encoder4917* shooterEncoder;
@@ -39,6 +39,7 @@ public:
 	void RotateTurretCounterClockwise(float speed);
 	bool GetTurretCentered();
 	bool GetTiltDown();
+	CANTalon* spinnerMotor;
 };
 
 #endif

@@ -21,11 +21,11 @@ void DriveWithJoystickCmd::Execute()
 {
 	if(rDrivetrainSub->GetControls() == TANK_DRIVE_CONTROLS)
 	{
-		rDrivetrainSub->Drive(oi->DGetLeftVer(4.0), oi->DGetRightVer(4.0));
+		rDrivetrainSub->Drive(oi->DGetLeftVer(DRIVE_SENSITIVITY), oi->DGetRightVer(DRIVE_SENSITIVITY));
 	}
 	else
 	{
-		rDrivetrainSub->Drive(oi->DGetLeftVer(4.0) - oi->DGetRightHor(4.0), oi->DGetLeftVer(4.0) + oi->DGetRightHor(4.0));
+		rDrivetrainSub->Drive(oi->DGetLeftVer(DRIVE_SENSITIVITY) - oi->DGetRightHor(DRIVE_SENSITIVITY), oi->DGetLeftVer(DRIVE_SENSITIVITY) + oi->DGetRightHor(DRIVE_SENSITIVITY));
 	}
 
 }
