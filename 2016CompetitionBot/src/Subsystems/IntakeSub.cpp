@@ -51,5 +51,5 @@ void IntakeSub::SetVerticalSpeed(float speed)
 
 void IntakeSub::SetIntakeSpeed(float speed)
 {
-	intakeMotor->Set(speed);
+	intakeMotor->Set(-speed);
 }
