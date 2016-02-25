@@ -1,11 +1,11 @@
 #include "HopperSub.h"
 #include "../RobotMap.h"
 
-HopperSub::HopperSub(int hopperMotorC, int ballInLimitC) :
+HopperSub::HopperSub() :
 		Subsystem("HopperSub")
 {
-	hopperMotor = new Talon(hopperMotorC);
-	ballInLimit = new DigitalInput(ballInLimitC);
+	hopperMotor = new Talon(HopperPWM);
+	ballInLimit = new DigitalInput(HopperLimitDIO);
 
 	LiveWindow::GetInstance()->AddActuator("Hopper", "HopperMotor", hopperMotor);
 	LiveWindow::GetInstance()->AddSensor("Hopper", "BallIntakeLimit", ballInLimit);

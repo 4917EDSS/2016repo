@@ -2,13 +2,13 @@
 #include "../Commands/ControlIntakeWithJoystickCmd.h"
 #include "../RobotMap.h"
 
-IntakeSub::IntakeSub(int intakeMotorC, int adjustMotorC, int heightEncoder1C, int heightEncoder2C, int intakeUpLimitC) :
+IntakeSub::IntakeSub() :
 		Subsystem("IntakeSub")
 {
-	intakeMotor = new Talon(intakeMotorC);
-	adjustMotor = new Talon(adjustMotorC);
-	heightEncoder = new Encoder(heightEncoder1C, heightEncoder2C);
-	intakeUpLimit = new DigitalInput(intakeUpLimitC);
+	intakeMotor = new Talon(IntakePWM);
+	adjustMotor = new Talon(AdjustPWM);
+	heightEncoder = new Encoder(HeightEncoder1DIO, HeightEncoder2DIO);
+	intakeUpLimit = new DigitalInput(IntakeUpLimitDIO);
 
 	LiveWindow::GetInstance()->AddActuator("Intake", "intakeMotor", intakeMotor);
 	LiveWindow::GetInstance()->AddActuator("Intake", "adjustMotor", adjustMotor);

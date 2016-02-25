@@ -22,7 +22,7 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 public:
-	ShooterSub(int shooterMotorCanC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int tiltDownC, int turrentCenteredC);
+	ShooterSub();
 	void Spin(float spinSpeed);
 	void SetTurretTilt(float speed);
 	float GetTargetOffsetFromCenter();
