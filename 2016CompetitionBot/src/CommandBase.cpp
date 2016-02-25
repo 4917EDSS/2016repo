@@ -24,12 +24,11 @@ void CommandBase::init()
 {
 	// Create a single static instance of all of your subsystems. The following
 	// line should be repeated for each subsystem in the project.
-	rDrivetrainSub = new DrivetrainSub(LeftDrive1PWM, RightDrive1PWM, LeftDriveEncoder1DIO, LeftDriveEncoder2DIO,
-			RightDriveEncoder1DIO, RightDriveEncoder2DIO, ShifterSolenoid1PNC, ShifterSolenoid2PNC);
-	rIntakeSub = new IntakeSub(IntakePWM, AdjustPWM, HeightEncoder1DIO, HeightEncoder2DIO, IntakeUpLimitDIO);
-	rShooterSub = new ShooterSub(ShooterMotorCAN, ShooterEncoder1DIO, ShooterEncoder2DIO, TiltEncoder1DIO, TiltEncoder2DIO, RotateTurretEncoder1DIO, RotateTurretEncoder2DIO, TurretRotatePWM, TurretTiltPWM, TiltDownDIO, TurretCenteredLimitDIO);
+	rDrivetrainSub = new DrivetrainSub();
+	rIntakeSub = new IntakeSub();
+	rShooterSub = new ShooterSub();
 	//rCameraSub = new CameraSub(); commented out to allow for better console outputs
-	rHopperSub = new HopperSub(HopperPWM, HopperLimitDIO);
+	rHopperSub = new HopperSub();
 
 	//OI must be at the bottom!!
 	oi = new OI();

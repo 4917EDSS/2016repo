@@ -14,7 +14,7 @@ private:
 	Encoder* heightEncoder;
 	DigitalInput* intakeUpLimit;
 public:
-	IntakeSub(int intakeMotorC, int adjustMotorC, int heightEncoder1C, int heightEncoder2C, int intakeUpLimitC);
+	IntakeSub();
 	void InitDefaultCommand();
 	int GetHeight();
 	bool GetIntakeUp();

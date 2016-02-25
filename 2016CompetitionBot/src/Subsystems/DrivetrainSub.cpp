@@ -2,15 +2,14 @@
 #include "../RobotMap.h"
 #include "Commands/DriveWithJoystickCmd.h"
 
-DrivetrainSub::DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1C, int leftEncoder2C,
-		int rightEncoder1C, int rightEncoder2C, int driveLiftShift1C, int driveLiftShift2C) :
+DrivetrainSub::DrivetrainSub() :
 		Subsystem("DrivetrainSub")
 {
-	leftMotor1 = new Talon(leftMotor1C);
-	rightMotor1 = new Talon(rightMotor1C);
-	driveLiftShifter = new DoubleSolenoid(driveLiftShift1C, driveLiftShift2C);
-	leftDistanceEncoder = new Encoder(leftEncoder1C, leftEncoder2C);
-	rightDistanceEncoder = new Encoder(rightEncoder1C, rightEncoder2C);
+	leftMotor1 = new Talon(LeftDrive1PWM);
+	rightMotor1 = new Talon(RightDrive1PWM);
+	driveLiftShifter = new DoubleSolenoid(ShifterSolenoid1PNC, ShifterSolenoid2PNC);
+	leftDistanceEncoder = new Encoder(LeftDriveEncoder1DIO, LeftDriveEncoder2DIO);
+	rightDistanceEncoder = new Encoder(RightDriveEncoder1DIO, RightDriveEncoder2DIO);
 
 	controlState = TANK_DRIVE_CONTROLS;
 	accelThreshold = ACCELERATION_THRESHOLD;
@@ -20,7 +19,6 @@ DrivetrainSub::DrivetrainSub(int leftMotor1C, int rightMotor1C, int leftEncoder1
 	LiveWindow::GetInstance()->AddActuator("Drivetrain", "rightMotor1", rightMotor1);
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "rightDistanceEncoder", rightDistanceEncoder);
 	LiveWindow::GetInstance()->AddActuator("Drivetrain", "driveLiftShifter", driveLiftShifter);
-
 }
 
 void DrivetrainSub::InitDefaultCommand()

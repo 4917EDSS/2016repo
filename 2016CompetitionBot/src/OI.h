@@ -24,6 +24,9 @@
  *
  */
 
+// D = driver controller
+// O = operator controller
+
 //Controllers
 #define DControllerDriverPort 0
 #define OControllerOperatorPort 1

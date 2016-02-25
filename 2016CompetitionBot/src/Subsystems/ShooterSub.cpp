@@ -3,23 +3,23 @@
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
-ShooterSub::ShooterSub(int shooterMotorCanC, int shooterEncoder1C, int shooterEncoder2C, int tiltEncoder1C, int tiltEncoder2C, int rotateEncoder1C, int rotateEncoder2C, int turretRotateC, int turretTiltC, int tiltDownC, int turretCenteredC) :
+ShooterSub::ShooterSub() :
 		Subsystem("ExampleSubsystem")
 {
-	spinnerMotor = new CANTalon(shooterMotorCanC);
+	spinnerMotor = new CANTalon(ShooterMotorCAN);
 	spinnerMotor->SetControlMode(CANSpeedController::ControlMode::kVoltage);
 	spinnerMotor->SetPID(FLYWHEEL_P, FLYWHEEL_I, FLYWHEEL_D);
 	spinnerMotor->EnableControl();
-	rotateTurretMotor = new Talon(turretRotateC);
-	tiltTurretMotor = new Talon(turretTiltC);
+	rotateTurretMotor = new Talon(TurretRotatePWM);
+	tiltTurretMotor = new Talon(TurretTiltPWM);
 	tiltTurretMotor->SetInverted(true); // tilt motor up = positive speed, wiring doesn't match this
 
-	shooterEncoder = new Encoder4917(shooterEncoder1C, shooterEncoder2C);
-	tiltEncoder = new Encoder(tiltEncoder1C, tiltEncoder2C);
-	rotateEncoder = new Encoder(rotateEncoder1C, rotateEncoder2C);
+	shooterEncoder = new Encoder4917(ShooterEncoder1DIO, ShooterEncoder2DIO);
+	tiltEncoder = new Encoder(TiltEncoder1DIO, TiltEncoder2DIO);
+	rotateEncoder = new Encoder(RotateTurretEncoder1DIO, RotateTurretEncoder2DIO);
 
-	turretCentered = new DigitalInput(turretCenteredC);
-	tiltDown = new DigitalInput(tiltDownC);
+	turretCentered = new DigitalInput(TurretCenteredLimitDIO);
+	tiltDown = new DigitalInput(TiltDownDIO);
 
 	LiveWindow::GetInstance()->AddActuator("Shooter", "spinnerMotor", spinnerMotor);
 //	LiveWindow::GetInstance()->AddSensor("Shooter", "shooterEncoder", shooterEncoder); // TODO: Add this type of encoder

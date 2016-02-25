@@ -12,7 +12,7 @@ private:
 	Talon* hopperMotor;
 	DigitalInput* ballInLimit;
 public:
-	HopperSub(int hopperMotorC, int ballInLimitC);
+	HopperSub();
 	void InitDefaultCommand();
 	bool IsBallIn();
 	void SetHopperMotorIn(float speed);

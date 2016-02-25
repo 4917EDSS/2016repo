@@ -3,21 +3,135 @@
 
 #include "WPILib.h"
 
+/***********************************************************************
+ ********************** roboRIO I/O Port Map ***************************
+ ***********************************************************************/
+
+// Note that in addition to the labeled ports on the roboRIO, the MXP (myRIO Expansion Port)
+// supports additional functionality.
+//  - 4 analog inputs
+//  - 2 analog outputs
+//  - +5V
+//  - +3.3V
+//  - a total of 16 DIOs, all pins have dual functionality, DIO and
+//     - 10 PWMs (10 pins)
+//     - I2C (2 pins)
+//     - SPI (4 pins)
+//  - a UART
+//  - digital ground
+
+
+// PWM (Pulse-Width Modulation) Outputs
+#define LeftDrive1PWM	0
+#define RightDrive1PWM	1
+//#define free			2
+//#define free			3
+#define IntakePWM 		4   //Actually intaking or expelling boulders by rotating the intake drums.
+//#define free			5
+#define AdjustPWM 		6 	//Moves the intake subsystem.
+#define HopperPWM 		7   //Moves boulder from hopper to SpinnerMotor.
+#define TurretRotatePWM 8	//Rotates shooting turret(Yaw).
+#define TurretTiltPWM 	9   //Tilts shooting turret(Pitch).
+
+// DIOs (Digital Inputs/Outputs)
+// on roboRIO
+#define HopperLimitDIO			0
+#define HeightEncoder1DIO		1  //These are for the height of the intake.
+#define HeightEncoder2DIO		2
+#define TurretCenteredLimitDIO	3
+#define TiltDownDIO				4
+#define IntakeUpLimitDIO		5
+#define RotateTurretEncoder2DIO 6
+#define RotateTurretEncoder1DIO 7
+#define TiltEncoder2DIO 		8
+#define TiltEncoder1DIO 		9
+
+// on MXP (myRIO Expansion Port) via NavX-MXP expansion board
+#define ShooterEncoder1DIO 		10
+#define ShooterEncoder2DIO 		11
+#define LeftDriveEncoder2DIO 	12
+#define LeftDriveEncoder1DIO 	13
+//#define free
+#define RightDriveEncoder1DIO 	18
+#define RightDriveEncoder2DIO 	19
+
+// CAN (Controller Area Network) Bus
+#define ShooterMotorCAN			0	//High speed wheels to launch the boulder.
+
+// I2C (Inter-Integrated Circuit) Bus
+//#define free
+
+// RS-232 (serial) Port
+//#define free
+
+// SPI (Serial Peripheral Interface) with 4 Slave-Select Lines
+//#define free			0
+//#define free			1
+//#define free			2
+//#define free			3
+
+// Analog Inputs
+//#define free			0	// Note:  Some of these inputs might be buggy
+//#define free			1
+//#define free			2
+//#define free			3
+
+// Relay FWD and REV Outputs
+//#define free			0
+//#define free			1
+//#define free			2
+//#define free			3
+
+// USB Ports
+// Two available
+
+// PNC (Pneumatics Control Module) Outputs
+#define ShifterSolenoid1PNC 	0
+#define ShifterSolenoid2PNC 	1
+
+
+/***********************************************************************
+ *************************** SUBSYSTEMS ********************************
+ ***********************************************************************/
+//////////////////////// Machine Vision Camera Subsystem ////////////////////////
+#define MIDDLE_CAMERA_X 120.0
+#define TARGET_RANGE 15
+
+
+//////////////////////// Live-view Camera Subsystem ////////////////////////
 #define CAMERA_NAME "cam2"
 
+
+//////////////////////// Drivetrain Subsystem ////////////////////////
 #define TANK_DRIVE_CONTROLS 1
 #define FPS_DRIVE_CONTROLS 2
 
 #define ACCELERATION_THRESHOLD 0.1
-
-#define ROTATE_MARGIN 10
-
-#define MIDDLE_CAMERA_X 120.0
-
-#define TARGET_RANGE 15
-
 #define DRIVE_SENSITIVITY 0.8      //The higher the number, the more sensitive.
 
+//Some bool constants used for code readability
+#define IS_DRIVE true
+#define IS_SHIFTER false
+
+//go forward this much on one side and reverse the same amount on the other for a 90 degree turn.
+//TODO: update this once the robot is finalized.
+// mm/deg
+#define DISTANCE_PER_DEGREE_EV (745.0/90.0)
+// mm/tick
+#define DISTANCE_PER_PULSE_EV
+
+
+//////////////////////// Hopper Subsystem ////////////////////////
+
+
+//////////////////////// Intake Subsystem ////////////////////////
+// Zeroes at top
+#define BALL_HEIGHT_EV 12032
+#define FLOOR_HEIGHT_EV 2343423423423432
+
+
+//////////////////////// Shooter Subsystem ////////////////////////
+#define ROTATE_MARGIN 10
 #define ROTATE_SLOW 0.25
 
 #define FLYWHEEL_P 1
@@ -25,13 +139,6 @@
 #define FLYWHEEL_D 0
 #define FLYWHEEL_VOLTAGE 11.2
 
-//Some bool constants used for code readability
-#define IS_DRIVE true
-#define IS_SHIFTER false
-
-/***********************************************************************
- ************************* ENCODER VALUES ******************************
- ***********************************************************************/
 // TURRET ROTATE
 // TODO: get these values
 // The farthest the turret can rotate positive or negative
@@ -41,18 +148,6 @@
 // Highest the hood can go
 #define MAX_HOOD_HEIGHT_EV 2000
 
-// DRIVETRAIN
-//go forward this much on one side and reverse the same amount on the other for a 90 degree turn.
-//TODO: update this once the robot is finalized.
-// mm/deg
-#define DISTANCE_PER_DEGREE_EV (745.0/90.0)
-// mm/tick
-#define DISTANCE_PER_PULSE_EV
-
-// INTAKE HEIGHT
-// Zeroes at top
-#define BALL_HEIGHT_EV 12032
-#define FLOOR_HEIGHT_EV 2343423423423432
-
 
 #endif
+
