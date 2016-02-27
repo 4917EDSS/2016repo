@@ -105,9 +105,20 @@
 //////////////////////// Drivetrain Subsystem ////////////////////////
 #define TANK_DRIVE_CONTROLS 1
 #define FPS_DRIVE_CONTROLS 2
+#define AHRSInterface SPI::kMXP
+
+#define DRIVE_BALANCE_P 0.04
+#define DRIVE_BALANCE_I 0
+#define DRIVE_BALANCE_D 0
+#define DRIVE_BALANCE_TOLERANCE 0.01
+
+#define DRIVE_TURN_P 0.01
+#define DRIVE_TURN_I 0
+#define DRIVE_TURN_D 0.3
+#define DRIVE_TURN_TOLERANCE 0.01
 
 #define ACCELERATION_THRESHOLD 0.1
-#define DRIVE_SENSITIVITY 0.8      //The higher the number, the more sensitive.
+#define DRIVE_SENSITIVITY 2      //The higher the number, the less sensitive.
 
 //Some bool constants used for code readability
 #define IS_DRIVE true
@@ -118,7 +129,9 @@
 // mm/deg
 #define DISTANCE_PER_DEGREE_EV (745.0/90.0)
 // mm/tick
-#define DISTANCE_PER_PULSE_EV
+#define DISTANCE_PER_PULSE_EV (5000.0/29100.0)
+
+#define ENCODER_CONVERSION_FACTOR 4
 
 
 //////////////////////// Hopper Subsystem ////////////////////////

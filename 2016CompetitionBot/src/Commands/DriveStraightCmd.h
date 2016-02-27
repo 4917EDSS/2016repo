@@ -7,8 +7,10 @@
 class DriveStraightCmd: public CommandBase
 {
 private:
+	int targetDistance;
+	float targetSpeed;
 public:
-	DriveStraightCmd();
+	DriveStraightCmd(int distance, float speed);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

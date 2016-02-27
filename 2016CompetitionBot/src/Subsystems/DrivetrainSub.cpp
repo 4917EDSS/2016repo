@@ -1,6 +1,7 @@
 #include "DrivetrainSub.h"
 #include "../RobotMap.h"
 #include "Commands/DriveWithJoystickCmd.h"
+#include "Components/PidAhrs.h"
 
 DrivetrainSub::DrivetrainSub() :
 		Subsystem("DrivetrainSub")
@@ -10,6 +11,30 @@ DrivetrainSub::DrivetrainSub() :
 	driveLiftShifter = new DoubleSolenoid(ShifterSolenoid1PNC, ShifterSolenoid2PNC);
 	leftDistanceEncoder = new Encoder(LeftDriveEncoder1DIO, LeftDriveEncoder2DIO);
 	rightDistanceEncoder = new Encoder(RightDriveEncoder1DIO, RightDriveEncoder2DIO);
+	leftDistanceEncoder->SetDistancePerPulse(DISTANCE_PER_PULSE_EV*ENCODER_CONVERSION_FACTOR);
+	rightDistanceEncoder->SetDistancePerPulse(DISTANCE_PER_PULSE_EV*ENCODER_CONVERSION_FACTOR);
+	motorBalancer = new MotorBalancer();
+	motorTurner = new MotorBalancer();
+
+	// Initialize the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
+	ahrs = new AHRS(AHRSInterface); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
+	if(!ahrs){
+		std::cerr << "ahrs not connecting";
+	}
+	else{
+		std::cerr << "ahrs connected";
+	}
+
+	Preferences *prefs = Preferences::GetInstance();
+	driveBalanceController = new PIDController(prefs->GetFloat("DriveBalanceP", DRIVE_BALANCE_P), prefs->GetFloat("DriveBalanceI", DRIVE_BALANCE_I), prefs->GetFloat("DriveBalanceD", DRIVE_BALANCE_D), new PidAhrs(ahrs), motorBalancer);
+	driveBalanceController->SetAbsoluteTolerance(prefs->GetFloat("DriveBalanceTolerance", DRIVE_BALANCE_TOLERANCE));
+	driveBalanceController->SetOutputRange(-1.0, 1.0);
+	driveBalanceController->Disable();
+
+	driveTurnController = new PIDController(prefs->GetFloat("DriveTurnP", DRIVE_TURN_P), prefs->GetFloat("DriveTurnI", DRIVE_TURN_I), prefs->GetFloat("DriveTurnD", DRIVE_TURN_D), new PidAhrs(ahrs), motorTurner);
+	driveTurnController->SetAbsoluteTolerance(prefs->GetFloat("DriveTurnTolerance", DRIVE_TURN_TOLERANCE));
+	driveTurnController->SetOutputRange(-1.0, 1.0);
+	driveTurnController->Disable();
 
 	controlState = TANK_DRIVE_CONTROLS;
 	accelThreshold = ACCELERATION_THRESHOLD;
@@ -31,9 +56,55 @@ void DrivetrainSub::InitDefaultCommand()
 void DrivetrainSub::Drive(float leftSpeed, float rightSpeed)
 {
 	leftMotor1->Set(-leftSpeed);
-	//leftMotor2->Set(leftSpeed);
 	rightMotor1->Set(rightSpeed);
-	//rightMotor2->Set(rightSpeed);
+}
+
+void DrivetrainSub::EnableBalancerPID(float setPoint){
+	Preferences *prefs = Preferences::GetInstance();
+	driveBalanceController->SetPID(prefs->GetFloat("DriveBalanceP", DRIVE_BALANCE_P), prefs->GetFloat("DriveBalanceI", DRIVE_BALANCE_I), prefs->GetFloat("DriveBalanceD", DRIVE_BALANCE_D));
+	driveBalanceController->SetAbsoluteTolerance(prefs->GetFloat("DriveBalanceTolerance", DRIVE_BALANCE_TOLERANCE));
+	driveBalanceController->SetSetpoint(setPoint);
+	driveBalanceController->Enable();
+	std::cout << "PID" << driveBalanceController->GetP() << " " << driveBalanceController->GetI()<< " " << driveBalanceController->GetD()<< std::endl;
+}
+
+void DrivetrainSub::DisableBalancerPID(){
+	driveBalanceController->Disable();
+}
+
+void DrivetrainSub::PIDDrive(float speed)
+{
+	std::cout << motorBalancer->GetDifference() << std::endl;
+	leftMotor1->Set(-speed - motorBalancer->GetDifference());
+	rightMotor1->Set(speed - motorBalancer->GetDifference());
+}
+
+void DrivetrainSub::EnableTurnPID(float setPoint){
+	Preferences *prefs = Preferences::GetInstance();
+	driveTurnController->SetPID(prefs->GetFloat("DriveTurnP", DRIVE_TURN_P), prefs->GetFloat("DriveTurnI", DRIVE_TURN_I), prefs->GetFloat("DriveTurnD", DRIVE_TURN_D));
+	driveTurnController->SetAbsoluteTolerance(prefs->GetFloat("DriveTurnTolerance", DRIVE_TURN_TOLERANCE));
+	driveTurnController->SetSetpoint(setPoint);
+	driveTurnController->Enable();
+	std::cout << "PID" << driveTurnController->GetP() << " " << driveTurnController->GetI()<< " " << driveTurnController->GetD()<< std::endl;
+}
+
+void DrivetrainSub::DisableTurnPID(){
+	driveTurnController->Disable();
+}
+
+void DrivetrainSub::PIDTurn()
+{
+	std::cout << motorTurner->GetDifference() << std::endl;
+	leftMotor1->Set(-motorTurner->GetDifference());
+	rightMotor1->Set(-motorTurner->GetDifference());
+}
+
+bool DrivetrainSub::IsTurnFinished(){
+	return driveTurnController->OnTarget();
+}
+
+float DrivetrainSub::GetYaw(){
+	return ahrs->GetYaw();
 }
 
 void DrivetrainSub::ToggleControls(){
@@ -98,10 +169,19 @@ bool DrivetrainSub::GetGear(){
 
 }
 
+AHRS* DrivetrainSub::GetAHRS() {
+	return ahrs;
+}
+
 void DrivetrainSub::ResetDrive(){
 	// This also resets the virtual speed encoders
 	leftDistanceEncoder->Reset();
 	rightDistanceEncoder->Reset();
+	motorBalancer->Reset();
+	if(ahrs)
+	{
+		ahrs->ZeroYaw();
+	}
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

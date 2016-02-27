@@ -69,14 +69,6 @@ private:
 			}
 		}
 
-		// Initialize the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
-		ahrs = new AHRS(SPI::kMXP); // Options are:  SerialPort::kMXP, SPI::kMXP, I2C::kMXP or SerialPort::kUSB
-		if(!ahrs){
-			std::cerr << "ahrs not connecting";
-		}
-		else{
-			std::cerr << "ahrs connected";
-		}
 		CommandBase::init();
 
 		//the camera name (ex "cam0") can be found through the roborio web interface
@@ -123,6 +115,7 @@ private:
 		} */
 
 //		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
+		CommandBase::rDrivetrainSub->ResetDrive();
 
 		autonomousDefenceCommand = (Command *)autoDefenceOptions->GetSelected();
 		autonomousLocationCommand = (Command *)autoLocationOptions->GetSelected();
@@ -185,8 +178,8 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	//SmartDashboard::PutData("Camera Update", new CameraUpdateCmd());
 	SmartDashboard::PutData("Joystick Intake Ctrl", new ControlIntakeWithJoystickCmd());
 	SmartDashboard::PutData("Joystick Turret Ctrl", new ControlTurretWithJoystickCmd());
-	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd());
-//	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd());				// Needs parameters
+	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd((Preferences::GetInstance())->GetInt("DriveStraightMM", 0.0), (Preferences::GetInstance())->GetFloat("DriveStraightSpeed", 0.0)));
+	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd((Preferences::GetInstance())->GetInt("DriveTurnDegrees", 0.0), (Preferences::GetInstance())->GetFloat("DriveTurnSpeed", 0.0)));
 	SmartDashboard::PutData("Joystick Drive", new DriveWithJoystickCmd());
 	SmartDashboard::PutData("Intake Until Limit Hit", new IntakeUntilLimitHitCmd());
 //	SmartDashboard::PutData("Set Intake Height", new SetIntakeHeightCmd());	// Needs parameters
@@ -235,6 +228,7 @@ void Robot::UpdateSmartDashboard()
 
 
 	// For the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
+	AHRS* ahrs = CommandBase::rDrivetrainSub->GetAHRS();
 	if(ahrs)
 	{
 		double zeroYaw = 0.0;

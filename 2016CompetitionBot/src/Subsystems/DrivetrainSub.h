@@ -2,7 +2,12 @@
 #define DrivetrainSub_H
 
 #include "Commands/Subsystem.h"
+#include "Components/MotorBalancer.h"
 #include "WPILib.h"
+#include "AHRS.h"
+
+#define FROM_DASHBOARD_SPEED -1000000.0
+#define FROM DASHBOARD_DISTANCE -1000000
 
 class DrivetrainSub: public Subsystem
 {
@@ -14,6 +19,11 @@ private:
 	DoubleSolenoid* driveLiftShifter;
 	Encoder* leftDistanceEncoder;
 	Encoder* rightDistanceEncoder;
+	PIDController* driveBalanceController;
+	PIDController* driveTurnController;
+	AHRS* ahrs;
+	MotorBalancer* motorBalancer;
+	MotorBalancer* motorTurner;
 
 	int controlState;
 	float accelThreshold;
@@ -21,9 +31,17 @@ private:
 public:
 	DrivetrainSub();
 	void Drive(float leftSpeed, float rightSpeed);
+	void PIDDrive(float speed);
+	void EnableBalancerPID(float setPoint);
+	void DisableBalancerPID();
+	void PIDTurn();
+	void EnableTurnPID(float setPoint);
+	void DisableTurnPID();
+	bool IsTurnFinished();
 	void ToggleControls();
 	int GetControls();
 	float GetAccelThresh();
+	float GetYaw();
 	void SetAccelThresh(float accelThresh);
 	int GetRawLeftEnc();
 	int GetLeftEnc();
@@ -31,6 +49,7 @@ public:
 	int GetRightEnc();
 	void ShiftDrive(bool isDrive);
 	bool GetGear();
+	AHRS* GetAHRS();
 	void InitDefaultCommand();
 	void ResetDrive();
 

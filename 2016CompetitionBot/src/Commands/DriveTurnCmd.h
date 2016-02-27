@@ -7,14 +7,11 @@
 class DriveTurnCmd: public CommandBase
 {
 private:
-	int turnEncoderValues;
-	bool isClockwiseTurn;
+	float turnDegrees;
 	float driveSpeed;
-	int previousLeftEncoder;
-	int previousRightEncoder;
 
 public:
-	DriveTurnCmd(int turnDegrees, bool isClockwiseTurnParam, float driveSpeedParam);
+	DriveTurnCmd(float turnDegrees, float driveSpeedParam);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
