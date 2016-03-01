@@ -135,7 +135,7 @@
 
 
 //////////////////////// Hopper Subsystem ////////////////////////
-
+#define BALL_TO_SHOOTER_TIME 2.5
 
 //////////////////////// Intake Subsystem ////////////////////////
 // Zeroes at top
@@ -146,6 +146,9 @@
 //////////////////////// Shooter Subsystem ////////////////////////
 #define ROTATE_MARGIN 10
 #define ROTATE_SLOW 0.25
+
+#define FRONT_TOUCHING_BATTER_EV 733
+#define RESTING_ON_BACK_BATTER_EV 475
 
 #define FLYWHEEL_P 1
 #define FLYWHEEL_I 0

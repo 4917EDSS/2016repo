@@ -32,7 +32,7 @@ bool PrepareShotCmd::IsFinished()
 // Called once after isFinished returns true
 void PrepareShotCmd::End()
 {
-	rShooterSub->Spin(0.0);
+	//rShooterSub->Spin(0.0);
 }
 
 // Called when another command which requires one or more of the same

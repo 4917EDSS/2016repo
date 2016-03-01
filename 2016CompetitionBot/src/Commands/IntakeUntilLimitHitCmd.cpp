@@ -27,7 +27,7 @@ void IntakeUntilLimitHitCmd::Execute()
 bool IntakeUntilLimitHitCmd::IsFinished()
 {
 	//return rIntakeSub->IsBallLoaded();
-	return !rHopperSub->IsBallIn();
+	return rHopperSub->IsBallIn();
 }
 
 // Called once after isFinished returns true

@@ -1,5 +1,6 @@
 #include "BallToShooterCmd.h"
 #include "Timer.h"
+#include "RobotMap.h"
 
 BallToShooterCmd::BallToShooterCmd()
 {
@@ -24,7 +25,7 @@ void BallToShooterCmd::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool BallToShooterCmd::IsFinished()
 {
-	return TimeSinceInitialized() > 1.0;
+	return TimeSinceInitialized() > BALL_TO_SHOOTER_TIME;
 }
 
 // Called once after isFinished returns true

@@ -1,0 +1,27 @@
+Front of Bumper touching Ramp
+
+Distance from low goal face(in metres):1.23
+Center y value for target (pixel number from grip):71
+center x for turret dead center(the pixel number from grip):77
+Encoder value for tilt(literal encoder value for making shot):733
+
+2.5 m away
+
+Distance from low goal face(in metres):2.5
+Center y value for target (pixel number from grip):163
+center x for turret dead center(the pixel number from grip):80
+Encoder value for tilt(literal encoder value for making shot):1104
+
+
+4.6 m away
+
+Distance from low goal face(in metres):4.6
+Center y value for target (pixel number from grip):
+center x for turret dead center(the pixel number from grip):
+Encoder value for tilt(literal encoder value for making shot):
+
+
+
+
+
+**ALL GOALS MUST BE PEAK OF ARCH**

@@ -18,7 +18,7 @@ void HopperSub::InitDefaultCommand()
 }
 bool HopperSub::IsBallIn()
 {
-	return ballInLimit->Get();
+	return !ballInLimit->Get();
 }
 
 void HopperSub::SetHopperMotorIn(float speed)

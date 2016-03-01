@@ -7,6 +7,7 @@
 class BallToShooterCmd: public CommandBase
 {
 private:
+	double timeSinceBallInShooter;
 public:
 	BallToShooterCmd();
 	void Initialize();
