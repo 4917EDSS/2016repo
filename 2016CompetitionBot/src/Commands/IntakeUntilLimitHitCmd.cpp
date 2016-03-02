@@ -33,8 +33,8 @@ bool IntakeUntilLimitHitCmd::IsFinished()
 // Called once after isFinished returns true
 void IntakeUntilLimitHitCmd::End()
 {
-	rIntakeSub->SetIntakeSpeed(0);
-	rHopperSub->SetHopperMotorIn(0);
+	rIntakeSub->SetIntakeSpeed(0.0);
+	rHopperSub->SetHopperMotorIn(0.0);
 }
 
 // Called when another command which requires one or more of the same
