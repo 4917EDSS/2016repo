@@ -9,5 +9,5 @@
 PidAhrs::PidAhrs(AHRS* ahrs) : m_ahrs(ahrs) {}
 
 double PidAhrs::PIDGet() {
-	return m_ahrs->GetAngle()();
+	return m_ahrs->GetAngle();
 }

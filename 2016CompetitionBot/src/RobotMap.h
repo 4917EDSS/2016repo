@@ -118,7 +118,7 @@
 #define DRIVE_TURN_TOLERANCE 0.01
 
 #define ACCELERATION_THRESHOLD 0.1
-#define DRIVE_SENSITIVITY 2      //The higher the number, the less sensitive.
+#define DRIVE_SENSITIVITY 0.8      //The higher the number, the less sensitive.
 
 //Some bool constants used for code readability
 #define IS_DRIVE true
