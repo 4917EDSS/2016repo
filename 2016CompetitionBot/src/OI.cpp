@@ -9,6 +9,7 @@
 #include "Commands/LowBarTransformGrp.h"
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/EmergencyStopCmd.h"
+#include "Commands/DriveStraightCmd.h"
 #include "Commands/IntakeUntilLimitHitGrp.h"
 
 OI::OI()
@@ -27,6 +28,12 @@ OI::OI()
 
 	dLiftShifterBtn = new JoystickButton(dController, DLiftShifterBtn);
 	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);
+
+	dStraightForwardBtn = new JoystickButton(dController, DStraightForwardBtn);
+	dStraightForwardBtn->WhileHeld(new DriveStraightCmd(10000, 0.7));
+
+	dStraightBackwardBtn = new JoystickButton(dController, DStraightBackwardBtn);
+	dStraightBackwardBtn->WhileHeld(new DriveStraightCmd(-10000, 0.7));
 
 	oPrepareShotBtn = new JoystickButton (oController, OPrepareShotBtn);
 	oPrepareShotBtn->WhenPressed(new PrepareShotCmd);

@@ -118,7 +118,7 @@
 #define DRIVE_TURN_TOLERANCE 0.01
 
 #define ACCELERATION_THRESHOLD 0.1
-#define DRIVE_SENSITIVITY 0.8      //The higher the number, the less sensitive.
+#define DRIVE_SENSITIVITY 0.7      //The higher the number, the less sensitive.
 
 //Some bool constants used for code readability
 #define IS_DRIVE true
@@ -153,7 +153,7 @@
 #define FLYWHEEL_P 10
 #define FLYWHEEL_I 1
 #define FLYWHEEL_D 0
-#define FLYWHEEL_VOLTAGE 11.0
+#define FLYWHEEL_VOLTAGE 11.2
 
 // TURRET ROTATE
 // TODO: get these values

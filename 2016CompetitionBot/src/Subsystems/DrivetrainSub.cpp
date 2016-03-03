@@ -70,6 +70,7 @@ void DrivetrainSub::EnableBalancerPID(float setPoint){
 	driveBalanceController->SetPID(prefs->GetFloat("DriveBalanceP", DRIVE_BALANCE_P), prefs->GetFloat("DriveBalanceI", DRIVE_BALANCE_I), prefs->GetFloat("DriveBalanceD", DRIVE_BALANCE_D));
 	driveBalanceController->SetAbsoluteTolerance(prefs->GetFloat("DriveBalanceTolerance", DRIVE_BALANCE_TOLERANCE));
 	driveBalanceController->SetSetpoint(setPoint);
+	motorBalancer->Reset();
 	driveBalanceController->Enable();
 	std::cout << "PID" << driveBalanceController->GetP() << " " << driveBalanceController->GetI()<< " " << driveBalanceController->GetD()<< std::endl;
 }

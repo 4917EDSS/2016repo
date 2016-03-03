@@ -37,6 +37,8 @@
 #define OLowGoalBtn 6
 #define OHighGoalBtn 8
 #define DLiftShifterBtn 5
+#define DStraightForwardBtn 4
+#define DStraightBackwardBtn 2
 #define OPrepareShotBtn 2
 #define OLowBarTransformBtn 7
 #define OIntakeUntilLimitBtn 3
@@ -71,6 +73,8 @@ private:
 	JoystickButton* oLowGoalBtn;
 	JoystickButton* oHighGoalBtn;
 	JoystickButton* dLiftShifterBtn;
+	JoystickButton* dStraightForwardBtn;
+	JoystickButton* dStraightBackwardBtn;
 	JoystickButton* oPrepareShotBtn;
 	JoystickButton* oLowBarTransformBtn;
 	JoystickButton* oIntakeUntilLimitBtn;
