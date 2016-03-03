@@ -64,9 +64,10 @@ private:
 		// THIS PROGRAM HAS YET TO WORK AS IS. Commenting out the rest of this function
 		// from CommandBase::init() down to the bottom makes it work.
 		if (fork() == 0) {
+			system("/home/lvuser/grip &");/*
 			if (execv(JAVA, GRIP_ARGS) == -1) {
 				perror("Error running GRIP");
-			}
+			}*/
 		}
 
 		CommandBase::init();

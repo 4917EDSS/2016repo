@@ -26,12 +26,18 @@ DrivetrainSub::DrivetrainSub() :
 	}
 
 	Preferences *prefs = Preferences::GetInstance();
-	driveBalanceController = new PIDController(prefs->GetFloat("DriveBalanceP", DRIVE_BALANCE_P), prefs->GetFloat("DriveBalanceI", DRIVE_BALANCE_I), prefs->GetFloat("DriveBalanceD", DRIVE_BALANCE_D), new PidAhrs(ahrs), motorBalancer);
+	driveBalanceController = new PIDController(prefs->GetFloat("DriveBalanceP", DRIVE_BALANCE_P),
+											   prefs->GetFloat("DriveBalanceI", DRIVE_BALANCE_I),
+											   prefs->GetFloat("DriveBalanceD", DRIVE_BALANCE_D),
+											   new PidAhrs(ahrs), motorBalancer);
 	driveBalanceController->SetAbsoluteTolerance(prefs->GetFloat("DriveBalanceTolerance", DRIVE_BALANCE_TOLERANCE));
 	driveBalanceController->SetOutputRange(-1.0, 1.0);
 	driveBalanceController->Disable();
 
-	driveTurnController = new PIDController(prefs->GetFloat("DriveTurnP", DRIVE_TURN_P), prefs->GetFloat("DriveTurnI", DRIVE_TURN_I), prefs->GetFloat("DriveTurnD", DRIVE_TURN_D), new PidAhrs(ahrs), motorTurner);
+	driveTurnController = new PIDController(prefs->GetFloat("DriveTurnP", DRIVE_TURN_P),
+											prefs->GetFloat("DriveTurnI", DRIVE_TURN_I),
+											prefs->GetFloat("DriveTurnD", DRIVE_TURN_D),
+											new PidAhrs(ahrs), motorTurner);
 	driveTurnController->SetAbsoluteTolerance(prefs->GetFloat("DriveTurnTolerance", DRIVE_TURN_TOLERANCE));
 	driveTurnController->SetOutputRange(-1.0, 1.0);
 	driveTurnController->Disable();
