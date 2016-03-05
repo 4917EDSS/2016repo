@@ -18,9 +18,6 @@ void ControlTurretWithJoystickCmd::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void ControlTurretWithJoystickCmd::Execute()
 {
-	//Tilting the turret with the left joystick vertical axis
-	rShooterSub->SetTurretTilt(oi->OGetLeftVer(2.0));
-
 	//Turning the turret with the left operator joystick horizontal axis
 	rShooterSub->RotateTurretClockwise(oi->OGetLeftHor(2.0));
 }
@@ -35,7 +32,6 @@ bool ControlTurretWithJoystickCmd::IsFinished()
 void ControlTurretWithJoystickCmd::End()
 {
 	rShooterSub->SetTurretRotate(0.0);
-	rShooterSub->SetTurretTilt(0.0);
 }
 
 // Called when another command which requires one or more of the same

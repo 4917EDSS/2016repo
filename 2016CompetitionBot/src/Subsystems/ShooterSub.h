@@ -10,10 +10,7 @@ class ShooterSub: public Subsystem
 private:
 
 	Talon* rotateTurretMotor;
-	Talon* tiltTurretMotor;
 	Encoder4917* shooterEncoder;
-	Encoder* tiltEncoder;
-	DigitalInput* tiltDown;
 	Encoder* rotateEncoder;
 	DigitalInput* turretCentered;
 	int target;
@@ -24,13 +21,11 @@ private:
 public:
 	ShooterSub();
 	void Spin(float spinSpeed);
-	void SetTurretTilt(float speed);
 	float GetTargetOffsetFromCenter();
+	float GetGripValue(std::string gripValue);
+	float GetTargetDistance();
 	void InitDefaultCommand();
-	float GetTiltEnc();
-	float GetRawTiltEnc();
 	float GetRotateEnc();
-	void ResetTiltEnc();
 	float GetRawRotateEnc();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);
@@ -38,7 +33,6 @@ public:
 	void RotateTurretClockwise(float speed);
 	void RotateTurretCounterClockwise(float speed);
 	bool GetTurretCentered();
-	bool GetTiltDown();
 	CANTalon* spinnerMotor;
 };
 

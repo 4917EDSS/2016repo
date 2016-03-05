@@ -18,7 +18,7 @@ OI::OI()
 	oController = new Joystick(OControllerOperatorPort);
 
 	oFlywheelSpinBtn = new JoystickButton(oController, OFlywheelSpinBtn);
-	oFlywheelSpinBtn->WhileHeld(new SpinupCmd);
+	oFlywheelSpinBtn->WhenPressed(new SpinupCmd);
 
 	oLowGoalBtn = new JoystickButton(oController, OLowGoalBtn);
 	oLowGoalBtn->WhenPressed(new BallToIntakeCmd);

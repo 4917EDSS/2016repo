@@ -1,6 +1,7 @@
-#include "ZeroTurretTiltEncCmd.h"
+#include "ControlHoodWithJoystickCmd.h"
+#include "OI.h"
 
-ZeroTurretTiltEncCmd::ZeroTurretTiltEncCmd()
+ControlHoodWithJoystickCmd::ControlHoodWithJoystickCmd()
 {
 	Requires(rHoodSub);
 	// Use Requires() here to declare subsystem dependencies
@@ -8,32 +9,33 @@ ZeroTurretTiltEncCmd::ZeroTurretTiltEncCmd()
 }
 
 // Called just before this Command runs the first time
-void ZeroTurretTiltEncCmd::Initialize()
+void ControlHoodWithJoystickCmd::Initialize()
 {
-	rHoodSub->SetTurretTilt(-1.0);
+
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ZeroTurretTiltEncCmd::Execute()
+void ControlHoodWithJoystickCmd::Execute()
 {
-
+	//Tilting the turret with the left joystick vertical axis
+	rHoodSub->SetTurretTilt(oi->OGetLeftVer(2.0));
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ZeroTurretTiltEncCmd::IsFinished()
+bool ControlHoodWithJoystickCmd::IsFinished()
 {
-	return rHoodSub->GetTiltDown();
+	return false;
 }
 
 // Called once after isFinished returns true
-void ZeroTurretTiltEncCmd::End()
+void ControlHoodWithJoystickCmd::End()
 {
 	rHoodSub->SetTurretTilt(0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ZeroTurretTiltEncCmd::Interrupted()
+void ControlHoodWithJoystickCmd::Interrupted()
 {
 	End();
 }

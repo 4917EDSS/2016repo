@@ -5,6 +5,7 @@
 OI* CommandBase::oi = NULL;
 DrivetrainSub* CommandBase::rDrivetrainSub = NULL;
 IntakeSub* CommandBase::rIntakeSub = NULL;
+HoodSub* CommandBase::rHoodSub = NULL;
 ShooterSub* CommandBase::rShooterSub = NULL;
 CameraSub* CommandBase::rCameraSub = NULL;
 HopperSub* CommandBase::rHopperSub = NULL;
@@ -26,6 +27,7 @@ void CommandBase::init()
 	// line should be repeated for each subsystem in the project.
 	rDrivetrainSub = new DrivetrainSub();
 	rIntakeSub = new IntakeSub();
+	rHoodSub = new HoodSub();
 	rShooterSub = new ShooterSub();
 	//rCameraSub = new CameraSub(); commented out to allow for better console outputs
 	rHopperSub = new HopperSub();

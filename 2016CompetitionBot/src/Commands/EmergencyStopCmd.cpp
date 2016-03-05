@@ -4,6 +4,7 @@ EmergencyStopCmd::EmergencyStopCmd()
 {
 	Requires(rShooterSub);
 	Requires(rIntakeSub);
+	Requires(rHoodSub);
 	Requires(rHopperSub);
 	Requires(rDrivetrainSub);
 	// Use Requires() here to declare subsystem dependencies

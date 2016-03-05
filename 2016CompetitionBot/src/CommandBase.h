@@ -7,6 +7,7 @@
 #include "WPILib.h"
 #include "Subsystems/DrivetrainSub.h"
 #include "Subsystems/IntakeSub.h"
+#include "Subsystems/HoodSub.h"
 #include "Subsystems/ShooterSub.h"
 #include "Subsystems/CameraSub.h"
 #include "Subsystems/HopperSub.h"
@@ -26,6 +27,7 @@ public:
 	// Create a single static instance of all of your subsystems
 	static DrivetrainSub* rDrivetrainSub;
 	static IntakeSub* rIntakeSub;
+	static HoodSub* rHoodSub;
 	static ShooterSub* rShooterSub;
 	static CameraSub* rCameraSub;
 	static HopperSub* rHopperSub;

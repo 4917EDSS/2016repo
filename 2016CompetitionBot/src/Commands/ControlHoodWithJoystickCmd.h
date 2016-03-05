@@ -1,14 +1,13 @@
-#ifndef BallToShooterCmd_H
-#define BallToShooterCmd_H
+#ifndef ControlHoodWithJoystickCmd_H
+#define ControlHoodWithJoystickCmd_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class BallToShooterCmd: public CommandBase
+class ControlHoodWithJoystickCmd: public CommandBase
 {
-private:
 public:
-	BallToShooterCmd();
+	ControlHoodWithJoystickCmd();
 	void Initialize();
 	void Execute();
 	bool IsFinished();

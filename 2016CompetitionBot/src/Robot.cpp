@@ -221,7 +221,7 @@ void Robot::SetSmartDashboardAutoOptions()
 // This is run during Teleop periodic to update the Smart Dashboard values
 void Robot::UpdateSmartDashboard()
 {
-	SmartDashboard::PutNumber("Tilt raw encoder", CommandBase::rShooterSub->GetRawTiltEnc());
+	SmartDashboard::PutNumber("Tilt raw encoder", CommandBase::rHoodSub->GetRawTiltEnc());
 	SmartDashboard::PutNumber("IntakeHeight raw encoder", CommandBase::rIntakeSub->GetRawHeight());
 	SmartDashboard::PutNumber("LeftDrive raw encoder", CommandBase::rDrivetrainSub->GetRawLeftEnc());
 	SmartDashboard::PutNumber("RightDrive raw encoder", CommandBase::rDrivetrainSub->GetRawRightEnc());

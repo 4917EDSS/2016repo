@@ -43,8 +43,8 @@
 #define IntakeUpLimitDIO		5
 #define RotateTurretEncoder2DIO 6
 #define RotateTurretEncoder1DIO 7
-#define TiltEncoder2DIO 		8
-#define TiltEncoder1DIO 		9
+#define TiltEncoder1DIO 		8
+#define TiltEncoder2DIO 		9
 
 // on MXP (myRIO Expansion Port) via NavX-MXP expansion board
 #define ShooterEncoder1DIO 		10
@@ -95,7 +95,7 @@
  ***********************************************************************/
 //////////////////////// Machine Vision Camera Subsystem ////////////////////////
 #define MIDDLE_CAMERA_X 120.0
-#define TARGET_RANGE 15
+#define TARGET_RANGE 0.5
 
 
 //////////////////////// Live-view Camera Subsystem ////////////////////////
@@ -154,15 +154,30 @@
 #define FLYWHEEL_I 1
 #define FLYWHEEL_D 0
 #define FLYWHEEL_VOLTAGE 11.2
+//Vision Adjustment Values
+#define ADJUSTMENT_P 0.02
+#define ADJUSTMENT_F 0.2
+#define ADJUST_MAX_SPEED 0.5
 
 // TURRET ROTATE
 // TODO: get these values
 // The farthest the turret can rotate positive or negative
-#define MAX_TURRET_ROTATE_EV 5850
+#define MAX_TURRET_ROTATE_EV 5600
 
 // TURRET HOOD
 // Highest the hood can go
-#define MAX_HOOD_HEIGHT_EV 2000
+#define MAX_HOOD_HEIGHT_EV 3800
+//Range for target height of hood
+#define HOOD_HEIGHT_TARGET_RANGE 50
+
+//////////////////////// Vision Math Constants /////////////////////
+//Distance
+#define DISTANCE_EQUATION_QA 0.0000813061
+#define DISTANCE_EQUATION_QB -0.00597179
+#define DISTANCE_EQUATION_QC 1.45848
+//Rotation
+#define ROTATION_EQUATION_LM 2.17528
+#define ROTATION_EQUATION_LB 79.2065
 
 
 #endif

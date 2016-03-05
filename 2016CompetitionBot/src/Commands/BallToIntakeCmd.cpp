@@ -24,7 +24,7 @@ void BallToIntakeCmd::Execute()
 bool BallToIntakeCmd::IsFinished()
 {
 
-	return TimeSinceInitialized() > 0.5;
+	return TimeSinceInitialized() > 1.75;
 }
 
 // Called once after isFinished returns true

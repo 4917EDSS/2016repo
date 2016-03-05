@@ -19,8 +19,8 @@ void PrepareShotCmd::Initialize()
 void PrepareShotCmd::Execute()
 {
 	rShooterSub->Update(true);
-	std::cout << rShooterSub->spinnerMotor->GetOutputCurrent() << " is Current" << std::endl;
-	std::cout << rShooterSub->spinnerMotor->GetOutputVoltage() << " is Voltage" << std::endl;
+	//std::cout << rShooterSub->spinnerMotor->GetOutputCurrent() << " is Current" << std::endl;
+	//std::cout << rShooterSub->spinnerMotor->GetOutputVoltage() << " is Voltage" << std::endl;
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +32,7 @@ bool PrepareShotCmd::IsFinished()
 // Called once after isFinished returns true
 void PrepareShotCmd::End()
 {
-	//rShooterSub->Spin(0.0);
+	rShooterSub->SetTurretRotate(0.0);
 }
 
 // Called when another command which requires one or more of the same
