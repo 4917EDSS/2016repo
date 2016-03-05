@@ -12,10 +12,13 @@ private:
 	Encoder* tiltEncoder;
 	DigitalInput* tiltDown;
 	Talon* tiltTurretMotor;
+	int targetHeight;
 public:
 	HoodSub();
 	void SetTurretTilt(float speed);
 	void SetTiltHeight(int height);
+	void Update();
+	bool IsOnTarget();
 	float GetTiltEnc();
 	float GetRawTiltEnc();
 	void ResetTiltEnc();

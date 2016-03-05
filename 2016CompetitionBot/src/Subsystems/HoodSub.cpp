@@ -37,16 +37,23 @@ void HoodSub::SetTurretTilt(float speed)
 }
 
 void HoodSub::SetTiltHeight(int height){
-	if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE){
-		tiltTurretMotor->Set(0.8);
+	targetHeight = height;
+}
+
+void HoodSub::Update() {
+	if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+		tiltTurretMotor->Set(-0.4);
 	}
-	else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE){
-		tiltTurretMotor->Set(-0.8);
+	else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+		tiltTurretMotor->Set(0.4);
 	}
 	else {
 		tiltTurretMotor->Set(0.0);
 	}
+}
 
+bool HoodSub::IsOnTarget() {
+	return GetRawTiltEnc() >= -HOOD_HEIGHT_TARGET_RANGE + targetHeight && GetRawTiltEnc() <= HOOD_HEIGHT_TARGET_RANGE + targetHeight;
 }
 
 float HoodSub::GetRawTiltEnc() {

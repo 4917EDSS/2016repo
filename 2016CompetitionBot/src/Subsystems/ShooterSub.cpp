@@ -46,7 +46,6 @@ void ShooterSub::RotateTurretCounterClockwise(float speed) {
 //The reset function only works if SetTurretRotate is constantly called.
 void ShooterSub::SetTurretRotate(float speed)
 {
-	std::cout << "SPEED is set to " <<  speed << std::endl;
 	speed *= ROTATE_SLOW;
 	if (GetTurretCentered())
 	{
