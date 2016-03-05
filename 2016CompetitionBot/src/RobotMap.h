@@ -112,10 +112,10 @@
 #define DRIVE_BALANCE_D 0
 #define DRIVE_BALANCE_TOLERANCE 0.01
 
-#define DRIVE_TURN_P 0.01
+#define DRIVE_TURN_P 0.075
 #define DRIVE_TURN_I 0
 #define DRIVE_TURN_D 0.3
-#define DRIVE_TURN_TOLERANCE 0.01
+#define DRIVE_TURN_TOLERANCE 0.0268
 
 #define ACCELERATION_THRESHOLD 0.1
 #define DRIVE_SENSITIVITY 0.7      //The higher the number, the less sensitive.
