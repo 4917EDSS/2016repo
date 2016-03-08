@@ -9,5 +9,5 @@
 PidAhrs::PidAhrs(AHRS* ahrs) : m_ahrs(ahrs) {}
 
 double PidAhrs::PIDGet() {
-	return m_ahrs->GetYaw();// DO NOT CHANGE TO GET ANGLE - MESSES UP STRAIGHT SHOT
+	return m_ahrs->GetYaw();// DO NOT CHANGE TO GET ANGLE - MESSES UP STRAIGHT DRIVING
 }

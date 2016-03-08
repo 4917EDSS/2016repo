@@ -40,15 +40,69 @@ void HoodSub::SetTiltHeight(int height){
 	targetHeight = height;
 }
 
-void HoodSub::Update() {
-	if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
-		tiltTurretMotor->Set(-0.4);
+float HoodSub::GetGripValue(std::string gripValue)
+{
+	int TargetIndex = 0, widestTarget = 0;
+
+	std::shared_ptr<NetworkTable> gripTable = NetworkTable::GetTable("GRIP/myContoursReport");
+
+	std::vector<double> WidthArray = gripTable->GetNumberArray("width", llvm::ArrayRef<double>());
+
+	if (WidthArray.size() < 1)
+	{
+		return 0.0;
 	}
-	else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
-		tiltTurretMotor->Set(0.4);
+
+	for (unsigned int i = 0; i < WidthArray.size(); i++) {
+		if (WidthArray[i] > widestTarget)
+		{
+			TargetIndex = i;
+			widestTarget = WidthArray[i];
+		}
 	}
-	else {
-		tiltTurretMotor->Set(0.0);
+
+	std::vector<double> ValuesArray = gripTable->GetNumberArray(gripValue, llvm::ArrayRef<double>());
+
+	return ValuesArray[TargetIndex];
+}
+
+float HoodSub::GetTargetDistance(){
+	float centerY = GetGripValue("centerY");
+
+	float quadraticDistance = DISTANCE_EQUATION_QA*centerY*centerY + DISTANCE_EQUATION_QB*centerY + DISTANCE_EQUATION_QC;
+	std::cout << "centerY" << centerY << std::endl;
+	std::cout << "Quadratic Distance " << quadraticDistance << " m" << std::endl;
+	return quadraticDistance;
+}
+
+int HoodSub::GetVisionHeight(){
+	float computedHeight = HEIGHT_EQUATION_QA*GetTargetDistance()*GetTargetDistance() + HEIGHT_EQUATION_QB*GetTargetDistance() + HEIGHT_EQUATION_QC;
+	return int(computedHeight);
+}
+
+void HoodSub::Update(bool VisionActive) {
+	if (VisionActive){
+		SetTiltHeight(GetVisionHeight());
+		if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+			tiltTurretMotor->Set(-0.4);
+		}
+		else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+			tiltTurretMotor->Set(0.4);
+		}
+		else {
+			tiltTurretMotor->Set(0.0);
+		}
+	}
+	else{
+		if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+			tiltTurretMotor->Set(-0.4);
+		}
+		else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+			tiltTurretMotor->Set(0.4);
+		}
+		else {
+			tiltTurretMotor->Set(0.0);
+		}
 	}
 }
 

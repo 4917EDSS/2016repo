@@ -1,7 +1,14 @@
 #include "AutoRockWallGrp.h"
+#include "RobotMap.h"
+#include "DriveStraightCmd.h"
+#include "IntakeUntilLimitHitGrp.h"
+#include "ZeroTurretTiltEncCmd.h"
 
 AutoRockWallGrp::AutoRockWallGrp()
 {
+	AddParallel (new IntakeUntilLimitHitGrp());
+	AddParallel (new ZeroTurretTiltEncCmd());
+	AddSequential(new DriveStraightCmd(CROSS_BASIC_DEFENSE_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

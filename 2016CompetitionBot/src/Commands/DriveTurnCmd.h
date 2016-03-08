@@ -8,10 +8,11 @@ class DriveTurnCmd: public CommandBase
 {
 private:
 	float turnDegrees;
-	float driveSpeed;
+	float lastCheckpoint;
+	double lastCheckpointTime;
 
 public:
-	DriveTurnCmd(float turnDegrees, float driveSpeedParam);
+	DriveTurnCmd(float turnDegrees);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

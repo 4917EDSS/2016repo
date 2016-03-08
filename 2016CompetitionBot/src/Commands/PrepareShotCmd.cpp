@@ -5,6 +5,7 @@
 PrepareShotCmd::PrepareShotCmd()
 {
 	Requires (rShooterSub);
+	Requires (rHoodSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
@@ -19,6 +20,7 @@ void PrepareShotCmd::Initialize()
 void PrepareShotCmd::Execute()
 {
 	rShooterSub->Update(true);
+	rHoodSub->Update(true);
 	//std::cout << rShooterSub->spinnerMotor->GetOutputCurrent() << " is Current" << std::endl;
 	//std::cout << rShooterSub->spinnerMotor->GetOutputVoltage() << " is Voltage" << std::endl;
 }

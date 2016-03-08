@@ -1,7 +1,11 @@
 #include "AutoDrawbridgeGrp.h"
+#include "IntakeUntilLimitHitGrp.h"
+#include "ZeroTurretTiltEncCmd.h"
 
 AutoDrawbridgeGrp::AutoDrawbridgeGrp()
 {
+	AddParallel (new IntakeUntilLimitHitGrp());
+	AddParallel (new ZeroTurretTiltEncCmd());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

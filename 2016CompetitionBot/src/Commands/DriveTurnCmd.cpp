@@ -1,9 +1,8 @@
 #include "DriveTurnCmd.h"
 #include "RobotMap.h"
 
-DriveTurnCmd::DriveTurnCmd(float turnDegrees, float driveSpeedParam) : turnDegrees(turnDegrees)
+DriveTurnCmd::DriveTurnCmd(float turnDegrees) : turnDegrees(turnDegrees)
 {
-	driveSpeed = fabs(driveSpeedParam);
 	Requires(rDrivetrainSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -14,6 +13,8 @@ void DriveTurnCmd::Initialize()
 {
 	rDrivetrainSub->ResetDrive();
 	rDrivetrainSub->EnableTurnPID(turnDegrees);
+	lastCheckpoint = rDrivetrainSub->GetYaw();
+	lastCheckpointTime = TimeSinceInitialized();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -26,12 +27,17 @@ void DriveTurnCmd::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool DriveTurnCmd::IsFinished()
 {
-	if (rDrivetrainSub->IsTurnFinished()){
-		return true;
-	} else {
+	if (fabs(lastCheckpoint - rDrivetrainSub->GetYaw()) > TURNING_TOLERANCE){
+		lastCheckpoint = rDrivetrainSub->GetYaw();
+		lastCheckpointTime = TimeSinceInitialized();
 		return false;
 	}
-
+	else if ((TimeSinceInitialized() - lastCheckpointTime) > TURNING_TOLERANCE_DURATION){
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // Called once after isFinished returns true

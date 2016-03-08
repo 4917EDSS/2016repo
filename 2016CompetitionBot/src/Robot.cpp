@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <iostream>
 #include "Commands/AutoGenericDuoGrp.h"
+#include "COmmands/AutoDefaultGrp.h"
 #include "Commands/AutoLowBarGrp.h"
 #include "Commands/AutoPortcullisGrp.h"
 #include "Commands/AutoChevalGrp.h"
@@ -180,7 +181,7 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Joystick Intake Ctrl", new ControlIntakeWithJoystickCmd());
 	SmartDashboard::PutData("Joystick Turret Ctrl", new ControlTurretWithJoystickCmd());
 	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd((Preferences::GetInstance())->GetInt("DriveStraightMM", 0.0), (Preferences::GetInstance())->GetFloat("DriveStraightSpeed", 0.0)));
-	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd((Preferences::GetInstance())->GetInt("DriveTurnDegrees", 0.0), (Preferences::GetInstance())->GetFloat("DriveTurnSpeed", 0.0)));
+	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd((Preferences::GetInstance())->GetInt("DriveTurnDegrees")));
 	SmartDashboard::PutData("Joystick Drive", new DriveWithJoystickCmd());
 	SmartDashboard::PutData("Intake Until Limit Hit", new IntakeUntilLimitHitCmd());
 //	SmartDashboard::PutData("Set Intake Height", new SetIntakeHeightCmd());	// Needs parameters
@@ -193,7 +194,8 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 void Robot::SetSmartDashboardAutoOptions()
 {
 	autoDefenceOptions = new SendableChooser();
-	autoDefenceOptions->AddDefault("Low Bar Defence", new AutoLowBarGrp());
+	autoDefenceOptions->AddDefault("Do Nothing", new AutoDefaultGrp());
+	autoDefenceOptions->AddObject("Low Bar Defence", new AutoLowBarGrp());
 	autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());
 	autoDefenceOptions->AddObject("Cheval De Fris", new AutoChevalGrp());
 	autoDefenceOptions->AddObject("Ramparts Defence", new AutoRampartsGrp());
@@ -206,7 +208,8 @@ void Robot::SetSmartDashboardAutoOptions()
 	autoDefenceOptions->AddObject("expel", new BallToIntakeCmd());
 
 	autoLocationOptions = new SendableChooser();
-	autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
+	autoLocationOptions->AddDefault("Do Nothing", new AutoDefaultGrp());
+	autoLocationOptions->AddObject("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
 	autoLocationOptions->AddObject("Position 2", new AutoPosition2ShootGrp());
 	autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
 	autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());

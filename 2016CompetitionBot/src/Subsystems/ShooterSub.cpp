@@ -104,6 +104,7 @@ float ShooterSub::GetTargetOffsetFromCenter(){
 	return linearRotation - centerX;
 }
 
+
 float ShooterSub::GetTargetDistance(){
 	float centerY = GetGripValue("centerY");
 
