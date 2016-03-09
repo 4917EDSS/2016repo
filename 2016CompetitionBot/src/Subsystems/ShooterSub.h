@@ -25,6 +25,7 @@ public:
 	void InitDefaultCommand();
 	float GetRotateEnc();
 	float GetRawRotateEnc();
+	void ResetRotate();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);
 	bool IsOnTarget();

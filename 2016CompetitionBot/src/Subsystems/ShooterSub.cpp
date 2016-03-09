@@ -89,7 +89,11 @@ float ShooterSub::GetRawRotateEnc(){
 }
 
 bool ShooterSub::GetTurretCentered(){
-	return turretCentered->Get();
+	return false;//turretCentered->Get();
+}
+
+void ShooterSub::ResetRotate() {
+	rotateEncoder->Reset();
 }
 
 void ShooterSub::SetTarget(int newTarget){
@@ -97,7 +101,7 @@ void ShooterSub::SetTarget(int newTarget){
 }
 
 bool ShooterSub::IsOnTarget() {
-	return GetRawRotateEnc() >= -TURRET_ROTATE_TARGET_RANGE + target && GetRawRotateEnc() <= TURRET_ROTATE_TARGET_RANGE + target;
+	return GetRawRotateEnc() >= -ROTATE_MARGIN + target && GetRawRotateEnc() <= ROTATE_MARGIN + target;
 }
 
 void ShooterSub::Update(bool visionActive){
@@ -122,11 +126,11 @@ void ShooterSub::Update(bool visionActive){
 	{
 		if(target > GetRotateEnc()+ROTATE_MARGIN)
 		{
-			SetTurretRotate(1.0);
+			RotateTurretCounterClockwise(0.4);
 		}
 		else if(target < GetRotateEnc()-ROTATE_MARGIN)
 		{
-			SetTurretRotate(-1.0);
+			RotateTurretClockwise(0.4);
 		}
 		else {
 			SetTurretRotate(0.0);

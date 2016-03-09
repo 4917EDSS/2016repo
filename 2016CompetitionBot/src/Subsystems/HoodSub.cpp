@@ -49,26 +49,15 @@ int HoodSub::GetVisionHeight(){
 void HoodSub::Update(bool VisionActive) {
 	if (VisionActive){
 		SetTiltHeight(GetVisionHeight());
-		if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
-			tiltTurretMotor->Set(-0.4);
-		}
-		else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
-			tiltTurretMotor->Set(0.4);
-		}
-		else {
-			tiltTurretMotor->Set(0.0);
-		}
 	}
-	else{
-		if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
-			tiltTurretMotor->Set(-0.4);
-		}
-		else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
-			tiltTurretMotor->Set(0.4);
-		}
-		else {
-			tiltTurretMotor->Set(0.0);
-		}
+	if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+		tiltTurretMotor->Set(-0.4);
+	}
+	else if (GetRawTiltEnc() < -HOOD_HEIGHT_TARGET_RANGE + targetHeight){
+		tiltTurretMotor->Set(0.4);
+	}
+	else {
+		tiltTurretMotor->Set(0.0);
 	}
 }
 

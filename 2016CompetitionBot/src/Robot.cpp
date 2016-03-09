@@ -33,6 +33,7 @@
 #include "Commands/SetIntakeHeightCmd.h"
 #include "Commands/SpinupCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
+#include "Commands/SetTurretRotateCmd.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
 #include "AHRS.h"
@@ -118,6 +119,7 @@ private:
 
 //		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 		CommandBase::rDrivetrainSub->ResetDrive();
+		CommandBase::rShooterSub->ResetRotate();
 
 		autonomousDefenceCommand = (Command *)autoDefenceOptions->GetSelected();
 		autonomousLocationCommand = (Command *)autoLocationOptions->GetSelected();
@@ -189,6 +191,7 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Toggle Drive Lift", new ToggleDriveLiftCmd());
 	SmartDashboard::PutData("ResetDrive Encoders", new ResetDrivetrainEncCmd());
 	SmartDashboard::PutData("Zero Turret encoder", new TurretRotateZeroEncCmd());
+	SmartDashboard::PutData("Rotate Turret to Value", new SetTurretRotateCmd(Preferences::GetInstance()->GetInt("TurretRotateEncoder")));
 }
 
 void Robot::SetSmartDashboardAutoOptions()

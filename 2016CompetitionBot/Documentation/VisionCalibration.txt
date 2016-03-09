@@ -10,7 +10,7 @@ Encoder value for tilt(literal encoder value for making shot):1400
 Distance from low goal face(in metres):2.75
 Center y value for target (pixel number from grip):168
 center x for turret dead center(the pixel number from grip):86
-Encoder value for tilt(literal encoder value for making shot):2085 GOOD BALL AT TOP OF GOAL
+Encoder value for tilt(literal encoder value for making shot):2263 GOOD BALL AT TOP OF GOAL
 
 
 Touching outerworks
@@ -18,7 +18,7 @@ Touching outerworks
 Distance from low goal face(in metres):3.85
 Center y value for target (pixel number from grip):210
 center x for turret dead center(the pixel number from grip):87
-Encoder value for tilt(literal encoder value for making shot):2322 ENCODER VALUE FOR TOP GOOD GOAL
+Encoder value for tilt(literal encoder value for making shot):2429 ENCODER VALUE FOR TOP GOOD GOAL
 CLOSE TO APEX
 
 
