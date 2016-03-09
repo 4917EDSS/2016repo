@@ -29,6 +29,7 @@ public:
 	float GetRawRotateEnc();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);
+	bool IsOnTarget();
 	void SetTurretRotate(float speed);
 	void RotateTurretClockwise(float speed);
 	void RotateTurretCounterClockwise(float speed);

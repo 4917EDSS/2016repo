@@ -130,6 +130,10 @@ void ShooterSub::SetTarget(int newTarget){
 	target = newTarget;
 }
 
+bool ShooterSub::IsOnTarget() {
+	return GetRawRotateEnc() >= -TURRET_ROTATE_TARGET_RANGE + target && GetRawRotateEnc() <= TURRET_ROTATE_TARGET_RANGE + target;
+}
+
 void ShooterSub::Update(bool visionActive){
 	if(visionActive)
 	{

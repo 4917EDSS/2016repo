@@ -166,6 +166,8 @@
 // TODO: get these values
 // The farthest the turret can rotate positive or negative
 #define MAX_TURRET_ROTATE_EV 5600
+//Range for target Rotation
+#define TURRET_ROTATE_TARGET_RANGE 25
 
 // TURRET HOOD
 // Highest the hood can go
