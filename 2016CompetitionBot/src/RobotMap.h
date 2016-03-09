@@ -121,7 +121,7 @@
 #define TURNING_TOLERANCE_DURATION 0.45 //In seconds, must be in tolerance this long
 
 #define ACCELERATION_THRESHOLD 0.1
-#define DRIVE_SENSITIVITY 0.7      //The higher the number, the less sensitive.
+#define DRIVE_SENSITIVITY 2.0      //The higher the number, the less sensitive.
 
 //Some bool constants used for code readability
 #define IS_DRIVE true
@@ -184,9 +184,9 @@
 #define ROTATION_EQUATION_LM 2.17528
 #define ROTATION_EQUATION_LB 79.2065
 //Tilt Height
-#define HEIGHT_EQUATION_QA -95.1826
-#define HEIGHT_EQUATION_QB 906.022
-#define HEIGHT_EQUATION_QC 449.837
+#define HEIGHT_EQUATION_QA -213.724
+#define HEIGHT_EQUATION_QB 1561.49
+#define HEIGHT_EQUATION_QC -414.8
 
 
 /***********************************************************************

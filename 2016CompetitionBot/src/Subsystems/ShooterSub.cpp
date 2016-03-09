@@ -66,52 +66,18 @@ void ShooterSub::SetTurretRotate(float speed)
 }
 
 
-float ShooterSub::GetGripValue(std::string gripValue)
-{
-	int TargetIndex = 0, widestTarget = 0;
 
-	std::shared_ptr<NetworkTable> gripTable = NetworkTable::GetTable("GRIP/myContoursReport");
-
-	std::vector<double> WidthArray = gripTable->GetNumberArray("width", llvm::ArrayRef<double>());
-
-	if (WidthArray.size() < 1)
-	{
-		return 0.0;
-	}
-
-	for (unsigned int i = 0; i < WidthArray.size(); i++) {
-		if (WidthArray[i] > widestTarget)
-		{
-			TargetIndex = i;
-			widestTarget = WidthArray[i];
-		}
-	}
-
-	std::vector<double> ValuesArray = gripTable->GetNumberArray(gripValue, llvm::ArrayRef<double>());
-
-	return ValuesArray[TargetIndex];
-}
 
 float ShooterSub::GetTargetOffsetFromCenter(){
 
-	float centerX = GetGripValue("centerX");
+	float centerX = CommandBase::GetGripValue("centerX");
 	if (centerX < 1) {
 		return 0.0;
 	}
 
-	float linearRotation = ROTATION_EQUATION_LM*GetTargetDistance() + ROTATION_EQUATION_LB;
+	float linearRotation = ROTATION_EQUATION_LM*CommandBase::GetTargetDistance() + ROTATION_EQUATION_LB;
 	std::cout << "Difference " << linearRotation - centerX << " pixels" << std::endl;
 	return linearRotation - centerX;
-}
-
-
-float ShooterSub::GetTargetDistance(){
-	float centerY = GetGripValue("centerY");
-
-	float quadraticDistance = DISTANCE_EQUATION_QA*centerY*centerY + DISTANCE_EQUATION_QB*centerY + DISTANCE_EQUATION_QC;
-	std::cout << "centerY" << centerY << std::endl;
-	std::cout << "Quadratic Distance " << quadraticDistance << " m" << std::endl;
-	return quadraticDistance;
 }
 
 float ShooterSub::GetRotateEnc(){

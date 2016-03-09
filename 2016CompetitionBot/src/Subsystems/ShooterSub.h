@@ -22,8 +22,6 @@ public:
 	ShooterSub();
 	void Spin(float spinSpeed);
 	float GetTargetOffsetFromCenter();
-	float GetGripValue(std::string gripValue);
-	float GetTargetDistance();
 	void InitDefaultCommand();
 	float GetRotateEnc();
 	float GetRawRotateEnc();

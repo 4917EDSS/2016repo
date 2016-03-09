@@ -21,7 +21,22 @@ void DriveWithJoystickCmd::Execute()
 {
 	if(rDrivetrainSub->GetControls() == TANK_DRIVE_CONTROLS)
 	{
-		rDrivetrainSub->Drive(oi->DGetLeftVer(DRIVE_SENSITIVITY), oi->DGetRightVer(DRIVE_SENSITIVITY));
+		float rightStick = oi->DGetRightVer(DRIVE_SENSITIVITY);
+		float leftStick = oi->DGetLeftVer(DRIVE_SENSITIVITY);
+		if (rightStick > 0) {
+			rightStick = rightStick * 0.85 + 0.15;
+		}
+		else if (rightStick < 0) {
+			rightStick = rightStick * 0.85 - 0.15;
+		}
+		if (leftStick > 0) {
+			leftStick = leftStick * 0.85 + 0.15;
+		}
+		else if (leftStick < 0) {
+			leftStick = leftStick * 0.85 - 0.15;
+		}
+
+		rDrivetrainSub->Drive(leftStick, rightStick);
 	}
 	else
 	{

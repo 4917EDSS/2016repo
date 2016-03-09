@@ -16,8 +16,6 @@ private:
 public:
 	HoodSub();
 	void SetTurretTilt(float speed);
-	float GetGripValue(std::string gripValue);
-	float GetTargetDistance();
 	int GetVisionHeight();
 	void SetTiltHeight(int height);
 	void Update(bool VisionActive);

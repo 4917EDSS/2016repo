@@ -24,6 +24,8 @@ public:
 	CommandBase(const std::string &name);
 	CommandBase();
 	static void init();
+	static float GetGripValue(std::string gripValue);
+	static float GetTargetDistance();
 	// Create a single static instance of all of your subsystems
 	static DrivetrainSub* rDrivetrainSub;
 	static IntakeSub* rIntakeSub;
