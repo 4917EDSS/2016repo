@@ -25,3 +25,20 @@ CLOSE TO APEX
 
 
 **ALL GOALS MUST BE PEAK OF ARCH**
+
+1.33m: CenterX is 95, Encoder is 0
+Encoder ticks/pixel of offset = 24.87562
+
+2.57m: CenterX is 91 encoder is 0
+Encoder/pixel = 16.2864
++10, Encoder is 146
++30, Encoder is 462
++50, Encoder is 786
++145, 2780
+-10, -172
+-30, -510
+-50, -842
+-87, -1923
+
+3.85m, OuterWorks: CenterX is 102, Encoder is 0
+Encoder/pixel = 14.14427
