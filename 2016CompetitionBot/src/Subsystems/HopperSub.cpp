@@ -1,5 +1,6 @@
 #include "HopperSub.h"
 #include "../RobotMap.h"
+#include "Commands/ControlHopperWithJoystickCmd.h"
 
 HopperSub::HopperSub() :
 		Subsystem("HopperSub")
@@ -14,7 +15,7 @@ HopperSub::HopperSub() :
 void HopperSub::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
-	//SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new ControlHopperWithJoystickCmd());
 }
 bool HopperSub::IsBallIn()
 {

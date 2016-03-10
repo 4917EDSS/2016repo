@@ -4,7 +4,6 @@
 ControlIntakeWithJoystickCmd::ControlIntakeWithJoystickCmd()
 {
 	Requires(rIntakeSub);
-	Requires(rHopperSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
@@ -30,7 +29,6 @@ void ControlIntakeWithJoystickCmd::Execute()
 	}
 	// Dealing with intake in and out motors
 	rIntakeSub->SetIntakeSpeed(-oi->OGetRightVer(2.0));
-	rHopperSub->SetHopperMotorIn(-oi->OGetRightVer(2.0));
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -44,7 +42,6 @@ void ControlIntakeWithJoystickCmd::End()
 {
 	rIntakeSub->SetIntakeSpeed(0.0);
 	rIntakeSub->SetVerticalSpeed(0.0);
-	rHopperSub->SetHopperMotorIn(0.0);
 }
 
 // Called when another command which requires one or more of the same
