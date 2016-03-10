@@ -34,6 +34,7 @@
 #include "Commands/SpinupCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
 #include "Commands/SetTurretRotateCmd.h"
+#include "Commands/ZeroRotateEncoderCmd.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
 #include "AHRS.h"
@@ -44,6 +45,7 @@ class Robot: public IterativeRobot
 private:
 	void SetSmartDashboardAutoOptions();
 	void SendCmdAndSubInfoToSmartDashboard();
+	void SetSmartDashboardDriverContent();
 	void UpdateSmartDashboard();
 
 	Command* autonomousCommand;
@@ -80,9 +82,8 @@ private:
 
 		// Send to the Smart Dashboard a list of auto commands to choose from
 		SetSmartDashboardAutoOptions();
-
-
-
+		SetSmartDashboardDriverContent();
+		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 	}
 
 	/**
@@ -117,7 +118,6 @@ private:
 			autonomousCommand = new ExampleCommand();
 		} */
 
-//		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 		CommandBase::rDrivetrainSub->ResetDrive();
 		CommandBase::rShooterSub->ResetRotate();
 
@@ -142,8 +142,6 @@ private:
 		// this line or comment it out.
 		if (autonomousCommand != NULL)
 			autonomousCommand->Cancel();
-
-		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 	}
 
 	void TeleopPeriodic()
@@ -222,6 +220,11 @@ void Robot::SetSmartDashboardAutoOptions()
 	//chooser->AddObject("My Auto", new MyAutoCommand());
 	SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
 	SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
+}
+
+void Robot::SetSmartDashboardDriverContent()
+{
+	SmartDashboard::PutData("Zero Turret Rotate", new ZeroRotateEncoderCmd());
 }
 
 // This is run during Teleop periodic to update the Smart Dashboard values
