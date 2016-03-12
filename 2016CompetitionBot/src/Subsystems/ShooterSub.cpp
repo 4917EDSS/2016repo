@@ -1,11 +1,15 @@
 #include "ShooterSub.h"
 #include "../Commands/ControlTurretWithJoystickCmd.h"
+#include <cfloat>
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
 
 ShooterSub::ShooterSub() :
 		Subsystem("ExampleSubsystem")
 {
+x = 0;
+
+
 	spinnerMotor = new CANTalon(ShooterMotorCAN);
 	spinnerMotor->SetControlMode(CANSpeedController::ControlMode::kVoltage);
 	spinnerMotor->SetPID(FLYWHEEL_P, FLYWHEEL_I, FLYWHEEL_D);
@@ -17,6 +21,12 @@ ShooterSub::ShooterSub() :
 
 	turretCentered = new DigitalInput(TurretCenteredLimitDIO);
 
+	sideOfShooter = RIGHT_OF_ZERO;
+	maxRightEnc = FLT_MIN;
+	minLeftEnc = FLT_MAX;
+
+
+
 	LiveWindow::GetInstance()->AddActuator("Shooter", "spinnerMotor", spinnerMotor);
 	LiveWindow::GetInstance()->AddActuator("Shooter", "rotateMotor", rotateTurretMotor);
 	LiveWindow::GetInstance()->AddSensor("Shooter", "rotateEncoder", rotateEncoder);
@@ -24,7 +34,7 @@ ShooterSub::ShooterSub() :
 
 
 
-	target = 0;
+	rotateSetpoint = 0;
 
 }
 
@@ -52,11 +62,11 @@ void ShooterSub::SetTurretRotate(float speed)
 		rotateEncoder->Reset();
 	}
 
-	if (GetRawRotateEnc() < -MAX_TURRET_ROTATE_EV && speed < 0) {
+	if (GetRawRotateEnc() < -MAX_TURRET_ROTATE_EV && speed > 0) {
 		// Hard stop on the RIGHT
 		rotateTurretMotor->Set(0.0);
 	}
-	else if (GetRawRotateEnc() > MAX_TURRET_ROTATE_EV && speed > 0) {
+	else if (GetRawRotateEnc() > MAX_TURRET_ROTATE_EV && speed < 0) {
 		// Hard stop on the LEFT
 		rotateTurretMotor->Set(0.0);
 	}
@@ -76,12 +86,7 @@ float ShooterSub::GetTargetOffsetFromCenter(){
 	}
 
 	float linearRotation = ROTATION_EQUATION_LM*CommandBase::GetTargetDistance() + ROTATION_EQUATION_LB;
-	std::cout << "Difference " << linearRotation - centerX << " pixels" << std::endl;
 	return linearRotation - centerX;
-}
-
-float ShooterSub::GetRotateEnc(){
-	return rotateEncoder->GetDistance();
 }
 
 float ShooterSub::GetRawRotateEnc(){
@@ -97,46 +102,106 @@ void ShooterSub::ResetRotate() {
 }
 
 void ShooterSub::SetTarget(int newTarget){
-	target = newTarget;
+	rotateSetpoint = newTarget;
 }
 
 bool ShooterSub::IsOnTarget() {
-	return GetRawRotateEnc() >= -ROTATE_MARGIN + target && GetRawRotateEnc() <= ROTATE_MARGIN + target;
+	return GetRawRotateEnc() >= -ROTATE_MARGIN + rotateSetpoint && GetRawRotateEnc() <= ROTATE_MARGIN + rotateSetpoint;
 }
 
 void ShooterSub::Update(bool visionActive){
 	if(visionActive)
 	{
 		float offset = GetTargetOffsetFromCenter();
+
+		if (x++%20 == 0)
 		std::cout << "OFFSET " << offset << std::endl;
-		if (offset > TARGET_RANGE)
-		{
-			RotateTurretCounterClockwise(std::min(fabs(offset)*ADJUSTMENT_P+ADJUSTMENT_F, ADJUST_MAX_SPEED));
+
+		// TODO KEEP TRACK OF MIN AND MAX OFFSET, WEIGH minLeftEnc and maxRightEnc according to those offsets
+
+		if (!CommandBase::rDrivetrainSub->GetTryingToDrive() || !CommandBase::rDrivetrainSub->GetAHRS()->IsMoving()) {
+			//std::cout << "NOT MOVING" << std::endl;
+			if (sideOfShooter == RIGHT_OF_ZERO) {
+				// Started on the right side
+				if (minLeftEnc > GetRawRotateEnc()) {
+					minLeftEnc = GetRawRotateEnc();
+				}
+				if (rotateEncoder->GetRate() > 0) {
+					if (x%10 == 0)
+					std::cout << "Started on right; minleft " << minLeftEnc << std::endl;
+					if (maxRightEnc < GetRawRotateEnc()) {
+						maxRightEnc = GetRawRotateEnc();
+					}
+				} else if (rotateEncoder->GetRate() < 0 && maxRightEnc > FLT_MIN && minLeftEnc < FLT_MAX) {
+					centerEnc = (maxRightEnc + minLeftEnc) / 2;
+					if (x%10 == 0)
+					std::cout << "Found center " << centerEnc << std::endl;
+				}
+			} else {
+				// Started on the left side
+				if (maxRightEnc < GetRawRotateEnc()) {
+					maxRightEnc = GetRawRotateEnc();
+				}
+				if (rotateEncoder->GetRate() < 0) {
+					if (x%10 == 0)
+					std::cout << "Started on left; maxright " << maxRightEnc << std::endl;
+					if (minLeftEnc > GetRawRotateEnc()) {
+						minLeftEnc = GetRawRotateEnc();
+					}
+				} else if (rotateEncoder->GetRate() > 0 && maxRightEnc > FLT_MIN && minLeftEnc < FLT_MAX) {
+					centerEnc = (maxRightEnc + minLeftEnc) / 2;
+					if (x%10 == 0) std::cout << "Found center " << centerEnc << " left, right " << minLeftEnc << ", "<< maxRightEnc << std::endl;
+				}
+			}
 		}
-		else if (offset < -TARGET_RANGE)
-		{
-			RotateTurretClockwise(std::min(fabs(offset)*ADJUSTMENT_P+ADJUSTMENT_F, ADJUST_MAX_SPEED));
+		else {
+			ResetAutoShot();
 		}
-		else
-		{
-			SetTurretRotate(0.0);
+		if (centerEnc == FLT_MAX) {
+			if (offset > TARGET_RANGE)
+			{
+				RotateTurretCounterClockwise(std::min(fabs(offset)*ADJUSTMENT_P+ADJUSTMENT_F, ADJUST_MAX_SPEED));
+			}
+			else if (offset < -TARGET_RANGE)
+			{
+				RotateTurretClockwise(std::min(fabs(offset)*ADJUSTMENT_P+ADJUSTMENT_F, ADJUST_MAX_SPEED));
+			}
+			else
+			{
+				SetTurretRotate(0.0);
+			}
+		} else {
+			SetTarget(centerEnc);
+			if (x%10 == 0) std::cout << "going to center" << std::endl;
+			RotateWithEncoder();
 		}
 	}
 	else
 	{
-		if(target > GetRotateEnc()+ROTATE_MARGIN)
-		{
-			RotateTurretCounterClockwise(0.4);
-		}
-		else if(target < GetRotateEnc()-ROTATE_MARGIN)
-		{
-			RotateTurretClockwise(0.4);
-		}
-		else {
-			SetTurretRotate(0.0);
-		}
+		RotateWithEncoder();
 	}
 
+}
+
+void ShooterSub::ResetAutoShot() {
+	sideOfShooter = GetTargetOffsetFromCenter() > 0 ? RIGHT_OF_ZERO : LEFT_OF_ZERO;
+	maxRightEnc = -FLT_MAX;
+	centerEnc = FLT_MAX;
+	minLeftEnc = FLT_MAX;
+}
+
+void ShooterSub::RotateWithEncoder() {
+	if(rotateSetpoint > GetRawRotateEnc()+ROTATE_MARGIN)
+	{
+		RotateTurretClockwise(0.4);
+	}
+	else if(rotateSetpoint < GetRawRotateEnc()-ROTATE_MARGIN)
+	{
+		RotateTurretCounterClockwise(0.4);
+	}
+	else {
+		SetTurretRotate(0.0);
+	}
 }
 
 void ShooterSub::InitDefaultCommand()

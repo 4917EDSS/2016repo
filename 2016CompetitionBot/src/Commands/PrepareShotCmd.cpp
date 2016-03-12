@@ -14,6 +14,7 @@ PrepareShotCmd::PrepareShotCmd()
 void PrepareShotCmd::Initialize()
 {
 	rShooterSub->Spin(1.0);
+	rShooterSub->ResetAutoShot();
 }
 
 // Called repeatedly when this Command is scheduled to run

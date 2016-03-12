@@ -6,8 +6,8 @@
 DrivetrainSub::DrivetrainSub() :
 		Subsystem("DrivetrainSub")
 {
-	leftMotor1 = new Talon(LeftDrive1PWM);
-	rightMotor1 = new Talon(RightDrive1PWM);
+	leftMotor = new Talon(LeftDrive1PWM);
+	rightMotor = new Talon(RightDrive1PWM);
 	driveLiftShifter = new DoubleSolenoid(ShifterSolenoid1PNC, ShifterSolenoid2PNC);
 	leftDistanceEncoder = new Encoder(LeftDriveEncoder1DIO, LeftDriveEncoder2DIO);
 	rightDistanceEncoder = new Encoder(RightDriveEncoder1DIO, RightDriveEncoder2DIO);
@@ -45,9 +45,9 @@ DrivetrainSub::DrivetrainSub() :
 	controlState = TANK_DRIVE_CONTROLS;
 	accelThreshold = ACCELERATION_THRESHOLD;
 
-	LiveWindow::GetInstance()->AddActuator("Drivetrain", "leftMotor1", leftMotor1);
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "leftMotor1", leftMotor);
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "leftDistanceEncoder", leftDistanceEncoder);
-	LiveWindow::GetInstance()->AddActuator("Drivetrain", "rightMotor1", rightMotor1);
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "rightMotor", rightMotor);
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "rightDistanceEncoder", rightDistanceEncoder);
 	LiveWindow::GetInstance()->AddActuator("Drivetrain", "driveLiftShifter", driveLiftShifter);
 }
@@ -61,8 +61,8 @@ void DrivetrainSub::InitDefaultCommand()
 
 void DrivetrainSub::Drive(float leftSpeed, float rightSpeed)
 {
-	leftMotor1->Set(-leftSpeed);
-	rightMotor1->Set(rightSpeed);
+	leftMotor->Set(-leftSpeed);
+	rightMotor->Set(rightSpeed);
 }
 
 void DrivetrainSub::EnableBalancerPID(float setPoint){
@@ -72,7 +72,6 @@ void DrivetrainSub::EnableBalancerPID(float setPoint){
 	driveBalanceController->SetSetpoint(setPoint);
 	motorBalancer->Reset();
 	driveBalanceController->Enable();
-	std::cout << "PID" << driveBalanceController->GetP() << " " << driveBalanceController->GetI()<< " " << driveBalanceController->GetD()<< std::endl;
 }
 
 void DrivetrainSub::DisableBalancerPID(){
@@ -81,9 +80,8 @@ void DrivetrainSub::DisableBalancerPID(){
 
 void DrivetrainSub::PIDDrive(float speed)
 {
-	std::cout << motorBalancer->GetDifference() << std::endl;
-	leftMotor1->Set(-speed - motorBalancer->GetDifference());
-	rightMotor1->Set(speed - motorBalancer->GetDifference());
+	leftMotor->Set(-speed - motorBalancer->GetDifference());
+	rightMotor->Set(speed - motorBalancer->GetDifference());
 }
 
 void DrivetrainSub::EnableTurnPID(float setPoint){
@@ -102,12 +100,16 @@ void DrivetrainSub::DisableTurnPID(){
 void DrivetrainSub::PIDTurn()
 {
 	std::cout << motorTurner->GetDifference() << std::endl;
-	leftMotor1->Set(-motorTurner->GetDifference());
-	rightMotor1->Set(-motorTurner->GetDifference());
+	leftMotor->Set(-motorTurner->GetDifference());
+	rightMotor->Set(-motorTurner->GetDifference());
 }
 
 bool DrivetrainSub::IsTurnFinished(){
 	return driveTurnController->OnTarget();
+}
+
+bool DrivetrainSub::GetTryingToDrive() {
+	return leftMotor->Get() != 0 || rightMotor->Get() != 0;
 }
 
 float DrivetrainSub::GetYaw(){

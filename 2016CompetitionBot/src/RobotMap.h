@@ -41,8 +41,8 @@
 #define TurretCenteredLimitDIO	3
 #define TiltDownDIO				4
 #define IntakeUpLimitDIO		5
-#define RotateTurretEncoder2DIO 6
-#define RotateTurretEncoder1DIO 7
+#define RotateTurretEncoder1DIO 6
+#define RotateTurretEncoder2DIO 7
 #define TiltEncoder1DIO 		8
 #define TiltEncoder2DIO 		9
 
@@ -157,9 +157,13 @@
 #define FLYWHEEL_I 1
 #define FLYWHEEL_D 0
 #define FLYWHEEL_VOLTAGE 11.2
+
+#define LEFT_OF_ZERO false
+#define RIGHT_OF_ZERO true
+
 //Vision Adjustment Values
 #define ADJUSTMENT_P 0.02
-#define ADJUSTMENT_F 0.2
+#define ADJUSTMENT_F 0.23
 #define ADJUST_MAX_SPEED 0.5
 
 // TURRET ROTATE

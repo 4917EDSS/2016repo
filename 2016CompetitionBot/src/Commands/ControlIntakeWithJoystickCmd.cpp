@@ -28,7 +28,7 @@ void ControlIntakeWithJoystickCmd::Execute()
 		rIntakeSub->SetVerticalSpeed(0.0);
 	}
 	// Dealing with intake in and out motors
-	rIntakeSub->SetIntakeSpeed(-oi->OGetRightVer(2.0));
+	rIntakeSub->SetIntakeSpeed(oi->OGetRightVer(2.0));
 }
 
 // Make this return true when this Command no longer needs to run execute()
