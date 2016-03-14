@@ -41,8 +41,8 @@
 #define TurretCenteredLimitDIO	3
 #define TiltDownDIO				4
 #define IntakeUpLimitDIO		5
-#define RotateTurretEncoder2DIO 6
-#define RotateTurretEncoder1DIO 7
+#define RotateTurretEncoder1DIO 6
+#define RotateTurretEncoder2DIO 7
 #define TiltEncoder1DIO 		8
 #define TiltEncoder2DIO 		9
 
@@ -114,11 +114,14 @@
 
 #define DRIVE_TURN_P 0.075
 #define DRIVE_TURN_I 0
-#define DRIVE_TURN_D 0.3
-#define DRIVE_TURN_TOLERANCE 0.0268
+#define DRIVE_TURN_D 0.0268
+#define DRIVE_TURN_TOLERANCE 0.2
+
+#define TURNING_TOLERANCE 0.5 //In degress
+#define TURNING_TOLERANCE_DURATION 0.45 //In seconds, must be in tolerance this long
 
 #define ACCELERATION_THRESHOLD 0.1
-#define DRIVE_SENSITIVITY 0.7      //The higher the number, the less sensitive.
+#define DRIVE_SENSITIVITY 2.0      //The higher the number, the less sensitive.
 
 //Some bool constants used for code readability
 #define IS_DRIVE true
@@ -154,9 +157,13 @@
 #define FLYWHEEL_I 1
 #define FLYWHEEL_D 0
 #define FLYWHEEL_VOLTAGE 11.2
+
+#define LEFT_OF_ZERO false
+#define RIGHT_OF_ZERO true
+
 //Vision Adjustment Values
 #define ADJUSTMENT_P 0.02
-#define ADJUSTMENT_F 0.2
+#define ADJUSTMENT_F 0.23
 #define ADJUST_MAX_SPEED 0.5
 
 // TURRET ROTATE
@@ -178,6 +185,46 @@
 //Rotation
 #define ROTATION_EQUATION_LM 8.26
 #define ROTATION_EQUATION_LB 80.396
+//Tilt Height
+#define HEIGHT_EQUATION_QA -213.724
+#define HEIGHT_EQUATION_QB 1561.49
+#define HEIGHT_EQUATION_QC -414.8
+
+
+/***********************************************************************
+ *************************** Autonomous ********************************
+ ***********************************************************************/
+//Distances in mm. Negative for reverse.
+#define CROSS_BASIC_DEFENSE_DISTANCE 3300
+#define CROSS_BASIC_DEFENSE_POSITION_FOUR_DISTANCE 3000
+#define CROSS_LOW_BAR_FAST_DISTANCE -3000
+#define CROSS_LOW_BAR_DISTANCE (-1750)
+#define POSITION_ONE_APPROACH_DISTANCE 1800
+#define POSITION_TWO_APPROACH_DISTANCE 2300
+#define POSITION_THREE_APPROACH_DISTANCE 1750
+#define POSITION_FOUR_APPROACH_DISTANCE 1500
+#define POSITION_FIVE_APPROACH_DISTANCE 3000
+
+//Speeds
+#define CROSS_BASIC_DEFENSE_SPEED 0.6
+#define LOW_BAR_DEFENSE_SPEED 0.4
+
+//Degree of Turns. Negative for Counterclockwise, Positive for Clockwise.
+#define LOW_BAR_TURN_TO_SHOOT -125
+#define POSITION_TWO_TURN_TO_SHOOT 60
+#define POSITION_THREE_TURN_TO_SHOOT 30
+#define POSITION_FOUR_TURN_TO_SHOOT -5
+#define POSITION_FIVE_TURN_TO_SHOOT -15
+
+//Time
+#define AIM_TIME_AUTO 2//seconds
+
+//Hood Heights
+#define POSITION_ONE_HOOD_HEIGHT 1500
+#define POSITION_TWO_HOOD_HEIGHT 1500
+#define POSITION_THREE_HOOD_HEIGHT 1600
+#define POSITION_FOUR_HOOD_HEIGHT 1500
+#define POSITION_FIVE_HOOD_HEIGHT 1650
 
 
 #endif
