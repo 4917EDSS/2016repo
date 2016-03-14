@@ -7,9 +7,6 @@
 ShooterSub::ShooterSub() :
 		Subsystem("ExampleSubsystem")
 {
-x = 0;
-
-
 	spinnerMotor = new CANTalon(ShooterMotorCAN);
 	spinnerMotor->SetControlMode(CANSpeedController::ControlMode::kVoltage);
 	spinnerMotor->SetPID(FLYWHEEL_P, FLYWHEEL_I, FLYWHEEL_D);
