@@ -1,11 +1,9 @@
-#include "AutoSallyPortGrp.h"
-#include "IntakeUntilLimitHitGrp.h"
-#include "ZeroTurretTiltEncCmd.h"
+#include "AutoDefaultGrp.h"
+#include "EmergencyStopCmd.h"
 
-AutoSallyPortGrp::AutoSallyPortGrp()
+AutoDefaultGrp::AutoDefaultGrp()
 {
-	AddParallel (new IntakeUntilLimitHitGrp());
-	AddParallel (new ZeroTurretTiltEncCmd());
+	AddSequential(new EmergencyStopCmd());
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

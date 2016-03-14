@@ -1,7 +1,18 @@
 #include "AutoPosition4ShootGrp.h"
+#include "RobotMap.h"
+#include "Commands/PrepareShotCmd.h"
+#include "Commands/BallToShooterCmd.h"
+#include "Commands/DriveStraightCmd.h"
+#include "Commands/DriveTurnCmd.h"
 
 AutoPosition4ShootGrp::AutoPosition4ShootGrp()
 {
+	AddParallel(new PrepareShotCmd());
+	AddSequential(new DriveTurnCmd(POSITION_FOUR_TURN_TO_SHOOT));
+	AddSequential(new DriveStraightCmd(CROSS_BASIC_DEFENSE_POSITION_FOUR_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential(new WaitCommand(AIM_TIME_AUTO));
+	AddSequential(new BallToShooterCmd());
+
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

@@ -1,0 +1,10 @@
+Driving sections of auto:
+	Low bar (backwards + turn)
+	Moat DONE
+	Ramparts DONE
+	Rough Terrain DONE
+	Rock Wall DONE
+	
+Not moving, time (0.25s)
+
+-95.1826 x^2+906.022 x+449.837

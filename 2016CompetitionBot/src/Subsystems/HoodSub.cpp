@@ -40,7 +40,16 @@ void HoodSub::SetTiltHeight(int height){
 	targetHeight = height;
 }
 
-void HoodSub::Update() {
+int HoodSub::GetVisionHeight(){
+	float dist = CommandBase::GetTargetDistance();
+	float computedHeight = HEIGHT_EQUATION_QA*dist*dist + HEIGHT_EQUATION_QB*dist + HEIGHT_EQUATION_QC;
+	return int(computedHeight);
+}
+
+void HoodSub::Update(bool VisionActive) {
+	if (VisionActive){
+		SetTiltHeight(GetVisionHeight());
+	}
 	if (GetRawTiltEnc() > HOOD_HEIGHT_TARGET_RANGE + targetHeight){
 		tiltTurretMotor->Set(-0.4);
 	}

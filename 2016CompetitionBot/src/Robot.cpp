@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <iostream>
 #include "Commands/AutoGenericDuoGrp.h"
+#include "COmmands/AutoDefaultGrp.h"
 #include "Commands/AutoLowBarGrp.h"
 #include "Commands/AutoPortcullisGrp.h"
 #include "Commands/AutoChevalGrp.h"
@@ -32,6 +33,8 @@
 #include "Commands/SetIntakeHeightCmd.h"
 #include "Commands/SpinupCmd.h"
 #include "Commands/ToggleDriveLiftCmd.h"
+#include "Commands/SetTurretRotateCmd.h"
+#include "Commands/ZeroRotateEncoderCmd.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
 #include "AHRS.h"
@@ -42,6 +45,7 @@ class Robot: public IterativeRobot
 private:
 	void SetSmartDashboardAutoOptions();
 	void SendCmdAndSubInfoToSmartDashboard();
+	void SetSmartDashboardDriverContent();
 	void UpdateSmartDashboard();
 
 	Command* autonomousCommand;
@@ -78,9 +82,8 @@ private:
 
 		// Send to the Smart Dashboard a list of auto commands to choose from
 		SetSmartDashboardAutoOptions();
-
-
-
+		SetSmartDashboardDriverContent();
+		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 	}
 
 	/**
@@ -115,8 +118,8 @@ private:
 			autonomousCommand = new ExampleCommand();
 		} */
 
-//		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 		CommandBase::rDrivetrainSub->ResetDrive();
+		CommandBase::rShooterSub->ResetRotate();
 
 		autonomousDefenceCommand = (Command *)autoDefenceOptions->GetSelected();
 		autonomousLocationCommand = (Command *)autoLocationOptions->GetSelected();
@@ -139,8 +142,6 @@ private:
 		// this line or comment it out.
 		if (autonomousCommand != NULL)
 			autonomousCommand->Cancel();
-
-		SendCmdAndSubInfoToSmartDashboard();	// Enable for debugging
 	}
 
 	void TeleopPeriodic()
@@ -180,7 +181,7 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Joystick Intake Ctrl", new ControlIntakeWithJoystickCmd());
 	SmartDashboard::PutData("Joystick Turret Ctrl", new ControlTurretWithJoystickCmd());
 	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd((Preferences::GetInstance())->GetInt("DriveStraightMM", 0.0), (Preferences::GetInstance())->GetFloat("DriveStraightSpeed", 0.0)));
-	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd((Preferences::GetInstance())->GetInt("DriveTurnDegrees", 0.0), (Preferences::GetInstance())->GetFloat("DriveTurnSpeed", 0.0)));
+	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd((Preferences::GetInstance())->GetInt("DriveTurnDegrees")));
 	SmartDashboard::PutData("Joystick Drive", new DriveWithJoystickCmd());
 	SmartDashboard::PutData("Intake Until Limit Hit", new IntakeUntilLimitHitCmd());
 //	SmartDashboard::PutData("Set Intake Height", new SetIntakeHeightCmd());	// Needs parameters
@@ -188,12 +189,14 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Toggle Drive Lift", new ToggleDriveLiftCmd());
 	SmartDashboard::PutData("ResetDrive Encoders", new ResetDrivetrainEncCmd());
 	SmartDashboard::PutData("Zero Turret encoder", new TurretRotateZeroEncCmd());
+	SmartDashboard::PutData("Rotate Turret to Value", new SetTurretRotateCmd(Preferences::GetInstance()->GetInt("TurretRotateEncoder")));
 }
 
 void Robot::SetSmartDashboardAutoOptions()
 {
 	autoDefenceOptions = new SendableChooser();
-	autoDefenceOptions->AddDefault("Low Bar Defence", new AutoLowBarGrp());
+	autoDefenceOptions->AddDefault("Do Nothing", new AutoDefaultGrp());
+	autoDefenceOptions->AddObject("Low Bar Defence", new AutoLowBarGrp());
 	autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());
 	autoDefenceOptions->AddObject("Cheval De Fris", new AutoChevalGrp());
 	autoDefenceOptions->AddObject("Ramparts Defence", new AutoRampartsGrp());
@@ -206,7 +209,8 @@ void Robot::SetSmartDashboardAutoOptions()
 	autoDefenceOptions->AddObject("expel", new BallToIntakeCmd());
 
 	autoLocationOptions = new SendableChooser();
-	autoLocationOptions->AddDefault("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
+	autoLocationOptions->AddDefault("Do Nothing", new AutoDefaultGrp());
+	autoLocationOptions->AddObject("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
 	autoLocationOptions->AddObject("Position 2", new AutoPosition2ShootGrp());
 	autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
 	autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());
@@ -216,6 +220,11 @@ void Robot::SetSmartDashboardAutoOptions()
 	//chooser->AddObject("My Auto", new MyAutoCommand());
 	SmartDashboard::PutData("Auto Modes", autoDefenceOptions);
 	SmartDashboard::PutData("Auto Modes 2", autoLocationOptions);
+}
+
+void Robot::SetSmartDashboardDriverContent()
+{
+	SmartDashboard::PutData("Zero Turret Rotate", new ZeroRotateEncoderCmd());
 }
 
 // This is run during Teleop periodic to update the Smart Dashboard values

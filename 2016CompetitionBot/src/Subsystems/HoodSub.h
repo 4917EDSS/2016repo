@@ -16,8 +16,9 @@ private:
 public:
 	HoodSub();
 	void SetTurretTilt(float speed);
+	int GetVisionHeight();
 	void SetTiltHeight(int height);
-	void Update();
+	void Update(bool VisionActive);
 	bool IsOnTarget();
 	float GetTiltEnc();
 	float GetRawTiltEnc();

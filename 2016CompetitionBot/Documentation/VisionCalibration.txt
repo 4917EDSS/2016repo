@@ -3,26 +3,42 @@ Front of Bumper touching Ramp
 Distance from low goal face(in metres):1.45
 Center y value for target (pixel number from grip):72
 center x for turret dead center(the pixel number from grip):82
-Encoder value for tilt(literal encoder value for making shot):730 COMPROMISE
+Encoder value for tilt(literal encoder value for making shot):1400
 
 2.5 m away
 
 Distance from low goal face(in metres):2.75
 Center y value for target (pixel number from grip):168
 center x for turret dead center(the pixel number from grip):86
-Encoder value for tilt(literal encoder value for making shot):2085 GOOD BALL AT TOP OF GOAL
+Encoder value for tilt(literal encoder value for making shot):2263 GOOD BALL AT TOP OF GOAL
 
 
 Touching outerworks
 
-Distance from low goal face(in metres):3.79
+Distance from low goal face(in metres):3.85
 Center y value for target (pixel number from grip):210
 center x for turret dead center(the pixel number from grip):87
-Encoder value for tilt(literal encoder value for making shot):2322 ENCODER VALUE FOR TOP GOOD GOAL
+Encoder value for tilt(literal encoder value for making shot):2429 ENCODER VALUE FOR TOP GOOD GOAL
 CLOSE TO APEX
 
 
 
 
-
 **ALL GOALS MUST BE PEAK OF ARCH**
+
+1.33m: CenterX is 95, Encoder is 0
+Encoder ticks/pixel of offset = 24.87562
+
+2.57m: CenterX is 91 encoder is 0
+Encoder/pixel = 16.2864
++10, Encoder is 146
++30, Encoder is 462
++50, Encoder is 786
++145, 2780
+-10, -172
+-30, -510
+-50, -842
+-87, -1923
+
+3.85m, OuterWorks: CenterX is 102, Encoder is 0
+Encoder/pixel = 14.14427

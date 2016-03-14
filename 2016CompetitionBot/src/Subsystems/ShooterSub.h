@@ -13,7 +13,13 @@ private:
 	Encoder4917* shooterEncoder;
 	Encoder* rotateEncoder;
 	DigitalInput* turretCentered;
-	int target;
+	int rotateSetpoint;
+	bool sideOfShooter;
+	float maxRightEnc;
+	float maxRightOffset;
+	float minLeftEnc;
+	float minLeftOffset;
+	float centerEnc;
 
 
 	// It's desirable that everything possible under private except
@@ -22,16 +28,17 @@ public:
 	ShooterSub();
 	void Spin(float spinSpeed);
 	float GetTargetOffsetFromCenter();
-	float GetGripValue(std::string gripValue);
-	float GetTargetDistance();
 	void InitDefaultCommand();
-	float GetRotateEnc();
 	float GetRawRotateEnc();
+	void ResetRotate();
 	void Update(bool visionActive);
 	void SetTarget(int newTarget);
+	bool IsOnTarget();
 	void SetTurretRotate(float speed);
 	void RotateTurretClockwise(float speed);
 	void RotateTurretCounterClockwise(float speed);
+	void RotateWithEncoder();
+	void ResetAutoShot();
 	bool GetTurretCentered();
 	CANTalon* spinnerMotor;
 };

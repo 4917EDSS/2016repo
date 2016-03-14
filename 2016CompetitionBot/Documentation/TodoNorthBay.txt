@@ -1,0 +1,23 @@
+Measure distance on drivetrain - ensure that 1m = 1m
+
+Check drivetrain PIDs
+	- rotation PID
+		- at small angle (10, 20 deg)
+		- at large angle (150 deg)
+	- drivestraight PID
+		- high speed
+		- low speed
+
+Do vision calibration
+	- Measure at 3 distances FROM CAMERA (on batter (~1.45m), 2.75m, on outerworks (~3.85m)
+		- get CenterX, CenterY, and ideally hood height if possible
+		- create quadratic of (centerY, distance), plug in a, b, c
+		- create line of (distance, centerX), plug in m, b
+		- create quadratic of (distance, hoodheight), plug in a, b ,c
+	- See if autotarget is consistently scoring
+
+Get new encoder values for intake at ground, intake at ball height
+
+Get new encoder values for max rotation of turret
+
+Make sure autointake works, ball sensor in correct place

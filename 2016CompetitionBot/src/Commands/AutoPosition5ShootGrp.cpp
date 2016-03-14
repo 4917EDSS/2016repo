@@ -1,7 +1,18 @@
 #include "AutoPosition5ShootGrp.h"
+#include "RobotMap.h"
+#include "Commands/PrepareShotCmd.h"
+#include "Commands/BallToShooterCmd.h"
+#include "Commands/DriveStraightCmd.h"
+#include "Commands/DriveTurnCmd.h"
 
 AutoPosition5ShootGrp::AutoPosition5ShootGrp()
 {
+	AddParallel(new PrepareShotCmd());
+	AddSequential(new DriveStraightCmd(POSITION_FIVE_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential(new DriveTurnCmd(POSITION_FIVE_TURN_TO_SHOOT));
+	AddSequential(new WaitCommand(AIM_TIME_AUTO));
+	AddSequential(new BallToShooterCmd());
+
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

@@ -14,8 +14,8 @@ class DrivetrainSub: public Subsystem
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	Talon* leftMotor1;
-	Talon* rightMotor1;
+	Talon* leftMotor;
+	Talon* rightMotor;
 	DoubleSolenoid* driveLiftShifter;
 	Encoder* leftDistanceEncoder;
 	Encoder* rightDistanceEncoder;
@@ -39,6 +39,7 @@ public:
 	void DisableTurnPID();
 	bool IsTurnFinished();
 	void ToggleControls();
+	bool GetTryingToDrive();
 	int GetControls();
 	float GetAccelThresh();
 	float GetYaw();

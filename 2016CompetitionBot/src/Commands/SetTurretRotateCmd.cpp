@@ -1,7 +1,6 @@
-#include "TurretRotateZeroEncCmd.h"
-#include "RobotMap.h"
+#include "SetTurretRotateCmd.h"
 
-TurretRotateZeroEncCmd::TurretRotateZeroEncCmd()
+SetTurretRotateCmd::SetTurretRotateCmd(int rotate): rotate(rotate)
 {
 	Requires(rShooterSub);
 	// Use Requires() here to declare subsystem dependencies
@@ -9,32 +8,32 @@ TurretRotateZeroEncCmd::TurretRotateZeroEncCmd()
 }
 
 // Called just before this Command runs the first time
-void TurretRotateZeroEncCmd::Initialize()
+void SetTurretRotateCmd::Initialize()
 {
-	rShooterSub->SetTarget(0);
+	rShooterSub->SetTarget(rotate);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TurretRotateZeroEncCmd::Execute()
+void SetTurretRotateCmd::Execute()
 {
 	rShooterSub->Update(false);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TurretRotateZeroEncCmd::IsFinished()
+bool SetTurretRotateCmd::IsFinished()
 {
-	return rShooterSub->GetRawRotateEnc() < ROTATE_MARGIN && rShooterSub->GetRawRotateEnc() > -ROTATE_MARGIN;
+	return rShooterSub->IsOnTarget();
 }
 
 // Called once after isFinished returns true
-void TurretRotateZeroEncCmd::End()
+void SetTurretRotateCmd::End()
 {
-
+	rShooterSub->RotateTurretClockwise(0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TurretRotateZeroEncCmd::Interrupted()
+void SetTurretRotateCmd::Interrupted()
 {
-
+	End();
 }
