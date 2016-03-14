@@ -16,7 +16,9 @@ private:
 	int rotateSetpoint;
 	bool sideOfShooter;
 	float maxRightEnc;
+	float maxRightOffset;
 	float minLeftEnc;
+	float minLeftOffset;
 	float centerEnc;
 	int x;
 

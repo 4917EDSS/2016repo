@@ -23,7 +23,9 @@ x = 0;
 
 	sideOfShooter = RIGHT_OF_ZERO;
 	maxRightEnc = FLT_MIN;
+	maxRightOffset = FLT_MIN;
 	minLeftEnc = FLT_MAX;
+	minLeftOffset = FLT_MAX;
 
 
 
@@ -126,21 +128,39 @@ void ShooterSub::Update(bool visionActive){
 				if (minLeftEnc > GetRawRotateEnc()) {
 					minLeftEnc = GetRawRotateEnc();
 				}
+				if (minLeftOffset > offset) {
+					minLeftOffset = offset;
+				}
 				if (rotateEncoder->GetRate() > 0) {
 					if (x%10 == 0)
 					std::cout << "Started on right; minleft " << minLeftEnc << std::endl;
 					if (maxRightEnc < GetRawRotateEnc()) {
 						maxRightEnc = GetRawRotateEnc();
 					}
+					if (maxRightOffset < offset) {
+						maxRightOffset = offset;
+					}
 				} else if (rotateEncoder->GetRate() < 0 && maxRightEnc > FLT_MIN && minLeftEnc < FLT_MAX) {
-					centerEnc = (maxRightEnc + minLeftEnc) / 2;
-					if (x%10 == 0)
-					std::cout << "Found center " << centerEnc << std::endl;
+					if (maxRightOffset < offset) {
+						maxRightOffset = offset;
+					}
+					// minLeftOffset should be negative, maxRightOffset should be positive
+					// Weighting the each side by the amount the camera is off to the opposite side
+					// So, if our camera is way off left (offset -10, 2), and our encoder vals are (100, 1000)
+					// then our center is (2*100 + 10*1000)/(10+2) = 10200/12 = 850
+					centerEnc = (maxRightEnc*fabs(minLeftOffset) + minLeftEnc*maxRightOffset) / (maxRightOffset + fabs(minLeftOffset));
+					if (x%10 == 0) {
+					std::cout << "Found center: " << centerEnc << " minLeftOffset: " << minLeftOffset << " minLeftEnc: " << minLeftEnc << std::endl;
+					std::cout << " maxRightOffset: " << maxRightOffset << " maxRightEnc " << maxRightEnc << std::endl;
+					}
 				}
 			} else {
 				// Started on the left side
 				if (maxRightEnc < GetRawRotateEnc()) {
 					maxRightEnc = GetRawRotateEnc();
+				}
+				if (maxRightOffset < offset) {
+					maxRightOffset = offset;
 				}
 				if (rotateEncoder->GetRate() < 0) {
 					if (x%10 == 0)
@@ -148,9 +168,22 @@ void ShooterSub::Update(bool visionActive){
 					if (minLeftEnc > GetRawRotateEnc()) {
 						minLeftEnc = GetRawRotateEnc();
 					}
+					if (minLeftOffset > offset) {
+						minLeftOffset = offset;
+					}
 				} else if (rotateEncoder->GetRate() > 0 && maxRightEnc > FLT_MIN && minLeftEnc < FLT_MAX) {
-					centerEnc = (maxRightEnc + minLeftEnc) / 2;
-					if (x%10 == 0) std::cout << "Found center " << centerEnc << " left, right " << minLeftEnc << ", "<< maxRightEnc << std::endl;
+					if (minLeftOffset > offset) {
+						minLeftOffset = offset;
+					}
+					// minLeftOffset should be negative, maxRightOffset should be positive
+					// Weighting the each side by the amount the camera is off to the opposite side
+					// So, if our camera is way off left (offset -10, 2), and our encoder vals are (100, 1000)
+					// then our center is (2*100 + 10*1000)/(10+2) = 10200/12 = 850
+					centerEnc = (maxRightEnc*fabs(minLeftOffset) + minLeftEnc*maxRightOffset) / (maxRightOffset + fabs(minLeftOffset));
+					if (x%10 == 0) {
+						std::cout << "Found center: " << centerEnc << " minLeftOffset: " << minLeftOffset << " minLeftEnc: " << minLeftEnc << std::endl;
+						std::cout << " maxRightOffset: " << maxRightOffset << " maxRightEnc " << maxRightEnc << std::endl;
+					}
 				}
 			}
 		}
@@ -172,7 +205,7 @@ void ShooterSub::Update(bool visionActive){
 			}
 		} else {
 			SetTarget(centerEnc);
-			if (x%10 == 0) std::cout << "going to center" << std::endl;
+			if (x%10 == 0) std::cout << "going to center " <<centerEnc << std::endl;
 			RotateWithEncoder();
 		}
 	}
@@ -184,6 +217,7 @@ void ShooterSub::Update(bool visionActive){
 }
 
 void ShooterSub::ResetAutoShot() {
+	std::cout << "Resetting auto shot" << std::endl;
 	sideOfShooter = GetTargetOffsetFromCenter() > 0 ? RIGHT_OF_ZERO : LEFT_OF_ZERO;
 	maxRightEnc = -FLT_MAX;
 	centerEnc = FLT_MAX;

@@ -59,7 +59,7 @@
 #define OLeftHorizontalAxis 0
 
 
-#define CONTROLLER_DEADZONE_VALUE 0.01
+#define CONTROLLER_DEADZONE_VALUE 0.02
 
 
 class OI

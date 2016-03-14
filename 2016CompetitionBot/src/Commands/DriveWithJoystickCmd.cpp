@@ -35,7 +35,6 @@ void DriveWithJoystickCmd::Execute()
 		else if (leftStick < 0) {
 			leftStick = leftStick * 0.85 - 0.15;
 		}
-
 		rDrivetrainSub->Drive(leftStick, rightStick);
 	}
 	else
