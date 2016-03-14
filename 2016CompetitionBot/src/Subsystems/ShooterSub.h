@@ -20,7 +20,6 @@ private:
 	float minLeftEnc;
 	float minLeftOffset;
 	float centerEnc;
-	int x;
 
 
 	// It's desirable that everything possible under private except
