@@ -3,6 +3,7 @@
 #include <cfloat>
 #include "../RobotMap.h"
 #include "../Components/Encoder4917.h"
+#include <algorithm>
 
 ShooterSub::ShooterSub() :
 		Subsystem("ExampleSubsystem")
@@ -205,13 +206,14 @@ void ShooterSub::ResetAutoShot() {
 }
 
 void ShooterSub::RotateWithEncoder() {
-	if(rotateSetpoint > GetRawRotateEnc()+ROTATE_MARGIN)
+	rawRotateEnc = GetRawRotateEnc();
+	if(rotateSetpoint > rawRotateEnc+ROTATE_MARGIN)
 	{
-		RotateTurretClockwise(0.7);
+		RotateTurretClockwise(std::min(ROTATE_BASE_SPEED+((rotateSetpoint - rawRotateEnc)/ROTATE_SPEED_FACTOR), 1.0));
 	}
-	else if(rotateSetpoint < GetRawRotateEnc()-ROTATE_MARGIN)
+	else if(rotateSetpoint < rawRotateEnc-ROTATE_MARGIN)
 	{
-		RotateTurretCounterClockwise(0.7);
+		RotateTurretCounterClockwise(std::min(ROTATE_BASE_SPEED+((rawRotateEnc-rotateSetpoint)/ROTATE_SPEED_FACTOR), 1.0));
 	}
 	else {
 		SetTurretRotate(0.0);

@@ -32,8 +32,9 @@
 #define OControllerOperatorPort 1
 
 //Buttons
-#define OFlywheelSpinBtn 5
-#define OLowGoalBtn 6
+#define OFlywheelSpinBtn 1
+#define OShootFromLeftBatterBtn 5
+#define OShootFromRightBatterBtn 6
 #define OHighGoalBtn 8
 #define DLiftShifterBtn 5
 #define DStraightForwardBtn 4
@@ -77,6 +78,8 @@ private:
 	JoystickButton* oPrepareShotBtn;
 	JoystickButton* oLowBarTransformBtn;
 	JoystickButton* oIntakeUntilLimitBtn;
+	JoystickButton* oShootFromLeftBatterBtn;
+	JoystickButton* oShootFromRightBatterBtn;
 	JoystickButton* oEmergencyStopBtn1;
 	JoystickButton* dEmergencyStopBtn1;
 	JoystickButton* oEmergencyStopBtn2;

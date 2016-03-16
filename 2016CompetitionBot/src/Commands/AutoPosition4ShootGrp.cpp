@@ -9,9 +9,11 @@ AutoPosition4ShootGrp::AutoPosition4ShootGrp()
 {
 	AddParallel(new PrepareShotCmd());
 	AddSequential(new DriveTurnCmd(POSITION_FOUR_TURN_TO_SHOOT));
-	AddSequential(new DriveStraightCmd(CROSS_BASIC_DEFENSE_POSITION_FOUR_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential(new DriveStraightCmd(POSITION_FOUR_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	AddSequential(new WaitCommand(AIM_TIME_AUTO));
 	AddSequential(new BallToShooterCmd());
+	AddSequential(new DriveTurnCmd(POSITION_FOUR_TURN_TO_DEFENCE));
+	AddSequential(new DriveStraightCmd(-POSITION_FOUR_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

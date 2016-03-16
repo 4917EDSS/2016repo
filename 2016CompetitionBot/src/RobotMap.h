@@ -152,6 +152,8 @@
 //////////////////////// Shooter Subsystem ////////////////////////
 #define ROTATE_MARGIN 10
 #define ROTATE_SLOW 0.25
+#define ROTATE_BASE_SPEED 0.4
+#define ROTATE_SPEED_FACTOR 3000
 
 #define FRONT_TOUCHING_BATTER_EV 733
 #define RESTING_ON_BACK_BATTER_EV 475
@@ -174,11 +176,17 @@
 // The farthest the turret can rotate positive or negative
 #define MAX_TURRET_ROTATE_EV 5600
 
+#define BATTER_WALL_TURRET_ENC 5200
+#define RIGHT_SIDE -1
+#define LEFT_SIDE 1
+
 // TURRET HOOD
 // Highest the hood can go
 #define MAX_HOOD_HEIGHT_EV 3800
 //Range for target height of hood
 #define HOOD_HEIGHT_TARGET_RANGE 50
+
+#define BATTER_WALL_HOOD_HEIGHT 1400
 
 //////////////////////// Vision Math Constants /////////////////////
 //Distance
@@ -199,13 +207,12 @@
  ***********************************************************************/
 //Distances in mm. Negative for reverse.
 #define CROSS_BASIC_DEFENSE_DISTANCE 3300
-#define CROSS_BASIC_DEFENSE_POSITION_FOUR_DISTANCE 3000
-#define CROSS_LOW_BAR_FAST_DISTANCE -3000
-#define CROSS_LOW_BAR_DISTANCE (-1750)
+#define CROSS_LOW_BAR_SLOW_DISTANCE -3000
+#define CROSS_LOW_BAR_FAST_DISTANCE -1750
 #define POSITION_ONE_APPROACH_DISTANCE 1800
 #define POSITION_TWO_APPROACH_DISTANCE 2300
 #define POSITION_THREE_APPROACH_DISTANCE 1750
-#define POSITION_FOUR_APPROACH_DISTANCE 1500
+#define POSITION_FOUR_APPROACH_DISTANCE 3000
 #define POSITION_FIVE_APPROACH_DISTANCE 3000
 
 //Speeds
@@ -219,6 +226,11 @@
 #define POSITION_THREE_TURN_TO_SHOOT 30
 #define POSITION_FOUR_TURN_TO_SHOOT -5
 #define POSITION_FIVE_TURN_TO_SHOOT -15
+#define LOW_BAR_TURN_TO_DEFENCE -55
+#define POSITION_TWO_TURN_TO_DEFENCE 120
+#define POSITION_THREE_TURN_TO_DEFENCE 150
+#define POSITION_FOUR_TURN_TO_DEFENCE 5
+#define POSITION_FIVE_TURN_TO_DEFENCE 15
 
 //Time
 #define AIM_TIME_AUTO 2//seconds

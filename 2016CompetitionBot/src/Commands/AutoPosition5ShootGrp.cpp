@@ -12,6 +12,8 @@ AutoPosition5ShootGrp::AutoPosition5ShootGrp()
 	AddSequential(new DriveTurnCmd(POSITION_FIVE_TURN_TO_SHOOT));
 	AddSequential(new WaitCommand(AIM_TIME_AUTO));
 	AddSequential(new BallToShooterCmd());
+	AddSequential(new DriveTurnCmd(POSITION_FIVE_TURN_TO_DEFENCE));
+	AddSequential(new DriveStraightCmd(-POSITION_FIVE_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

@@ -11,6 +11,7 @@
 #include "Commands/EmergencyStopCmd.h"
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/IntakeUntilLimitHitGrp.h"
+#include "Commands/ShootFromBatterGrp.h"
 
 OI::OI()
 {
@@ -19,9 +20,6 @@ OI::OI()
 
 	oFlywheelSpinBtn = new JoystickButton(oController, OFlywheelSpinBtn);
 	oFlywheelSpinBtn->WhenPressed(new SpinupCmd);
-
-	oLowGoalBtn = new JoystickButton(oController, OLowGoalBtn);
-	oLowGoalBtn->WhenPressed(new BallToIntakeCmd);
 
 	oHighGoalBtn = new JoystickButton(oController, OHighGoalBtn);
 	oHighGoalBtn->WhenPressed(new BallToShooterCmd);
@@ -43,6 +41,12 @@ OI::OI()
 
 	oIntakeUntilLimitBtn = new JoystickButton(oController, OIntakeUntilLimitBtn);
 	oIntakeUntilLimitBtn->WhenPressed(new IntakeUntilLimitHitGrp);
+
+	oShootFromLeftBatterBtn = new JoystickButton(oController, OShootFromLeftBatterBtn);
+	oShootFromLeftBatterBtn->WhenPressed(new ShootFromBatterGrp(LEFT_SIDE));
+
+	oShootFromRightBatterBtn = new JoystickButton(oController, OShootFromRightBatterBtn);
+	oShootFromRightBatterBtn->WhenPressed(new ShootFromBatterGrp(RIGHT_SIDE));
 
 
 	//Emergency Stop commands.

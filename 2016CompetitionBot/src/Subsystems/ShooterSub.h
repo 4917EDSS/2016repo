@@ -20,6 +20,7 @@ private:
 	float minLeftEnc;
 	float minLeftOffset;
 	float centerEnc;
+	float rawRotateEnc;
 
 
 	// It's desirable that everything possible under private except

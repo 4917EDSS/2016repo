@@ -1,17 +1,12 @@
-#include "AutoLowBarGrp.h"
 #include "RobotMap.h"
-#include "DriveStraightCmd.h"
-#include "IntakeUntilLimitHitGrp.h"
-#include "ZeroTurretTiltEncCmd.h"
-#include "SetIntakeHeightCmd.h"
+#include "ShootFromBatterGrp.h"
+#include "SetHoodHeightCmd.h"
+#include "SetTurretRotateCmd.h"
 
-AutoLowBarGrp::AutoLowBarGrp()
+ShootFromBatterGrp::ShootFromBatterGrp(int side)
 {
-	AddParallel (new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
-	AddParallel (new IntakeUntilLimitHitGrp());
-	AddParallel (new ZeroTurretTiltEncCmd());
-	AddSequential(new DriveStraightCmd(CROSS_LOW_BAR_SLOW_DISTANCE, LOW_BAR_DEFENSE_SPEED));
-	AddSequential(new DriveStraightCmd(CROSS_LOW_BAR_FAST_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddParallel(new SetHoodHeightCmd(BATTER_WALL_HOOD_HEIGHT));
+	AddParallel(new SetTurretRotateCmd(side*BATTER_WALL_TURRET_ENC));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

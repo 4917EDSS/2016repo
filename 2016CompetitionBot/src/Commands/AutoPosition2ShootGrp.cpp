@@ -12,6 +12,8 @@ AutoPosition2ShootGrp::AutoPosition2ShootGrp()
 	AddSequential(new DriveStraightCmd(POSITION_TWO_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	AddSequential(new WaitCommand(AIM_TIME_AUTO));
 	AddSequential(new BallToShooterCmd());
+	AddSequential(new DriveTurnCmd(POSITION_TWO_TURN_TO_DEFENCE));
+	AddSequential(new DriveStraightCmd(POSITION_TWO_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
