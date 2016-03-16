@@ -20,6 +20,11 @@ void ControlTurretWithJoystickCmd::Execute()
 {
 	//Turning the turret with the left operator joystick horizontal axis
 	rShooterSub->RotateTurretClockwise(oi->OGetLeftHor(2.0));
+	if(oi->OGetRightVer(2.0) > 0.0 && rHopperSub->IsBallIn()){
+		rShooterSub->Spin(-oi->OGetRightVer(2.0));
+	} else{
+		rShooterSub->Spin(0.0);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +37,7 @@ bool ControlTurretWithJoystickCmd::IsFinished()
 void ControlTurretWithJoystickCmd::End()
 {
 	rShooterSub->SetTurretRotate(0.0);
+	rShooterSub->Spin(0.0);
 }
 
 // Called when another command which requires one or more of the same

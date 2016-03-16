@@ -32,7 +32,6 @@
 #define OControllerOperatorPort 1
 
 //Buttons
-#define OIntakeBtn 1
 #define OFlywheelSpinBtn 5
 #define OLowGoalBtn 6
 #define OHighGoalBtn 8

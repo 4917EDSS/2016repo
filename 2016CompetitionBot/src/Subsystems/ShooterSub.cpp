@@ -207,11 +207,11 @@ void ShooterSub::ResetAutoShot() {
 void ShooterSub::RotateWithEncoder() {
 	if(rotateSetpoint > GetRawRotateEnc()+ROTATE_MARGIN)
 	{
-		RotateTurretClockwise(0.4);
+		RotateTurretClockwise(0.7);
 	}
 	else if(rotateSetpoint < GetRawRotateEnc()-ROTATE_MARGIN)
 	{
-		RotateTurretCounterClockwise(0.4);
+		RotateTurretCounterClockwise(0.7);
 	}
 	else {
 		SetTurretRotate(0.0);
