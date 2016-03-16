@@ -13,12 +13,16 @@ private:
 	Talon* adjustMotor;
 	Encoder* heightEncoder;
 	DigitalInput* intakeUpLimit;
+	int targetHeight;
 public:
 	IntakeSub();
 	void InitDefaultCommand();
+	void SetHeight(int height);
 	int GetHeight();
 	bool GetIntakeUp();
 	int GetRawHeight();
+	void Update();
+	bool IsOnTarget();
 	void SetVerticalSpeed(float speed);
 	void SetIntakeSpeed(float speed);
 };

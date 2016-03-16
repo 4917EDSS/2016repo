@@ -142,8 +142,11 @@
 
 //////////////////////// Intake Subsystem ////////////////////////
 // Zeroes at top
-#define BALL_HEIGHT_EV 12032
-#define FLOOR_HEIGHT_EV 2343423423423432
+#define BOTTOM_INTAKE_HEIGHT_EV 252
+#define INTAKE_HEIGHT_TARGET_RANGE 3
+//Auto defense crossing heights
+#define LOW_BAR_INTAKE_HEIGHT_EV 155
+#define SIMPLE_DEFENSE_INTAKE_HEIGHT_EV 75
 
 
 //////////////////////// Shooter Subsystem ////////////////////////

@@ -8,7 +8,6 @@ class SetIntakeHeightCmd: public CommandBase
 {
 private:
 	int height;
-	bool isUp;
 public:
 	SetIntakeHeightCmd(int destination);
 	void Initialize();

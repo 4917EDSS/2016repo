@@ -1,9 +1,8 @@
 #include "SetIntakeHeightCmd.h"
 
-SetIntakeHeightCmd::SetIntakeHeightCmd(int destination)
+SetIntakeHeightCmd::SetIntakeHeightCmd(int height) : height(height)
 {
-	isUp = true;
-	height = destination;
+
 	Requires(rIntakeSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
@@ -12,49 +11,20 @@ SetIntakeHeightCmd::SetIntakeHeightCmd(int destination)
 // Called just before this Command runs the first time
 void SetIntakeHeightCmd::Initialize()
 {
-	if (rIntakeSub->GetHeight() > height)
-		{
-			rIntakeSub->SetVerticalSpeed(0.5);
-			isUp = true;
-		}
-		else
-		{
-			rIntakeSub->SetVerticalSpeed(-0.5);
-			isUp = false;
-		}
+	rIntakeSub->SetHeight(height);
 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void SetIntakeHeightCmd::Execute()
 {
-
+	rIntakeSub->Update();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetIntakeHeightCmd::IsFinished()
 {
-	if (isUp){
-		if (rIntakeSub->GetHeight() > height)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	{
-		if (rIntakeSub->GetHeight() < height)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+	return rIntakeSub->IsOnTarget();
 }
 
 // Called once after isFinished returns true

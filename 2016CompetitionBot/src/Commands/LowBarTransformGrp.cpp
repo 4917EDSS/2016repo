@@ -1,9 +1,12 @@
 #include "LowBarTransformGrp.h"
 #include "ZeroTurretTiltEncCmd.h"
+#include "SetIntakeHeightCmd.h"
+#include "RobotMap.h"
 
 LowBarTransformGrp::LowBarTransformGrp()
 {
-	AddParallel(new ZeroTurretTiltEncCmd);
+	AddParallel(new ZeroTurretTiltEncCmd());
+	AddParallel(new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

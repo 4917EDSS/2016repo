@@ -26,6 +26,11 @@ void IntakeSub::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
+void IntakeSub::SetHeight(int height){
+	targetHeight = height;
+}
+
 int IntakeSub::GetHeight()
 {
 	return (int) heightEncoder->GetDistance();
@@ -40,12 +45,38 @@ bool IntakeSub::GetIntakeUp(){
 	return !intakeUpLimit->Get();
 }
 
+void IntakeSub::Update(){
+	if (GetRawHeight() > targetHeight + INTAKE_HEIGHT_TARGET_RANGE){
+		SetVerticalSpeed(-0.4);
+	}
+	else if (GetRawHeight() < targetHeight - INTAKE_HEIGHT_TARGET_RANGE){
+		SetVerticalSpeed(0.4);
+	}
+	else {
+		SetVerticalSpeed(0.0);
+	}
+}
+
+bool IntakeSub::IsOnTarget() {
+	return GetRawHeight() >= targetHeight - INTAKE_HEIGHT_TARGET_RANGE && GetRawHeight() <= targetHeight + INTAKE_HEIGHT_TARGET_RANGE;
+}
+
 void IntakeSub::SetVerticalSpeed(float speed)
 {
 	if(GetIntakeUp())
 	{
 		heightEncoder->Reset();
+		if (speed < 0){
+			adjustMotor->Set(0.0);
+			return;
+		}
+
 	}
+	else if (GetRawHeight() >= BOTTOM_INTAKE_HEIGHT_EV - INTAKE_HEIGHT_TARGET_RANGE && speed > 0){
+		adjustMotor->Set(0.0);
+		return;
+	}
+
 	adjustMotor->Set(speed);
 }
 

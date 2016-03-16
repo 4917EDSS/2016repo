@@ -3,9 +3,11 @@
 #include "DriveStraightCmd.h"
 #include "IntakeUntilLimitHitGrp.h"
 #include "ZeroTurretTiltEncCmd.h"
+#include "SetIntakeHeightCmd.h"
 
 AutoRoughTerrainGrp::AutoRoughTerrainGrp()
 {
+	AddParallel (new SetIntakeHeightCmd(SIMPLE_DEFENSE_INTAKE_HEIGHT_EV));
 	AddParallel (new IntakeUntilLimitHitGrp());
 	AddParallel (new ZeroTurretTiltEncCmd());
 	AddSequential(new DriveStraightCmd(CROSS_BASIC_DEFENSE_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));

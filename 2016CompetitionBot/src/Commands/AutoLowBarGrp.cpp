@@ -3,9 +3,11 @@
 #include "DriveStraightCmd.h"
 #include "IntakeUntilLimitHitGrp.h"
 #include "ZeroTurretTiltEncCmd.h"
+#include "SetIntakeHeightCmd.h"
 
 AutoLowBarGrp::AutoLowBarGrp()
 {
+	AddParallel (new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
 	AddParallel (new IntakeUntilLimitHitGrp());
 	AddParallel (new ZeroTurretTiltEncCmd());
 	AddSequential(new DriveStraightCmd(CROSS_LOW_BAR_FAST_DISTANCE, LOW_BAR_DEFENSE_SPEED));
