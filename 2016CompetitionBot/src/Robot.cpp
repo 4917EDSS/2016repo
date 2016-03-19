@@ -182,6 +182,7 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Joystick Turret Ctrl", new ControlTurretWithJoystickCmd());
 	SmartDashboard::PutData("Drive Straight", new DriveStraightCmd((Preferences::GetInstance())->GetInt("DriveStraightMM", 0.0), (Preferences::GetInstance())->GetFloat("DriveStraightSpeed", 0.0)));
 	SmartDashboard::PutData("Drive Turn", new DriveTurnCmd((Preferences::GetInstance())->GetInt("DriveTurnDegrees")));
+	std::cout << Preferences::GetInstance()->GetInt("DriveTurnDegrees") << std::endl;
 	SmartDashboard::PutData("Joystick Drive", new DriveWithJoystickCmd());
 	SmartDashboard::PutData("Intake Until Limit Hit", new IntakeUntilLimitHitCmd());
 //	SmartDashboard::PutData("Set Intake Height", new SetIntakeHeightCmd());	// Needs parameters

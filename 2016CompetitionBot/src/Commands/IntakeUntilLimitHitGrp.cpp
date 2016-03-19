@@ -1,9 +1,12 @@
 #include "IntakeUntilLimitHitGrp.h"
 #include "TurretRotateZeroEncCmd.h"
 #include "IntakeUntilLimitHitCmd.h"
+#include "SetIntakeHeightCmd.h"
+#include "RobotMap.h"
 
 IntakeUntilLimitHitGrp::IntakeUntilLimitHitGrp()
 {
+	AddParallel (new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
 	AddSequential(new TurretRotateZeroEncCmd());
 	AddSequential(new IntakeUntilLimitHitCmd());
 	// Add Commands here:

@@ -20,7 +20,7 @@ void ControlTurretWithJoystickCmd::Execute()
 {
 	//Turning the turret with the left operator joystick horizontal axis
 	rShooterSub->RotateTurretClockwise(oi->OGetLeftHor(2.0));
-	if(oi->OGetRightVer(2.0) > 0.0 && rHopperSub->IsBallIn()){
+	if(oi->OGetRightVer(2.0) > 0.0){
 		rShooterSub->Spin(-oi->OGetRightVer(2.0));
 	} else{
 		rShooterSub->Spin(0.0);

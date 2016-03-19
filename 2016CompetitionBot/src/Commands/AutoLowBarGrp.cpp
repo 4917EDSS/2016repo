@@ -1,17 +1,18 @@
 #include "AutoLowBarGrp.h"
 #include "RobotMap.h"
 #include "DriveStraightCmd.h"
-#include "IntakeUntilLimitHitGrp.h"
+#include "IntakeUntilLimitHitCmd.h"
 #include "ZeroTurretTiltEncCmd.h"
 #include "SetIntakeHeightCmd.h"
 
 AutoLowBarGrp::AutoLowBarGrp()
 {
-	AddParallel (new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
-	AddParallel (new IntakeUntilLimitHitGrp());
 	AddParallel (new ZeroTurretTiltEncCmd());
+	AddSequential (new IntakeUntilLimitHitCmd());
+	AddParallel (new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
 	AddSequential(new DriveStraightCmd(CROSS_LOW_BAR_SLOW_DISTANCE, LOW_BAR_DEFENSE_SPEED));
 	AddSequential(new DriveStraightCmd(CROSS_LOW_BAR_FAST_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

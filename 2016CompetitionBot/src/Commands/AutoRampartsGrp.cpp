@@ -1,16 +1,16 @@
 #include "AutoRampartsGrp.h"
 #include "RobotMap.h"
 #include "DriveStraightCmd.h"
-#include "IntakeUntilLimitHitGrp.h"
+#include "IntakeUntilLimitHitCmd.h"
 #include "ZeroTurretTiltEncCmd.h"
 #include "SetIntakeHeightCmd.h"
 
 AutoRampartsGrp::AutoRampartsGrp()
 {
-	AddParallel (new SetIntakeHeightCmd(SIMPLE_DEFENSE_INTAKE_HEIGHT_EV));
-	AddParallel (new IntakeUntilLimitHitGrp());
 	AddParallel (new ZeroTurretTiltEncCmd());
-	AddSequential(new DriveStraightCmd(CROSS_BASIC_DEFENSE_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddParallel(new DriveStraightCmd(CROSS_BASIC_DEFENSE_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential (new IntakeUntilLimitHitCmd());
+	AddParallel (new SetIntakeHeightCmd(SIMPLE_DEFENSE_INTAKE_HEIGHT_EV));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

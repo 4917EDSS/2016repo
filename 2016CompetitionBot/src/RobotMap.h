@@ -142,7 +142,7 @@
 
 //////////////////////// Intake Subsystem ////////////////////////
 // Zeroes at top
-#define BOTTOM_INTAKE_HEIGHT_EV 252
+#define BOTTOM_INTAKE_HEIGHT_EV 239
 #define INTAKE_HEIGHT_TARGET_RANGE 3
 //Auto defense crossing heights
 #define LOW_BAR_INTAKE_HEIGHT_EV 155
@@ -174,9 +174,9 @@
 // TURRET ROTATE
 // TODO: get these values
 // The farthest the turret can rotate positive or negative
-#define MAX_TURRET_ROTATE_EV 5600
+#define MAX_TURRET_ROTATE_EV 5715
 
-#define BATTER_WALL_TURRET_ENC 5200
+
 #define RIGHT_SIDE -1
 #define LEFT_SIDE 1
 
@@ -186,7 +186,8 @@
 //Range for target height of hood
 #define HOOD_HEIGHT_TARGET_RANGE 50
 
-#define BATTER_WALL_HOOD_HEIGHT 1400
+#define BATTER_WALL_HOOD_HEIGHT 1500
+#define BATTER_WALL_TURRET_ENC 5580
 
 //////////////////////// Vision Math Constants /////////////////////
 //Distance
@@ -199,7 +200,7 @@
 //Tilt Height
 #define HEIGHT_EQUATION_QA -213.724
 #define HEIGHT_EQUATION_QB 1561.49
-#define HEIGHT_EQUATION_QC -414.8
+#define HEIGHT_EQUATION_QC -350.8
 
 
 /***********************************************************************
@@ -212,25 +213,25 @@
 #define POSITION_ONE_APPROACH_DISTANCE 1800
 #define POSITION_TWO_APPROACH_DISTANCE 2300
 #define POSITION_THREE_APPROACH_DISTANCE 1750
-#define POSITION_FOUR_APPROACH_DISTANCE 3000
+#define POSITION_FOUR_APPROACH_DISTANCE 2000
 #define POSITION_FIVE_APPROACH_DISTANCE 3000
 
 //Speeds
 #define CROSS_FAST_DEFENSE_SPEED 0.8
 #define CROSS_BASIC_DEFENSE_SPEED 0.6
-#define LOW_BAR_DEFENSE_SPEED 0.4
+#define LOW_BAR_DEFENSE_SPEED 0.5
 
 //Degree of Turns. Negative for Counterclockwise, Positive for Clockwise.
 #define LOW_BAR_TURN_TO_SHOOT -125
 #define POSITION_TWO_TURN_TO_SHOOT 60
 #define POSITION_THREE_TURN_TO_SHOOT 30
 #define POSITION_FOUR_TURN_TO_SHOOT -5
-#define POSITION_FIVE_TURN_TO_SHOOT -15
-#define LOW_BAR_TURN_TO_DEFENCE -55
+#define POSITION_FIVE_TURN_TO_SHOOT -30
+#define LOW_BAR_TURN_TO_DEFENCE 125
 #define POSITION_TWO_TURN_TO_DEFENCE 120
 #define POSITION_THREE_TURN_TO_DEFENCE 150
 #define POSITION_FOUR_TURN_TO_DEFENCE 5
-#define POSITION_FIVE_TURN_TO_DEFENCE 15
+#define POSITION_FIVE_TURN_TO_DEFENCE 30
 
 //Time
 #define AIM_TIME_AUTO 2//seconds
