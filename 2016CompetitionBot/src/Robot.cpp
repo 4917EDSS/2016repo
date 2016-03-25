@@ -238,7 +238,7 @@ void Robot::UpdateSmartDashboard()
 	SmartDashboard::PutNumber("LeftDrive raw encoder", CommandBase::rDrivetrainSub->GetRawLeftEnc());
 	SmartDashboard::PutNumber("RightDrive raw encoder", CommandBase::rDrivetrainSub->GetRawRightEnc());
 	SmartDashboard::PutNumber("Turret rotate raw encoder", CommandBase::rShooterSub->GetRawRotateEnc());
-
+	SmartDashboard::PutBoolean("Intake limit switch", CommandBase::rHopperSub->IsBallIn());
 
 	// For the navX-mxp IMU (accelerometer, gyro, compass, aka Attitude Heading Reference System)
 	AHRS* ahrs = CommandBase::rDrivetrainSub->GetAHRS();

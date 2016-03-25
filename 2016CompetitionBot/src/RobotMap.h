@@ -184,25 +184,24 @@
 // Highest the hood can go
 #define MAX_HOOD_HEIGHT_EV 3800
 //Range for target height of hood
-#define HOOD_HEIGHT_TARGET_RANGE 50
+#define HOOD_HEIGHT_TARGET_RANGE 30
 
 #define BATTER_WALL_HOOD_HEIGHT 1500
 #define BATTER_WALL_TURRET_ENC 5580
 
 //////////////////////// Vision Math Constants /////////////////////
 //Distance
-#define DISTANCE_EQUATION_QA 0.00008217
-#define DISTANCE_EQUATION_QB 0.00161487
-#define DISTANCE_EQUATION_QC 1.34776440
+#define DISTANCE_EQUATION_QA 0.00010046 //OLD: 0.00008217
+#define DISTANCE_EQUATION_QB -0.00026929 //OLD: 0.00161487
+#define DISTANCE_EQUATION_QC 1.39859538 //OLD: 1.34776440
 //Rotation
-#define ROTATION_EQUATION_LM 5.7811
-#define ROTATION_EQUATION_LB 58.443
-/*5.7811
-58.443*/
+#define ROTATION_EQUATION_LM 6.8503 //OLD: 5.7811
+#define ROTATION_EQUATION_LB 60.349 //OLD: 58.443
+
 //Tilt Height
-#define HEIGHT_EQUATION_QA -213.724
-#define HEIGHT_EQUATION_QB 1561.49
-#define HEIGHT_EQUATION_QC -400.8
+#define HEIGHT_EQUATION_QA -213.724 // NEW?: -161.052143
+#define HEIGHT_EQUATION_QB 1561.49 // NEW? : 1041.246165
+#define HEIGHT_EQUATION_QC -405.8 // NEW? : 63.805191
 
 
 /***********************************************************************

@@ -1,0 +1,59 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="Intake limit switch" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="292" y="126"/>
+		<width>763</width>
+		<height>388</height>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="0" y="819"/>
+	</static-widget>
+	<widget field="Auto Modes 2" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="0" y="623"/>
+	</widget>
+	<widget field="LeftDrive raw encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="600"/>
+	</widget>
+	<widget field="IMU Pitch" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="577"/>
+	</widget>
+	<widget field="Turret rotate raw encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="279"/>
+	</widget>
+	<widget field="IMU Connected" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="21" y="256"/>
+	</widget>
+	<widget field="Auto Modes" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="310" y="528"/>
+	</widget>
+	<widget field="IMU Roll" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="233"/>
+	</widget>
+	<widget field="Tilt raw encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="187"/>
+	</widget>
+	<widget field="RightDrive raw encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="164"/>
+	</widget>
+	<widget field="Zero Turret Rotate" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="128"/>
+	</widget>
+	<widget field="Left Wheel dis Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="105"/>
+	</widget>
+	<widget field="IntakeHeight raw encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="82"/>
+	</widget>
+	<widget field="IMU Yaw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="59"/>
+	</widget>
+	<widget field="Right Wheel dis Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="36"/>
+	</widget>
+	<widget field="Zero Turret encoder" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="0"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>
