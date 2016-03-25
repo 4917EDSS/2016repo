@@ -11,6 +11,7 @@
 #include "Subsystems/ShooterSub.h"
 #include "Subsystems/CameraSub.h"
 #include "Subsystems/HopperSub.h"
+#include "Subsystems/ClimberSub.h"
 #include "Commands/Scheduler.h"
 
 /**
@@ -33,6 +34,7 @@ public:
 	static ShooterSub* rShooterSub;
 	static CameraSub* rCameraSub;
 	static HopperSub* rHopperSub;
+	static ClimberSub* rClimberSub;
 	// OI MUST BE AT BOTTOM
 	static OI* oi;
 };

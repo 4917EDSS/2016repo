@@ -10,6 +10,7 @@ HoodSub* CommandBase::rHoodSub = NULL;
 ShooterSub* CommandBase::rShooterSub = NULL;
 CameraSub* CommandBase::rCameraSub = NULL;
 HopperSub* CommandBase::rHopperSub = NULL;
+ClimberSub* CommandBase::rClimberSub = NULL;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -32,6 +33,7 @@ void CommandBase::init()
 	rShooterSub = new ShooterSub();
 	//rCameraSub = new CameraSub(); commented out to allow for better console outputs
 	rHopperSub = new HopperSub();
+	rClimberSub = new ClimberSub();
 
 	//OI must be at the bottom!!
 	oi = new OI();

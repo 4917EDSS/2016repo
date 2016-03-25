@@ -27,7 +27,7 @@
 //#define free			2
 //#define free			3
 #define IntakePWM 		4   //Actually intaking or expelling boulders by rotating the intake drums.
-//#define free			5
+#define ExtensionMotorPWM	5 // For the climbing mechanism
 #define AdjustPWM 		6 	//Moves the intake subsystem.
 #define HopperPWM 		7   //Moves boulder from hopper to SpinnerMotor.
 #define TurretRotatePWM 8	//Rotates shooting turret(Yaw).
@@ -145,7 +145,7 @@
 #define BOTTOM_INTAKE_HEIGHT_EV 239
 #define INTAKE_HEIGHT_TARGET_RANGE 3
 //Auto defense crossing heights
-#define LOW_BAR_INTAKE_HEIGHT_EV 155
+#define LOW_BAR_INTAKE_HEIGHT_EV 150
 #define SIMPLE_DEFENSE_INTAKE_HEIGHT_EV 75
 
 
@@ -191,16 +191,18 @@
 
 //////////////////////// Vision Math Constants /////////////////////
 //Distance
-#define DISTANCE_EQUATION_QA 0.0000643248
-#define DISTANCE_EQUATION_QB 0.00315265
-#define DISTANCE_EQUATION_QC 1.18675
+#define DISTANCE_EQUATION_QA 0.00008217
+#define DISTANCE_EQUATION_QB 0.00161487
+#define DISTANCE_EQUATION_QC 1.34776440
 //Rotation
-#define ROTATION_EQUATION_LM 8.26
-#define ROTATION_EQUATION_LB 80.396
+#define ROTATION_EQUATION_LM 5.7811
+#define ROTATION_EQUATION_LB 58.443
+/*5.7811
+58.443*/
 //Tilt Height
 #define HEIGHT_EQUATION_QA -213.724
 #define HEIGHT_EQUATION_QB 1561.49
-#define HEIGHT_EQUATION_QC -350.8
+#define HEIGHT_EQUATION_QC -400.8
 
 
 /***********************************************************************
@@ -210,7 +212,7 @@
 #define CROSS_BASIC_DEFENSE_DISTANCE 3300
 #define CROSS_LOW_BAR_SLOW_DISTANCE -3000
 #define CROSS_LOW_BAR_FAST_DISTANCE -1750
-#define POSITION_ONE_APPROACH_DISTANCE 1800
+#define POSITION_ONE_APPROACH_DISTANCE 1600
 #define POSITION_TWO_APPROACH_DISTANCE 2300
 #define POSITION_THREE_APPROACH_DISTANCE 1750
 #define POSITION_FOUR_APPROACH_DISTANCE 2000

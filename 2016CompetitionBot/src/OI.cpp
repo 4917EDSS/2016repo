@@ -12,6 +12,8 @@
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/IntakeUntilLimitHitGrp.h"
 #include "Commands/ShootFromBatterGrp.h"
+#include "Commands/ExtendClimberCmd.h"
+#include "Commands/RetractClimberCmd.h"
 
 OI::OI()
 {
@@ -48,6 +50,11 @@ OI::OI()
 	oShootFromRightBatterBtn = new JoystickButton(oController, OShootFromRightBatterBtn);
 	oShootFromRightBatterBtn->WhenPressed(new ShootFromBatterGrp(RIGHT_SIDE));
 
+	oExtendClimberBtn = new JoystickButton(oController, OExtendClimberBtn);
+	oExtendClimberBtn->WhileHeld(new ExtendClimberCmd);
+
+	oRetractClimberBtn = new JoystickButton(oController, ORetractClimberBtn);
+	oRetractClimberBtn->WhileHeld(new RetractClimberCmd);
 
 	//Emergency Stop commands.
 	oEmergencyStopBtn1 = new JoystickButton(oController, OEmergencyStopBtn1);

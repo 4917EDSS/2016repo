@@ -42,6 +42,8 @@
 #define OPrepareShotBtn 2
 #define OLowBarTransformBtn 7
 #define OIntakeUntilLimitBtn 3
+#define OExtendClimberBtn 9
+#define ORetractClimberBtn 10
 #define OEmergencyStopBtn1 11
 #define DEmergencyStopBtn1 11
 #define OEmergencyStopBtn2 12
@@ -80,6 +82,8 @@ private:
 	JoystickButton* oIntakeUntilLimitBtn;
 	JoystickButton* oShootFromLeftBatterBtn;
 	JoystickButton* oShootFromRightBatterBtn;
+	JoystickButton* oExtendClimberBtn;
+	JoystickButton* oRetractClimberBtn;
 	JoystickButton* oEmergencyStopBtn1;
 	JoystickButton* dEmergencyStopBtn1;
 	JoystickButton* oEmergencyStopBtn2;

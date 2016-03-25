@@ -160,6 +160,7 @@ private:
 void Robot::SendCmdAndSubInfoToSmartDashboard()
 {
 	// See what command is running
+#if 0
 	SmartDashboard::PutData(Scheduler::GetInstance());
 
 	// See what command requires a particular subsystem
@@ -189,8 +190,9 @@ void Robot::SendCmdAndSubInfoToSmartDashboard()
 	SmartDashboard::PutData("Spinup", new SpinupCmd());
 	SmartDashboard::PutData("Toggle Drive Lift", new ToggleDriveLiftCmd());
 	SmartDashboard::PutData("ResetDrive Encoders", new ResetDrivetrainEncCmd());
-	SmartDashboard::PutData("Zero Turret encoder", new TurretRotateZeroEncCmd());
 	SmartDashboard::PutData("Rotate Turret to Value", new SetTurretRotateCmd(Preferences::GetInstance()->GetInt("TurretRotateEncoder")));
+#endif
+	SmartDashboard::PutData("Zero Turret encoder", new TurretRotateZeroEncCmd());
 }
 
 void Robot::SetSmartDashboardAutoOptions()
