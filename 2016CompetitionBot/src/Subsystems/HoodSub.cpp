@@ -51,7 +51,7 @@ void HoodSub::Update(bool VisionActive) {
 		SetTiltHeight(GetVisionHeight());
 	}
 	if (GetRawTiltEnc() > targetHeight + HOOD_HEIGHT_TARGET_RANGE){
-		tiltTurretMotor->Set(-0.4);
+		tiltTurretMotor->Set(-0.4); //TODO: Hood gearing will change to 5x current speed, reduce this value
 	}
 	else if (GetRawTiltEnc() < targetHeight - HOOD_HEIGHT_TARGET_RANGE){
 		tiltTurretMotor->Set(0.4);
