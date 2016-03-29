@@ -142,7 +142,7 @@
 
 //////////////////////// Intake Subsystem ////////////////////////
 // Zeroes at top
-#define BOTTOM_INTAKE_HEIGHT_EV 239
+#define BOTTOM_INTAKE_HEIGHT_EV 225
 #define INTAKE_HEIGHT_TARGET_RANGE 3
 //Auto defense crossing heights
 #define LOW_BAR_INTAKE_HEIGHT_EV 150
@@ -184,7 +184,7 @@
 // Highest the hood can go
 #define MAX_HOOD_HEIGHT_EV 3800
 //Range for target height of hood
-#define HOOD_HEIGHT_TARGET_RANGE 30
+#define HOOD_HEIGHT_TARGET_RANGE 40
 
 #define BATTER_WALL_HOOD_HEIGHT 1500
 #define BATTER_WALL_TURRET_ENC 5580
@@ -196,12 +196,12 @@
 #define DISTANCE_EQUATION_QC 1.39859538 //OLD: 1.34776440
 //Rotation
 #define ROTATION_EQUATION_LM 6.8503 //OLD: 5.7811
-#define ROTATION_EQUATION_LB 60.349 //OLD: 58.443
+#define ROTATION_EQUATION_LB 77.349 //Adjusted LB becaues of bracket mounted to the left//OLD: 58.443
 
 //Tilt Height
 #define HEIGHT_EQUATION_QA -213.724 // NEW?: -161.052143
 #define HEIGHT_EQUATION_QB 1561.49 // NEW? : 1041.246165
-#define HEIGHT_EQUATION_QC -405.8 // NEW? : 63.805191
+#define HEIGHT_EQUATION_QC ((-410.8) - 553)// 653 for adjusted hood // NEW? : 63.805191
 
 
 /***********************************************************************

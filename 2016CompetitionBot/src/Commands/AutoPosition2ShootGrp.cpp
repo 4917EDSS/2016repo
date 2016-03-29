@@ -10,6 +10,7 @@ AutoPosition2ShootGrp::AutoPosition2ShootGrp()
 	AddParallel(new PrepareShotCmd());
 	AddSequential(new DriveTurnCmd(POSITION_TWO_TURN_TO_SHOOT));
 	AddSequential(new DriveStraightCmd(POSITION_TWO_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential(new DriveTurnCmd(-POSITION_TWO_TURN_TO_SHOOT));
 	AddSequential(new WaitCommand(AIM_TIME_AUTO));
 	AddSequential(new BallToShooterCmd());
 	AddSequential(new DriveTurnCmd(POSITION_TWO_TURN_TO_DEFENCE));
