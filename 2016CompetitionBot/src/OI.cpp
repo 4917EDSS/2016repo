@@ -3,7 +3,7 @@
 #include "Commands/DriveTurnCmd.h"
 #include "Commands/SpinupCmd.h"
 #include "Commands/BallToIntakeCmd.h"
-#include "Commands/BallToShooterCmd.h"
+#include "Commands/BallToShooterGrp.h"
 #include "Commands/ToggleDriveLiftCmd.h"
 #include "Commands/PrepareShotCmd.h"
 #include "Commands/LowBarTransformGrp.h"
@@ -24,7 +24,7 @@ OI::OI()
 	oFlywheelSpinBtn->WhenPressed(new SpinupCmd);
 
 	oHighGoalBtn = new JoystickButton(oController, OHighGoalBtn);
-	oHighGoalBtn->WhenPressed(new BallToShooterCmd);
+	oHighGoalBtn->WhenPressed(new BallToShooterGrp);
 
 	dLiftShifterBtn = new JoystickButton(dController, DLiftShifterBtn);
 	dLiftShifterBtn->WhenPressed(new ToggleDriveLiftCmd);

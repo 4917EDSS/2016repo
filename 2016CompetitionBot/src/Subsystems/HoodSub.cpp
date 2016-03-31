@@ -47,14 +47,18 @@ int HoodSub::GetVisionHeight(){
 }
 
 void HoodSub::Update(bool VisionActive) {
+	float delta = fabs(GetRawTiltEnc() - targetHeight);
+	float speed = delta/SLOW_DOWN_TILT_ENC_RANGE;
+	speed = speed > MAX_TILT_AUTO_SPEED ? MAX_TILT_AUTO_SPEED : speed;
+	speed = speed < MIN_TILT_AUTO_SPEED ? MIN_TILT_AUTO_SPEED : speed;
 	if (VisionActive){
 		SetTiltHeight(GetVisionHeight());
 	}
 	if (GetRawTiltEnc() > targetHeight + HOOD_HEIGHT_TARGET_RANGE){
-		tiltTurretMotor->Set(-0.4); //TODO: Hood gearing will change to 5x current speed, reduce this value
+		SetTurretTilt(-speed);
 	}
 	else if (GetRawTiltEnc() < targetHeight - HOOD_HEIGHT_TARGET_RANGE){
-		tiltTurretMotor->Set(0.4);
+		SetTurretTilt(speed);
 	}
 	else {
 		tiltTurretMotor->Set(0.0);

@@ -1,5 +1,6 @@
 #include "ControlHoodWithJoystickCmd.h"
 #include "OI.h"
+#include "RobotMap.h"
 
 ControlHoodWithJoystickCmd::ControlHoodWithJoystickCmd()
 {
@@ -18,7 +19,7 @@ void ControlHoodWithJoystickCmd::Initialize()
 void ControlHoodWithJoystickCmd::Execute()
 {
 	//Tilting the turret with the left joystick vertical axis
-	rHoodSub->SetTurretTilt(oi->OGetLeftVer(2.0));
+	rHoodSub->SetTurretTilt(oi->OGetLeftVer(2.0)*TILT_SLOW);
 }
 
 // Make this return true when this Command no longer needs to run execute()

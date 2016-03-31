@@ -1,20 +1,20 @@
-#include "AutoPosition2ShootGrp.h"
+#include "AutoPosition2ShootLeftGrp.h"
 #include "RobotMap.h"
 #include "Commands/PrepareShotCmd.h"
 #include "Commands/BallToShooterGrp.h"
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/DriveTurnCmd.h"
 
-AutoPosition2ShootGrp::AutoPosition2ShootGrp()
+AutoPosition2ShootLeftGrp::AutoPosition2ShootLeftGrp()
+
 {
 	AddParallel(new PrepareShotCmd());
-	AddSequential(new DriveTurnCmd(POSITION_TWO_TURN_TO_SHOOT));
-	AddSequential(new DriveStraightCmd(POSITION_TWO_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
-	AddSequential(new DriveTurnCmd(-POSITION_TWO_TURN_TO_SHOOT));
+	AddSequential(new DriveStraightCmd(POSITION_TWO_LEFT_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential(new DriveTurnCmd(POSITION_TWO_LEFT_TURN_TO_SHOOT));
 	AddSequential(new WaitCommand(AIM_TIME_AUTO));
 	AddSequential(new BallToShooterGrp());
-	AddSequential(new DriveTurnCmd(POSITION_TWO_TURN_TO_DEFENCE));
-	AddSequential(new DriveStraightCmd(POSITION_TWO_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
+	AddSequential(new DriveTurnCmd(POSITION_TWO_LEFT_TURN_TO_DEFENCE));
+	AddSequential(new DriveStraightCmd(-POSITION_TWO_LEFT_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

@@ -14,13 +14,14 @@
 #include "Commands/AutoRoughTerrainGrp.h"
 #include "Commands/AutoPosition1ShootGrp.h"
 #include "Commands/AutoPosition2ShootGrp.h"
+#include "Commands/AutoPosition2ShootLeftGrp.h"
 #include "Commands/AutoPosition3ShootGrp.h"
+#include "Commands/AutoPosition3ShootRightGrp.h"
 #include "Commands/AutoPosition4ShootGrp.h"
 #include "Commands/AutoPosition5ShootGrp.h"
 
 #include "Commands/IntakeUntilLimitHitCmd.h"
 #include "Commands/BallToIntakeCmd.h"
-#include "Commands/BallToShooterCmd.h"
 #include "Commands/CameraUpdateCmd.h"
 #include "Commands/ControlIntakeWithJoystickCmd.h"
 #include "Commands/ControlTurretWithJoystickCmd.h"
@@ -200,25 +201,20 @@ void Robot::SetSmartDashboardAutoOptions()
 	autoDefenceOptions = new SendableChooser();
 	autoDefenceOptions->AddDefault("Do Nothing", new AutoDefaultGrp());
 	autoDefenceOptions->AddObject("Low Bar Defence", new AutoLowBarGrp());
-	autoDefenceOptions->AddObject("Portcullis Defence", new AutoPortcullisGrp());
-	autoDefenceOptions->AddObject("Cheval De Fris", new AutoChevalGrp());
 	autoDefenceOptions->AddObject("Ramparts Defence", new AutoRampartsGrp());
 	autoDefenceOptions->AddObject("Moat Defence", new AutoMoatGrp());
-	autoDefenceOptions->AddObject("Drawbridge Defence", new AutoDrawbridgeGrp());
-	autoDefenceOptions->AddObject("Sally Port Defence", new AutoSallyPortGrp());
 	autoDefenceOptions->AddObject("Rock Wall Defence", new AutoRockWallGrp());
 	autoDefenceOptions->AddObject("Rough Terrain Defence", new AutoRoughTerrainGrp());
-	autoDefenceOptions->AddObject("put to shooter", new BallToShooterCmd());
-	autoDefenceOptions->AddObject("expel", new BallToIntakeCmd());
 
 	autoLocationOptions = new SendableChooser();
 	autoLocationOptions->AddDefault("Do Nothing", new AutoDefaultGrp());
 	autoLocationOptions->AddObject("Position 1 (Low Bar)", new AutoPosition1ShootGrp());
 	autoLocationOptions->AddObject("Position 2", new AutoPosition2ShootGrp());
+	autoLocationOptions->AddObject("Position 2 SHOOT LEFT", new AutoPosition2ShootLeftGrp());
 	autoLocationOptions->AddObject("Position 3", new AutoPosition3ShootGrp());
+	autoLocationOptions->AddObject("Position 3 SHOOT RIGHT", new AutoPosition3ShootRightGrp());
 	autoLocationOptions->AddObject("Position 4", new AutoPosition4ShootGrp());
 	autoLocationOptions->AddObject("Position 5", new AutoPosition5ShootGrp());
-	autoLocationOptions->AddObject("Test Position", new IntakeUntilLimitHitCmd());
 
 	//chooser->AddObject("My Auto", new MyAutoCommand());
 	SmartDashboard::PutData("Auto Modes", autoDefenceOptions);

@@ -1,7 +1,7 @@
 #include "AutoPosition1ShootGrp.h"
 #include "RobotMap.h"
 #include "Commands/PrepareShotCmd.h"
-#include "Commands/BallToShooterCmd.h"
+#include "Commands/BallToShooterGrp.h"
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/DriveTurnCmd.h"
 
@@ -11,7 +11,7 @@ AutoPosition1ShootGrp::AutoPosition1ShootGrp()
 	AddSequential(new DriveTurnCmd(LOW_BAR_TURN_TO_SHOOT));
 	AddSequential(new DriveStraightCmd(POSITION_ONE_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	AddSequential(new WaitCommand(AIM_TIME_AUTO));
-	AddSequential(new BallToShooterCmd());
+	AddSequential(new BallToShooterGrp());
 	AddSequential(new DriveTurnCmd(LOW_BAR_TURN_TO_DEFENCE));
 	AddSequential(new DriveStraightCmd(POSITION_ONE_APPROACH_DISTANCE, CROSS_BASIC_DEFENSE_SPEED));
 	// Add Commands here:
