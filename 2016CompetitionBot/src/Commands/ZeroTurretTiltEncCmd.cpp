@@ -10,7 +10,7 @@ ZeroTurretTiltEncCmd::ZeroTurretTiltEncCmd()
 // Called just before this Command runs the first time
 void ZeroTurretTiltEncCmd::Initialize()
 {
-	rHoodSub->SetTurretTilt(-1.0);
+	rHoodSub->SetTurretTilt(-0.4);
 }
 
 // Called repeatedly when this Command is scheduled to run
