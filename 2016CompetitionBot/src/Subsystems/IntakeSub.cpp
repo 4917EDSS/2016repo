@@ -5,6 +5,9 @@
 IntakeSub::IntakeSub() :
 		Subsystem("IntakeSub")
 {
+	previousHeight = 0;
+	cyclesSinceMovement = 0;
+	targetHeight = 0;
 	intakeMotor = new Talon(IntakePWM);
 	adjustMotor = new Talon(AdjustPWM);
 	heightEncoder = new Encoder(HeightEncoder1DIO, HeightEncoder2DIO);
@@ -58,7 +61,20 @@ void IntakeSub::Update(){
 }
 
 bool IntakeSub::IsOnTarget() {
-	return GetRawHeight() >= targetHeight - INTAKE_HEIGHT_TARGET_RANGE && GetRawHeight() <= targetHeight + INTAKE_HEIGHT_TARGET_RANGE;
+	int currentHeight = GetRawHeight();
+	if (currentHeight == previousHeight) {
+		cyclesSinceMovement ++;
+
+		if (cyclesSinceMovement > NUM_CYCLES_INTAKE_STALL) {
+			cyclesSinceMovement = 0;
+			return true;
+		}
+	} else {
+		cyclesSinceMovement = 0;
+	}
+
+	previousHeight = currentHeight;
+	return currentHeight >= targetHeight - INTAKE_HEIGHT_TARGET_RANGE && currentHeight <= targetHeight + INTAKE_HEIGHT_TARGET_RANGE;
 }
 
 void IntakeSub::SetVerticalSpeed(float speed)

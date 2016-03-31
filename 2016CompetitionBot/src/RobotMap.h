@@ -148,6 +148,8 @@
 #define LOW_BAR_INTAKE_HEIGHT_EV 150
 #define SIMPLE_DEFENSE_INTAKE_HEIGHT_EV 75
 
+#define NUM_CYCLES_INTAKE_STALL 20
+
 
 //////////////////////// Shooter Subsystem ////////////////////////
 #define ROTATE_MARGIN 10
@@ -244,8 +246,6 @@
 #define POSITION_THREE_TURN_TO_DEFENCE 150
 #define POSITION_FOUR_TURN_TO_DEFENCE 5
 #define POSITION_FIVE_TURN_TO_DEFENCE 30
-	AddSequential(new DriveStraightCmd(POSITION_THREE_RIGHT_APPROACH_DISTANCE, CROSS_FAST_DEFENSE_SPEED));
-	AddSequential(new DriveTurnCmd(POSITION_THREE_RIGHT_TURN_TO_SHOOT
 //Time
 #define AIM_TIME_AUTO 2//seconds
 

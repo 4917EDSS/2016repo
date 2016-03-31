@@ -14,6 +14,8 @@ private:
 	Encoder* heightEncoder;
 	DigitalInput* intakeUpLimit;
 	int targetHeight;
+	int previousHeight;
+	int cyclesSinceMovement;
 public:
 	IntakeSub();
 	void InitDefaultCommand();
