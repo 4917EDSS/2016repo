@@ -6,7 +6,6 @@
 
 IntakeUntilLimitHitGrp::IntakeUntilLimitHitGrp()
 {
-	AddParallel (new SetIntakeHeightCmd(LOW_BAR_INTAKE_HEIGHT_EV));
 	AddSequential(new TurretRotateZeroEncCmd());
 	AddSequential(new IntakeUntilLimitHitCmd());
 	// Add Commands here:

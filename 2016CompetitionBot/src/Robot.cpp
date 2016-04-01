@@ -133,6 +133,8 @@ private:
 		Scheduler::GetInstance()->Run();
 		SmartDashboard::PutNumber("Left Wheel dis Encoder", CommandBase::rDrivetrainSub->GetLeftEnc());
 		SmartDashboard::PutNumber("Right Wheel dis Encoder", CommandBase::rDrivetrainSub->GetRightEnc());
+
+		//UpdateSmartDashboard();//TODO:Get rid of this
 	}
 
 	void TeleopInit()

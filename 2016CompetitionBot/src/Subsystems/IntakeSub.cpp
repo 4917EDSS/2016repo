@@ -50,10 +50,10 @@ bool IntakeSub::GetIntakeUp(){
 
 void IntakeSub::Update(){
 	if (GetRawHeight() > targetHeight + INTAKE_HEIGHT_TARGET_RANGE){
-		SetVerticalSpeed(-0.4);
+		SetVerticalSpeed(-0.5);
 	}
 	else if (GetRawHeight() < targetHeight - INTAKE_HEIGHT_TARGET_RANGE){
-		SetVerticalSpeed(0.4);
+		SetVerticalSpeed(0.5);
 	}
 	else {
 		SetVerticalSpeed(0.0);
