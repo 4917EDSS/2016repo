@@ -5,8 +5,12 @@
 
 ShootFromBatterGrp::ShootFromBatterGrp(int side)
 {
-	AddParallel(new SetHoodHeightCmd(BATTER_WALL_HOOD_HEIGHT));
-	AddParallel(new SetTurretRotateCmd(side*BATTER_WALL_TURRET_ENC));
+	AddParallel(new SetHoodHeightCmd(BATTER_WALL_HOOD_HEIGHT, false));
+	if (side == LEFT_SIDE) {
+		AddParallel(new SetTurretRotateCmd(BATTER_WALL_TURRET_ENC_LEFT, true));
+	} else {
+		AddParallel(new SetTurretRotateCmd(BATTER_WALL_TURRET_ENC_RIGHT, true));
+	}
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

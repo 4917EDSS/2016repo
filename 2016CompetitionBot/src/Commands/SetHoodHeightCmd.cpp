@@ -1,6 +1,12 @@
 #include "SetHoodHeightCmd.h"
 
-SetHoodHeightCmd::SetHoodHeightCmd(int height) : height(height)
+SetHoodHeightCmd::SetHoodHeightCmd(int height) : height(height), exitWhenAtTarget(true)
+{
+	// Use Requires() here to declare subsystem dependencies
+	Requires(rHoodSub);
+}
+
+SetHoodHeightCmd::SetHoodHeightCmd(int height, bool exitAtTarget) : height(height), exitWhenAtTarget(exitAtTarget)
 {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(rHoodSub);
@@ -21,7 +27,7 @@ void SetHoodHeightCmd::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool SetHoodHeightCmd::IsFinished()
 {
-	return rHoodSub->IsOnTarget();
+	return exitWhenAtTarget && rHoodSub->IsOnTarget();
 }
 
 // Called once after isFinished returns true

@@ -196,7 +196,8 @@
 #define MIN_TILT_AUTO_SPEED 0.1
 
 #define BATTER_WALL_HOOD_HEIGHT 1500
-#define BATTER_WALL_TURRET_ENC 5400
+#define BATTER_WALL_TURRET_ENC_LEFT 5400
+#define BATTER_WALL_TURRET_ENC_RIGHT (-5400)
 
 //////////////////////// Vision Math Constants /////////////////////
 //Distance

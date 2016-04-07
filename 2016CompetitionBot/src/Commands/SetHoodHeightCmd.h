@@ -8,8 +8,10 @@ class SetHoodHeightCmd: public CommandBase
 {
 private:
 	int height;
+	bool exitWhenAtTarget;
 public:
 	SetHoodHeightCmd(int height);
+	SetHoodHeightCmd(int height, bool exitAtTarget);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
