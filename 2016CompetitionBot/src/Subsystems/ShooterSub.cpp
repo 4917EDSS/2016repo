@@ -139,7 +139,7 @@ void ShooterSub::Update(bool visionActive){
 					// Weighting the each side by the amount the camera is off to the opposite side
 					// So, if our camera is way off left (offset -10, 2), and our encoder vals are (100, 1000)
 					// then our center is (2*100 + 10*1000)/(10+2) = 10200/12 = 850, so we will go to 850
-					centerEnc = (maxRightEnc*fabs(minLeftOffset) + minLeftEnc*maxRightOffset) / (maxRightOffset + fabs(minLeftOffset));
+					centerEnc = (maxRightEnc*fabs(minLeftOffset) + minLeftEnc*maxRightOffset) / (maxRightOffset + fabs(minLeftOffset));// - AUTO_SHOT_OFFSET_LEFT;
 				}
 			} else {
 				// Started on the left side
@@ -164,7 +164,7 @@ void ShooterSub::Update(bool visionActive){
 					// Weighting the each side by the amount the camera is off to the opposite side
 					// So, if our camera is way off left (offset -10, 2), and our encoder vals are (100, 1000)
 					// then our center is (2*100 + 10*1000)/(10+2) = 10200/12 = 850
-					centerEnc = (maxRightEnc*fabs(minLeftOffset) + minLeftEnc*maxRightOffset) / (maxRightOffset + fabs(minLeftOffset));
+					centerEnc = (maxRightEnc*fabs(minLeftOffset) + minLeftEnc*maxRightOffset) / (maxRightOffset + fabs(minLeftOffset));// - AUTO_SHOT_OFFSET_LEFT;
 				}
 			}
 		}

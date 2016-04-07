@@ -160,6 +160,8 @@
 #define FRONT_TOUCHING_BATTER_EV 733
 #define RESTING_ON_BACK_BATTER_EV 475
 
+#define AUTO_SHOT_OFFSET_LEFT 50
+
 #define FLYWHEEL_P 10
 #define FLYWHEEL_I 1
 #define FLYWHEEL_D 0
@@ -208,7 +210,7 @@
 //Tilt Height
 #define HEIGHT_EQUATION_QA -161.052143 // OLD:-213.724
 #define HEIGHT_EQUATION_QB 1041.246165  // OLD: 1561.49
-#define HEIGHT_EQUATION_QC 63.805191 // OLD: (-410.8)
+#define HEIGHT_EQUATION_QC -43.805191 // OLD: (-410.8)
 
 
 /***********************************************************************
