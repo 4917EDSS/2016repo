@@ -142,7 +142,7 @@
 
 //////////////////////// Intake Subsystem ////////////////////////
 // Zeroes at top
-#define BOTTOM_INTAKE_HEIGHT_EV 225
+#define BOTTOM_INTAKE_HEIGHT_EV 215
 #define INTAKE_HEIGHT_TARGET_RANGE 3
 //Auto defense crossing heights
 #define LOW_BAR_INTAKE_HEIGHT_EV 125
