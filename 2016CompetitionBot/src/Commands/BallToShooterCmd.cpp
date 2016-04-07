@@ -6,6 +6,7 @@ BallToShooterCmd::BallToShooterCmd()
 {
 	Requires(rHopperSub);
 	Requires(rShooterSub);
+	Requires(rHoodSub);
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 }
