@@ -10,7 +10,7 @@ AutoRockWallGrp::AutoRockWallGrp()
 	AddParallel (new ZeroTurretTiltEncCmd());
 	AddParallel(new DriveStraightCmd(CROSS_BASIC_DEFENSE_DISTANCE, CROSS_FAST_DEFENSE_SPEED));
 	AddSequential (new IntakeUntilLimitHitCmd());
-	AddParallel (new SetIntakeHeightCmd(SIMPLE_DEFENSE_INTAKE_HEIGHT_EV));
+	AddSequential (new SetIntakeHeightCmd(SIMPLE_DEFENSE_INTAKE_HEIGHT_EV));
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

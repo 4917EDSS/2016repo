@@ -148,7 +148,7 @@
 #define LOW_BAR_INTAKE_HEIGHT_EV 125
 #define SIMPLE_DEFENSE_INTAKE_HEIGHT_EV 75
 
-#define NUM_CYCLES_INTAKE_STALL 20
+#define NUM_CYCLES_INTAKE_STALL 200
 
 
 //////////////////////// Shooter Subsystem ////////////////////////
