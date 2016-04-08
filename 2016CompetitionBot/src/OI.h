@@ -35,6 +35,7 @@
 #define OFlywheelSpinBtn 1
 #define OShootFromLeftBatterBtn 5
 //#define OShootFromRightBatterBtn 6
+#define OShootFromTowerBtn 6
 #define OHighGoalBtn 8
 #define DLiftShifterBtn 5
 #define DStraightForwardBtn 4
