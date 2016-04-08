@@ -12,8 +12,10 @@
 #include "Commands/DriveStraightCmd.h"
 #include "Commands/IntakeUntilLimitHitGrp.h"
 #include "Commands/ShootFromBatterGrp.h"
+#include "Commands/ShootFromTowerGrp.h"
 #include "Commands/ExtendClimberCmd.h"
 #include "Commands/RetractClimberCmd.h"
+#include "Commands/ZeroRotateEncoderCmd.h"
 
 OI::OI()
 {
@@ -47,14 +49,17 @@ OI::OI()
 	oShootFromLeftBatterBtn = new JoystickButton(oController, OShootFromLeftBatterBtn);
 	oShootFromLeftBatterBtn->WhenPressed(new ShootFromBatterGrp(LEFT_SIDE));
 
-	oShootFromRightBatterBtn = new JoystickButton(oController, OShootFromRightBatterBtn);
-	oShootFromRightBatterBtn->WhenPressed(new ShootFromBatterGrp(RIGHT_SIDE));
+	//oShootFromRightBatterBtn = new JoystickButton(oController, OShootFromRightBatterBtn);
+	//oShootFromRightBatterBtn->WhenPressed(new ShootFromBatterGrp(RIGHT_SIDE));
+
+	oShootFromTowerBtn = new JoystickButton(oController, OShootFromTowerBtn); // Todo: remove left or right side batter shot button
+	oShootFromTowerBtn->WhenPressed(new ShootFromTowerGrp());
 
 	oExtendClimberBtn = new JoystickButton(oController, OExtendClimberBtn);
 	oExtendClimberBtn->WhileHeld(new ExtendClimberCmd);
 
-	oRetractClimberBtn = new JoystickButton(oController, ORetractClimberBtn);
-	oRetractClimberBtn->WhileHeld(new RetractClimberCmd);
+	oZeroRotateEncoderBtn = new JoystickButton(oController, OZeroRotateEncoderBtn);
+	oZeroRotateEncoderBtn->WhenPressed(new ZeroRotateEncoderCmd);
 
 	//Emergency Stop commands.
 	oEmergencyStopBtn1 = new JoystickButton(oController, OEmergencyStopBtn1);

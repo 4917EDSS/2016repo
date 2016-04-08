@@ -94,7 +94,7 @@ float ShooterSub::GetRawRotateEnc(){
 }
 
 bool ShooterSub::GetTurretCentered(){
-	return false;//turretCentered->Get();
+	return false;//turretCentered->Get();  TODO:Uncomment this for the switch to work
 }
 
 void ShooterSub::ResetRotate() {
